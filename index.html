@@ -1,114 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wheeling Housing Authority – Booker T. | Work Order Request</title>
-  <style>
-    :root{ --purple:#4B0082; --gold:#C8A200; }
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#faf8ff;color:#111;margin:0}
-    header{padding:20px 16px;border-bottom:4px solid var(--gold);background:linear-gradient(90deg,rgba(75,0,130,.08),rgba(200,162,0,.08))}
-    h1{margin:0;color:#4B0082;font-size:1.35rem}
-    h2{margin:.35rem 0 0 0;color:#C8A200;font-size:1.05rem;font-weight:700}
-    main{max-width:820px;margin:20px auto;padding:16px}
-    form{background:#fff;border:2px solid #C8A200;border-radius:10px;padding:18px;box-shadow:0 3px 18px rgba(0,0,0,.05)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .row-1{display:grid;grid-template-columns:1fr;gap:12px}
-    label{font-weight:600;color:#4B0082;font-size:.95rem}
-    input,textarea,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:1rem}
-    textarea{min-height:120px}
-    .check{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-    .actions{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap}
-    button{cursor:pointer;border:none;padding:10px 14px;border-radius:8px;font-weight:700}
-    .primary{background:#4B0082;color:#fff}
-    .secondary{background:#eee}
-    footer{max-width:820px;margin:8px auto 32px auto;color:#555;font-size:.9rem;padding:0 16px}
-    .tagline{color:#4B0082;font-weight:700;margin-top:8px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luau Manor Work Order Request</title>
+<style>
+  :root{--purple:#5C1E6D;--gold:#D4AF37;--bg:#0E0A14;--panel:#F3F5FA;--field:#ffffff;--ink:#121319;}
+  body{margin:0;font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    background:radial-gradient(1200px 600px at 10% -10%,#1f1140 0%,#0e0a14 50%),
+               radial-gradient(900px 500px at 110% 10%,#2a0c46 0%,#0e0a14 55%),#0e0a14;
+    color:#fff;}
+  .wrap{max-width:900px;margin:auto;padding:24px}
+  header{margin:8px auto 18px;padding:18px 16px;background:linear-gradient(180deg,var(--purple) 0%,#43144E 100%);
+    border-radius:18px;border:2px solid var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.35);}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:44px;height:44px;border-radius:12px;background:#fff1;border:2px solid #fff3;
+    display:grid;place-items:center;font-weight:800}
+  .title{font-weight:800;font-size:20px;margin:0}
+  .tag{opacity:.9;font-size:13px;margin-top:2px}
+  .stripe{height:8px;background:linear-gradient(90deg,var(--gold),#ffb454 60%,var(--gold));border-radius:999px;margin:20px 0 10px}
+
+  .card{background:var(--panel);color:var(--ink);border-radius:22px;padding:22px;
+    box-shadow:0 14px 40px rgba(0,0,0,.25);border:1px solid #e6e9f3;}
+  .row{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:760px){.row-2{grid-template-columns:1fr 1fr}}
+  label{font-weight:800;color:#0c0e12;margin:6px 2px;display:block}
+  input,textarea{width:100%;background:var(--field);border:2px solid #e3e6f1;border-radius:16px;
+    padding:14px 14px;font:inherit;outline:none;transition:.2s border-color,.2s box-shadow}
+  textarea{min-height:120px;resize:vertical}
+  input:focus,textarea:focus{border-color:var(--purple);box-shadow:0 0 0 4px rgba(92,30,109,.15)}
+  .radio{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 2px 10px}
+  .pill{background:linear-gradient(90deg,#ff8c3a,#ff5b2b);color:#fff;font-weight:900;letter-spacing:.2px;
+    border:0;border-radius:999px;padding:16px 26px;cursor:pointer;
+    box-shadow:0 12px 24px rgba(255,115,67,.35),inset 0 -2px 0 rgba(0,0,0,.15);}
+  .pill:hover{filter:brightness(1.05)}
+  .help{font-size:12px;color:#555;margin-top:4px}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Wheeling Housing Authority – Booker T.</h1>
-    <h2>Work Order Request Form</h2>
-  </header>
-
-  <main>
-    <form id="workOrderForm">
-      <div class="row">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">WHA</div>
         <div>
-          <label for="resident">Resident Name</label>
-          <input id="resident" name="Resident Name" required autocomplete="name" />
-        </div>
-        <div>
-          <label for="unit">Unit Number</label>
-          <input id="unit" name="Unit Number" required />
+          <p class="title">Wheeling Housing Authority — Luau Manor Work Order</p>
+          <div class="tag">Serving Wheeling Residents with Dignity and Care</div>
         </div>
       </div>
+      <div class="stripe" aria-hidden="true"></div>
+    </header>
 
-      <div class="row">
-        <div>
-          <label for="phone">Phone Number</label>
-          <input id="phone" name="Phone Number" type="tel" required autocomplete="tel" />
+    <main class="card">
+      <form action="https://formsubmit.co/nikki@wheelingwv-pha.org" method="POST">
+        <input type="hidden" name="_subject" value="WHA Work Order Request – Luau Manor">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://YOURUSERNAME.github.io/thanks.html">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="row row-2">
+          <div><label>Resident name</label>
+            <input name="Resident Name" type="text" placeholder="Full name" required></div>
+          <div><label>Apartment #</label>
+            <input name="Apartment Number" type="text" placeholder="e.g., 504" required></div>
         </div>
-        <div>
-          <label for="email">Email Address</label>
-          <input id="email" name="Email Address" type="email" autocomplete="email" />
+
+        <div class="row row-2">
+          <div><label>Phone (for scheduling)</label>
+            <input name="Phone" type="tel" placeholder="(304) 555-1234"></div>
+          <div><label>Date submitted</label>
+            <input name="Date Submitted" type="date"></div>
         </div>
-      </div>
 
-      <div class="row">
-        <div>
-          <label for="date">Date Submitted</label>
-          <input id="date" name="Date Submitted" type="date" />
+        <div><label>Is it okay to enter if you are not home?</label>
+          <div class="radio">
+            <label><input type="radio" name="Entry Permission" value="Yes" required> Yes</label>
+            <label><input type="radio" name="Entry Permission" value="No"> No</label>
+          </div>
         </div>
-        <div>
-          <label for="type">Type of Request</label>
-          <input id="type" name="Type of Request" placeholder="Plumbing, Electrical, etc." />
+
+        <div><label>Description of work needed</label>
+          <textarea name="Description" placeholder="Example: Kitchen sink leaking under cabinet." required></textarea></div>
+
+        <div><label>Anything else we should know?</label>
+          <textarea name="Resident Notes" placeholder="Pets, preferred times, special instructions…"></textarea>
+          <div class="help">For after-hours emergencies call 304-242-2820.</div>
         </div>
-      </div>
 
-      <div class="row-1">
-        <div>
-          <label for="desc">Description of Issue</label>
-          <textarea id="desc" name="Description of Issue" required></textarea>
+        <div style="margin-top:14px">
+          <button class="pill" type="submit">SUBMIT WORK ORDER</button>
         </div>
-      </div>
+      </form>
+    </main>
 
-      <div class="row-1">
-        <div class="check">
-          <label>Permission to Enter Unit?</label>
-          <label><input type="radio" name="Permission to Enter" value="Yes" required> Yes</label>
-          <label><input type="radio" name="Permission to Enter" value="No" required> No</label>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button type="submit" class="primary">Submit Request</button>
-        <button type="reset" class="secondary">Clear</button>
-      </div>
-    </form>
-  </main>
-
-  <footer>
-    <div><strong>Privacy Notice:</strong> Your information will only be used to address your maintenance or service request. By submitting this form, you authorize management to contact you regarding this issue.</div>
-    <div class="tagline">Wheeling Housing Authority – Working Together for a Better Community.</div>
-  </footer>
-
-  <script>
-    // On submit, build a mailto to Nikkea with a nicely formatted body
-    const form = document.getElementById('workOrderForm');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const lines = [];
-      for (const [k, v] of fd.entries()) {
-        lines.push(`${k}: ${v}`);
-      }
-      const subject = encodeURIComponent('Booker T. Work Order Request');
-      const body = encodeURIComponent(lines.join('\n'));
-      const mailto = `mailto:Nikki@wheelingwv-pha.org?subject=${subject}&body=${body}`;
-      window.location.href = mailto;
-    });
-  </script>
+    <footer style="font-size:12px;color:#c9cbd6;margin:14px 4px">
+      This online form emails your request to Maintenance (nikki@wheelingwv-pha.org). No email account required.
+    </footer>
+  </div>
 </body>
 </html>
