@@ -10,160 +10,173 @@
 <style>
 :root{
   --purple:#5C1E6D; --purple2:#43144E; --gold:#D4AF37;
-  --ink:#0c0e12; --muted:#6b7280; --bg:#0E0A14; --panel:#F7F8FC; --white:#fff;
+  --ink:#0b0f18; --muted:#6b7280; --bg:#0A0D14; --panel:#F7F8FC; --white:#fff;
 }
 *{box-sizing:border-box} html,body{margin:0}
 body{
   font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color:var(--ink);
-  background:
-    radial-gradient(1200px 600px at 12% -10%, #241243 0%, #0E0A14 60%),
-    radial-gradient(900px 500px at 110% 10%, #2a0c46 0%, #0E0A14 55%),
-    #0E0A14;
+  background:#0a0d14;
 }
 
-/* HERO */
+/* ====== AURORA HERO ====== */
 .hero{
   position:relative; color:var(--white);
-  padding:72px 18px 56px;
-  background:linear-gradient(160deg, var(--purple) 0%, var(--purple2) 70%);
-  border-bottom:4px solid var(--gold); overflow:hidden;
+  padding:88px 20px 70px;
+  overflow:hidden;
+  border-bottom:4px solid var(--gold);
 }
-.hero .particles{
-  position:absolute; inset:0; pointer-events:none; opacity:.35;
-  background-image:
-    radial-gradient(2px 2px at 20% 30%, #fff, transparent 60%),
-    radial-gradient(2px 2px at 50% 10%, #fff, transparent 60%),
-    radial-gradient(2px 2px at 80% 40%, #fff, transparent 60%),
-    radial-gradient(2px 2px at 30% 70%, #fff, transparent 60%),
-    radial-gradient(2px 2px at 70% 80%, #fff, transparent 60%);
-  animation: drift 20s linear infinite;
+.aurora{
+  position:absolute; inset:-20% -10% -10% -10%; z-index:-1; filter:blur(24px);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #5b1ad8 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, #9b22ff 0%, transparent 55%),
+    radial-gradient(800px 520px at 30% 120%, #31c8ff 0%, transparent 60%),
+    radial-gradient(600px 420px at 80% 100%, #ff7a45 0%, transparent 60%),
+    linear-gradient(160deg, #32164a 0%, #0a0d14 70%);
+  animation: float 16s ease-in-out infinite alternate;
 }
-@keyframes drift { from{transform:translateY(0)} to{transform:translateY(-60px)} }
-
-.wrap{max-width:1100px; margin:0 auto; padding:0 18px; position:relative}
-.brand{display:flex; align-items:center; gap:12px}
+@keyframes float{
+  0%{ transform:translateY(0) scale(1) }
+  100%{ transform:translateY(-12px) scale(1.03) }
+}
+.wrap{max-width:1100px; margin:0 auto; padding:0 22px; position:relative}
+.brand{display:flex; align-items:center; gap:16px}
 .logo{
-  width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
-  border:2px solid #ffffff44; background:#ffffff1a; font-weight:900; color:#fff;
+  width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+  border:2px solid #ffffff55; background:#ffffff18; font-weight:900; color:#fff; font-size:18px;
 }
-.hero h1{margin:12px 0 6px; font-weight:900; font-size:34px; line-height:1.1}
-.tag{opacity:.9; font-size:14px}
-.hero-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:30px}
-@media (min-width: 950px){ .hero-grid{grid-template-columns:1.2fr .8fr} }
+.hero h1{
+  margin:10px 0 8px; font-weight:900; 
+  font-size: clamp(36px, 6vw, 56px); line-height:1.05; letter-spacing:.2px
+}
+.tag{opacity:.95; font-size:clamp(14px, 2.6vw, 18px)}
+.hero-grid{display:grid; grid-template-columns:1fr; gap:22px; margin-top:34px}
+@media (min-width: 980px){ .hero-grid{grid-template-columns:1.2fr .8fr} }
 
 .hero-card{
   background:linear-gradient(180deg, #ffffff 0%, #F7F8FC 100%);
-  color:var(--ink); border-radius:20px; padding:18px;
-  border:1px solid #eceef6; box-shadow:0 12px 40px rgba(0,0,0,.25);
+  color:var(--ink); border-radius:24px; padding:22px;
+  border:1px solid #e6e9f3; box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
-/* FORM */
-label{font-weight:800; display:block; margin:10px 4px 6px}
+/* ====== FORM ====== */
+label{font-weight:900; display:block; margin:12px 4px 6px; font-size:15px}
 .input, textarea, select{
-  width:100%; padding:14px 14px; border:2px solid #e3e6f1; border-radius:14px;
-  outline:none; background:#fff; font:inherit; transition: .2s border-color, .2s box-shadow;
+  width:100%; padding:16px 16px; border:2px solid #e3e6f1; border-radius:16px;
+  outline:none; background:#fff; font:16px/1.5 Inter,system-ui;
+  transition: .2s border-color, .2s box-shadow;
 }
-textarea{min-height:140px; resize:vertical}
+textarea{min-height:150px; resize:vertical}
 .input:focus, textarea:focus, select:focus{
-  border-color:var(--purple); box-shadow:0 0 0 4px rgba(92,30,109,.15);
+  border-color:var(--purple); box-shadow:0 0 0 5px rgba(92,30,109,.15);
 }
-.row{display:grid; gap:14px; grid-template-columns:1fr}
-@media (min-width: 760px){ .row-2{grid-template-columns:1fr 1fr} }
+.row{display:grid; gap:16px; grid-template-columns:1fr}
+@media (min-width: 780px){ .row-2{grid-template-columns:1fr 1fr} }
 
-.chips{display:flex; gap:10px; flex-wrap:wrap; margin:8px 0 2px}
-.chip{
-  border:2px solid #e3e6f1; background:#fff; border-radius:999px; padding:8px 12px;
-  cursor:pointer; font-weight:700; user-select:none; transition:.15s transform, .15s border-color;
+/* Chips (pure CSS, tap-friendly) */
+.chips{display:flex; gap:12px; flex-wrap:wrap; margin:10px 0 2px}
+.chip{display:inline-flex; align-items:center; cursor:pointer; position:relative}
+.chip input{position:absolute; opacity:0; pointer-events:none; width:0; height:0}
+.chip span{
+  border:2px solid #e3e6f1; background:#fff; border-radius:999px;
+  padding:10px 14px; font-weight:800; user-select:none; 
+  transition:.15s transform, .15s border-color, .15s box-shadow;
 }
-.chip[data-active="true"]{ border-color:var(--purple); transform:translateY(-1px) }
-.chip input{display:none}
+.chip input:checked + span{
+  border-color:var(--purple);
+  box-shadow:0 0 0 4px rgba(92,30,109,.12);
+  transform:translateY(-1px);
+}
 
-.mood{display:flex; gap:12px; margin:6px 0 8px}
-.mood input{display:none}
+.mood{display:flex; gap:12px; margin:8px 0 10px}
+.mood input{position:absolute; opacity:0}
 .mood label{
-  border:2px solid #e3e6f1; background:#fff; border-radius:14px; padding:10px 12px;
-  cursor:pointer; font-size:22px; line-height:1; transition:.15s transform, .15s border-color;
+  border:2px solid #e3e6f1; background:#fff; border-radius:16px; padding:12px 14px;
+  cursor:pointer; font-size:24px; line-height:1; transition:.15s transform, .15s border-color;
 }
 .mood input:checked + label{ border-color:var(--purple); transform:translateY(-1px) }
 
 .privacy{
   display:flex; gap:12px; align-items:flex-start; background:#fff; border:2px dashed #e3e6f1;
-  border-radius:14px; padding:12px; margin-top:10px; color:var(--ink)
+  border-radius:16px; padding:14px; margin-top:12px; color:var(--ink)
 }
-.privacy small{color:var(--muted)}
+.privacy small{color:var(--muted); font-size:13px}
 
 .pill{
-  background:linear-gradient(90deg,#ff8c3a,#ff5b2b); color:#fff; font-weight:900;
-  border:0; border-radius:999px; padding:16px 24px; cursor:pointer; letter-spacing:.2px;
-  box-shadow:0 12px 24px rgba(255,115,67,.35), inset 0 -2px 0 rgba(0,0,0,.15);
+  background:linear-gradient(90deg,#ff8c3a,#ff5b2b); color:#fff; font-weight:900; font-size:16px;
+  border:0; border-radius:999px; padding:18px 26px; cursor:pointer; letter-spacing:.3px;
+  box-shadow:0 16px 30px rgba(255,115,67,.35), inset 0 -2px 0 rgba(0,0,0,.15);
   transition: transform .08s ease, filter .2s ease;
 }
-.pill:hover{ filter:brightness(1.05) }
+.pill:hover{ filter:brightness(1.06) }
 .pill:active{ transform: translateY(1px) }
 
-.muted{color:#6b7280; font-size:13px}
+.muted{color:#667085; font-size:14px}
 
-/* INFO PANELS */
-.info{background:#ffffff22; border:1px solid #ffffff55; border-radius:18px; padding:18px}
-.info h3{margin:6px 0 6px; font-size:18px}
-.info p{margin:0; color:#f0f3ff; opacity:.95}
-.info li{margin:4px 0}
-
-/* SECTIONS */
-.section{background:var(--panel); padding:40px 18px}
-.section .wrap{max-width:1100px}
-.cards{display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px}
-@media (min-width: 950px){ .cards{ grid-template-columns:repeat(3, 1fr) } }
-.tile{
-  background:#fff; border:1px solid #eceef6; border-radius:18px; padding:18px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
+/* ====== INFO PANELS ====== */
+.info{
+  background:#ffffff22; border:1px solid #ffffff55; border-radius:20px; padding:20px;
 }
-.tile h3{margin:4px 0 6px}
-.tile p{margin:0; color:#444}
+.info h3{margin:6px 0 8px; font-size:20px; font-weight:900}
+.info p{margin:0; color:#f0f3ff; opacity:.95; font-size:16px}
+.info li{margin:6px 0; font-size:16px}
 
-/* FOOTER */
+/* ====== SECTIONS ====== */
+.section{background:var(--panel); padding:50px 22px}
+.section .wrap{max-width:1100px}
+.cards{display:grid; grid-template-columns:1fr; gap:16px; margin-top:16px}
+@media (min-width: 980px){ .cards{ grid-template-columns:repeat(3, 1fr) } }
+.tile{
+  background:#fff; border:1px solid #eceef6; border-radius:20px; padding:20px;
+  box-shadow:0 10px 26px rgba(0,0,0,.08);
+}
+.tile h3{margin:6px 0 8px; font-weight:900; font-size:18px}
+.tile p{margin:0; color:#3b3b44; font-size:16px}
+
+/* ====== FOOTER ====== */
 footer{
-  padding:24px 18px; color:#cfd3e6; text-align:center;
-  border-top:1px solid #ffffff22; background:#0E0A14
+  padding:28px 20px; color:#cfd3e6; text-align:center;
+  border-top:1px solid #ffffff22; background:#0A0D14; font-size:14px
 }
 a, a:visited{color:#ffd77a; text-decoration: none}
 a:hover{text-decoration: underline}
 
-/* ANIMS */
+/* ====== ANIMS ====== */
 .fadeUp{opacity:0; transform:translateY(12px); animation:fadeUp .5s ease forwards}
 .fadeUp.d1{animation-delay:.10s} .fadeUp.d2{animation-delay:.18s} .fadeUp.d3{animation-delay:.26s}
 @keyframes fadeUp{to{opacity:1; transform:none}}
 
-.success{background:#e8f7ed;color:#135a2c;border:1px solid #bfe8cc;padding:10px 12px;border-radius:12px;display:none;margin-top:10px}
-.error{background:#fdeaea;color:#8a1f1f;border:1px solid #f3c2c2;padding:10px 12px;border-radius:12px;display:none;margin-top:10px}
+.success{background:#e8f7ed;color:#135a2c;border:1px solid #bfe8cc;padding:12px;border-radius:14px;display:none;margin-top:12px}
+.error{background:#fdeaea;color:#8a1f1f;border:1px solid #f3c2c2;padding:12px;border-radius:14px;display:none;margin-top:12px}
 
-/* THANK YOU overlay (in-page) */
+/* ====== THANK YOU overlay (in-page) ====== */
 #thanks{
   position:fixed; inset:0; display:none; place-items:center;
-  background:rgba(14,10,20,.72); backdrop-filter: blur(6px); z-index:50;
+  background:rgba(10,13,20,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); z-index:50;
 }
 .ty-card{
-  width:min(720px,92vw);
-  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+  width:min(760px,92vw);
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
   border:1px solid rgba(255,255,255,.18); color:#fff;
-  border-radius:22px; padding:24px 18px; text-align:center;
-  box-shadow:0 18px 60px rgba(0,0,0,.35);
+  border-radius:24px; padding:28px 22px; text-align:center;
+  box-shadow:0 22px 70px rgba(0,0,0,.42);
 }
-.ty-actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+.ty-title{font-weight:900; font-size:clamp(26px,4.5vw,34px); margin:6px 0 8px}
+.ty-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
 .ty-btn{
-  display:inline-block; text-decoration:none; color:#fff; font-weight:800;
-  padding:12px 16px; border-radius:999px; border:2px solid var(--gold);
+  display:inline-block; text-decoration:none; color:#fff; font-weight:800; font-size:16px;
+  padding:14px 18px; border-radius:999px; border:2px solid var(--gold);
   background:linear-gradient(180deg, var(--purple) 0%, var(--purple2) 100%);
 }
-.ty-btn:hover{filter:brightness(1.05)}
+.ty-btn:hover{filter:brightness(1.06)}
 </style>
 </head>
 
 <body>
   <!-- HERO -->
   <section class="hero">
-    <div class="particles" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
     <div class="wrap">
       <div class="brand fadeUp">
         <div class="logo">WHA</div>
@@ -183,28 +196,24 @@ a:hover{text-decoration: underline}
             <textarea name="Suggestion" class="input" placeholder="Tell us the idea or problem. The more detail, the better." required></textarea>
 
             <!-- Categories -->
-            <label style="margin-top:8px">Category</label>
-            <div class="chips" id="chips">
-              <label class="chip"><input type="checkbox" name="Category" value="Maintenance">🧰 Maintenance</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Cleanliness">🧽 Cleanliness</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Safety">🛡️ Safety</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Community">🤝 Community</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Accessibility">♿ Accessibility</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Events">🎉 Events</label>
-              <label class="chip"><input type="checkbox" name="Category" value="Other">📝 Other</label>
+            <label style="margin-top:10px">Category</label>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="Category" value="Maintenance"><span>🧰 Maintenance</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Cleanliness"><span>🧽 Cleanliness</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Safety"><span>🛡️ Safety</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Community"><span>🤝 Community</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Accessibility"><span>♿ Accessibility</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Events"><span>🎉 Events</span></label>
+              <label class="chip"><input type="checkbox" name="Category" value="Other"><span>📝 Other</span></label>
             </div>
 
             <!-- Mood -->
-            <label style="margin-top:6px">How urgent/serious is this?</label>
+            <label style="margin-top:8px">How urgent/serious is this?</label>
             <div class="mood">
-              <input id="m1" type="radio" name="Urgency" value="🙂 Minor">
-              <label for="m1" title="Minor">🙂</label>
-              <input id="m2" type="radio" name="Urgency" value="😕 Annoying">
-              <label for="m2" title="Annoying">😕</label>
-              <input id="m3" type="radio" name="Urgency" value="😠 Frustrating">
-              <label for="m3" title="Frustrating">😠</label>
-              <input id="m4" type="radio" name="Urgency" value="🚨 Urgent">
-              <label for="m4" title="Urgent">🚨</label>
+              <input id="m1" type="radio" name="Urgency" value="🙂 Minor"><label for="m1" title="Minor">🙂 Minor</label>
+              <input id="m2" type="radio" name="Urgency" value="😕 Annoying"><label for="m2" title="Annoying">😕 Annoying</label>
+              <input id="m3" type="radio" name="Urgency" value="😠 Frustrating"><label for="m3" title="Frustrating">😠 Frustrating</label>
+              <input id="m4" type="radio" name="Urgency" value="🚨 Urgent"><label for="m4" title="Urgent">🚨 Urgent</label>
             </div>
 
             <!-- Contact (optional) -->
@@ -222,11 +231,11 @@ a:hover{text-decoration: underline}
             <!-- Private toggle -->
             <div class="privacy">
               <input id="private" type="checkbox" name="Private to Management" value="Yes" />
-              <label for="private" style="font-weight:800; margin:0">Keep this private?</label>
+              <label for="private" style="font-weight:900; margin:0">Keep this private?</label>
               <small>Checked = Only management will see your message. Unchecked = may be summarized in community updates (no names).</small>
             </div>
 
-            <div style="display:flex; gap:12px; align-items:center; margin-top:14px">
+            <div style="display:flex; gap:14px; align-items:center; margin-top:16px">
               <button class="pill" type="submit">SEND SUGGESTION</button>
               <span id="status" class="muted" aria-live="polite"></span>
             </div>
@@ -234,14 +243,14 @@ a:hover{text-decoration: underline}
             <div id="ok" class="success">Submitted! Thank you.</div>
             <div id="err" class="error">There was a problem sending your suggestion. Please try again or call the office.</div>
 
-            <div class="muted" style="margin-top:6px">
+            <div class="muted" style="margin-top:8px">
               For emergencies, call <strong>304-242-2820</strong>.
             </div>
           </form>
         </div>
 
         <!-- INFO STACK -->
-        <div class="fadeUp d2" style="display:grid; gap:14px">
+        <div class="fadeUp d2" style="display:grid; gap:16px">
           <div class="info">
             <h3>Why your suggestions matter</h3>
             <p>Small ideas create big wins: cleaner halls, safer entries, clearer signs, better events, and a stronger community.</p>
@@ -268,13 +277,15 @@ a:hover{text-decoration: underline}
   <section class="section">
     <div class="wrap">
       <div class="fadeUp">
-        <h2 style="margin:0 0 6px; color:#111">What makes a great suggestion?</h2>
-        <p class="muted" style="margin:0 0 12px">Clear, specific, and actionable. Here are examples we can move on quickly:</p>
+        <h2 style="margin:0 0 8px; color:#111; font-size:clamp(24px,4.6vw,28px); font-weight:900">
+          What makes a great suggestion?
+        </h2>
+        <p class="muted" style="margin:0 0 14px; font-size:16px">Clear, specific, and actionable. Here are examples we can move on quickly:</p>
       </div>
       <div class="cards fadeUp d1">
         <div class="tile"><h3>✨ Quick Fix</h3><p>“3rd floor hallway light flickers near Apt 308.”</p></div>
-        <div class="tile"><h3>🧭 Wayfinding</h3><p>“Sign for laundry hours by elevator B would help.”</p></div>
-        <div class="tile"><h3>🛡️ Safety</h3><p>“Mat at north entrance gets slippery when it rains.”</p></div>
+        <div class="tile"><h3>🧭 Wayfinding</h3><p>“Put laundry hours signage by Elevator B.”</p></div>
+        <div class="tile"><h3>🛡️ Safety</h3><p>“North entrance mat gets slippery when it rains.”</p></div>
       </div>
     </div>
   </section>
@@ -287,14 +298,14 @@ a:hover{text-decoration: underline}
   <!-- Inline Thank You (overlay) -->
   <div id="thanks">
     <div class="ty-card">
-      <h2 style="margin:8px 0">✅ Thank you!</h2>
-      <p>Your suggestion was sent to management. We review submissions daily.</p>
+      <div class="ty-title">✅ Thank you!</div>
+      <p style="margin:0">Your suggestion was sent to management. We review submissions daily.</p>
       <div class="ty-actions">
         <a class="ty-btn" href="#" id="again">Submit another suggestion</a>
         <a class="ty-btn" href="index.html">Back to Quick Links</a>
         <a class="ty-btn" href="luau-work-order.html">Submit a Work Order</a>
       </div>
-      <div style="font-size:12px;opacity:.85;margin-top:10px">For emergencies, call <strong>304-242-2820</strong>.</div>
+      <div style="font-size:12px;opacity:.85;margin-top:12px">For emergencies, call <strong>304-242-2820</strong>.</div>
     </div>
   </div>
 
@@ -305,14 +316,6 @@ const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwcoR7fzNRcHAxvDr
 
 function $(sel,root=document){ return root.querySelector(sel) }
 function $all(sel,root=document){ return Array.from(root.querySelectorAll(sel)) }
-
-/* Chips visual toggle */
-$all('.chip').forEach(ch => {
-  const input = ch.querySelector('input');
-  const set = () => ch.dataset.active = input.checked ? "true" : "false";
-  ch.addEventListener('click', (e)=>{ if(e.target.tagName!=="INPUT"){ input.checked = !input.checked; } set(); });
-  set();
-});
 
 const form = $('#suggestForm');
 const statusEl = $('#status');
@@ -337,7 +340,6 @@ form.addEventListener('submit', async (e)=>{
       statusEl.textContent = '';
       okEl.style.display = 'block';
       form.reset();
-      $all('.chip').forEach(ch => ch.dataset.active="false");
       setTimeout(()=>{ ty.style.display = 'grid'; okEl.style.display='none'; }, 350);
     } else {
       statusEl.textContent = '';
