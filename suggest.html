@@ -7,14 +7,12 @@
 <meta name="color-scheme" content="light only">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --purple:#5C1E6D; --purple2:#43144E; --gold:#D4AF37;
   --ink:#0c0e12; --muted:#6b7280; --bg:#0E0A14; --panel:#F7F8FC; --white:#fff;
 }
-*{box-sizing:border-box}
-html,body{margin:0}
+*{box-sizing:border-box} html,body{margin:0}
 body{
   font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color:var(--ink);
@@ -24,13 +22,12 @@ body{
     #0E0A14;
 }
 
-/* ====== HERO ====== */
+/* HERO */
 .hero{
   position:relative; color:var(--white);
   padding:72px 18px 56px;
   background:linear-gradient(160deg, var(--purple) 0%, var(--purple2) 70%);
-  border-bottom:4px solid var(--gold);
-  overflow:hidden;
+  border-bottom:4px solid var(--gold); overflow:hidden;
 }
 .hero .particles{
   position:absolute; inset:0; pointer-events:none; opacity:.35;
@@ -48,17 +45,12 @@ body{
 .brand{display:flex; align-items:center; gap:12px}
 .logo{
   width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
-  border:2px solid #ffffff44; background:#ffffff1a; font-weight:900;
+  border:2px solid #ffffff44; background:#ffffff1a; font-weight:900; color:#fff;
 }
-.logo span{letter-spacing:.5px; color:#fff}
 .hero h1{margin:12px 0 6px; font-weight:900; font-size:34px; line-height:1.1}
 .tag{opacity:.9; font-size:14px}
-.hero-grid{
-  display:grid; grid-template-columns:1fr; gap:18px; margin-top:30px;
-}
-@media (min-width: 950px){
-  .hero-grid{grid-template-columns:1.2fr .8fr}
-}
+.hero-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:30px}
+@media (min-width: 950px){ .hero-grid{grid-template-columns:1.2fr .8fr} }
 
 .hero-card{
   background:linear-gradient(180deg, #ffffff 0%, #F7F8FC 100%);
@@ -66,7 +58,7 @@ body{
   border:1px solid #eceef6; box-shadow:0 12px 40px rgba(0,0,0,.25);
 }
 
-/* ====== FORM ====== */
+/* FORM */
 label{font-weight:800; display:block; margin:10px 4px 6px}
 .input, textarea, select{
   width:100%; padding:14px 14px; border:2px solid #e3e6f1; border-radius:14px;
@@ -112,20 +104,16 @@ textarea{min-height:140px; resize:vertical}
 
 .muted{color:#6b7280; font-size:13px}
 
-/* ====== INFO PANELS ====== */
-.info{
-  background:#ffffff22; border:1px solid #ffffff55; border-radius:18px; padding:18px;
-}
+/* INFO PANELS */
+.info{background:#ffffff22; border:1px solid #ffffff55; border-radius:18px; padding:18px}
 .info h3{margin:6px 0 6px; font-size:18px}
 .info p{margin:0; color:#f0f3ff; opacity:.95}
 .info li{margin:4px 0}
 
-/* ====== SECTIONS ====== */
+/* SECTIONS */
 .section{background:var(--panel); padding:40px 18px}
 .section .wrap{max-width:1100px}
-.cards{
-  display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px
-}
+.cards{display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px}
 @media (min-width: 950px){ .cards{ grid-template-columns:repeat(3, 1fr) } }
 .tile{
   background:#fff; border:1px solid #eceef6; border-radius:18px; padding:18px;
@@ -134,7 +122,7 @@ textarea{min-height:140px; resize:vertical}
 .tile h3{margin:4px 0 6px}
 .tile p{margin:0; color:#444}
 
-/* ====== FOOTER ====== */
+/* FOOTER */
 footer{
   padding:24px 18px; color:#cfd3e6; text-align:center;
   border-top:1px solid #ffffff22; background:#0E0A14
@@ -142,10 +130,33 @@ footer{
 a, a:visited{color:#ffd77a; text-decoration: none}
 a:hover{text-decoration: underline}
 
-/* ====== SMALL ANIMS ====== */
+/* ANIMS */
 .fadeUp{opacity:0; transform:translateY(12px); animation:fadeUp .5s ease forwards}
 .fadeUp.d1{animation-delay:.10s} .fadeUp.d2{animation-delay:.18s} .fadeUp.d3{animation-delay:.26s}
 @keyframes fadeUp{to{opacity:1; transform:none}}
+
+.success{background:#e8f7ed;color:#135a2c;border:1px solid #bfe8cc;padding:10px 12px;border-radius:12px;display:none;margin-top:10px}
+.error{background:#fdeaea;color:#8a1f1f;border:1px solid #f3c2c2;padding:10px 12px;border-radius:12px;display:none;margin-top:10px}
+
+/* THANK YOU overlay (in-page) */
+#thanks{
+  position:fixed; inset:0; display:none; place-items:center;
+  background:rgba(14,10,20,.72); backdrop-filter: blur(6px); z-index:50;
+}
+.ty-card{
+  width:min(720px,92vw);
+  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.18); color:#fff;
+  border-radius:22px; padding:24px 18px; text-align:center;
+  box-shadow:0 18px 60px rgba(0,0,0,.35);
+}
+.ty-actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+.ty-btn{
+  display:inline-block; text-decoration:none; color:#fff; font-weight:800;
+  padding:12px 16px; border-radius:999px; border:2px solid var(--gold);
+  background:linear-gradient(180deg, var(--purple) 0%, var(--purple2) 100%);
+}
+.ty-btn:hover{filter:brightness(1.05)}
 </style>
 </head>
 
@@ -155,7 +166,7 @@ a:hover{text-decoration: underline}
     <div class="particles" aria-hidden="true"></div>
     <div class="wrap">
       <div class="brand fadeUp">
-        <div class="logo"><span>WHA</span></div>
+        <div class="logo">WHA</div>
         <div>
           <h1>Resident Suggestion Box</h1>
           <div class="tag">Wheeling Housing Authority — Luau Manor • We listen. We improve. We follow up.</div>
@@ -165,14 +176,8 @@ a:hover{text-decoration: underline}
       <div class="hero-grid">
         <!-- FORM CARD -->
         <div class="hero-card fadeUp d1">
-          <form id="suggestForm" action="https://formsubmit.co/nikki@wheelingwv-pha.org" method="POST" enctype="multipart/form-data">
-            <!-- Routing + options -->
-            <input type="hidden" name="_subject" value="Resident Suggestion — Luau Manor">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://YOUR_GITHUB_USERNAME.github.io/thanks.html">
+          <form id="suggestForm">
             <input type="hidden" name="Property" value="Luau Manor">
-            <input type="text" name="_honey" style="display:none">
 
             <label>What would make Luau Manor better?</label>
             <textarea name="Suggestion" class="input" placeholder="Tell us the idea or problem. The more detail, the better." required></textarea>
@@ -180,7 +185,6 @@ a:hover{text-decoration: underline}
             <!-- Categories -->
             <label style="margin-top:8px">Category</label>
             <div class="chips" id="chips">
-              <!-- chip template -->
               <label class="chip"><input type="checkbox" name="Category" value="Maintenance">🧰 Maintenance</label>
               <label class="chip"><input type="checkbox" name="Category" value="Cleanliness">🧽 Cleanliness</label>
               <label class="chip"><input type="checkbox" name="Category" value="Safety">🛡️ Safety</label>
@@ -194,18 +198,14 @@ a:hover{text-decoration: underline}
             <label style="margin-top:6px">How urgent/serious is this?</label>
             <div class="mood">
               <input id="m1" type="radio" name="Urgency" value="🙂 Minor">
-              <label for="m1">🙂</label>
+              <label for="m1" title="Minor">🙂</label>
               <input id="m2" type="radio" name="Urgency" value="😕 Annoying">
-              <label for="m2">😕</label>
+              <label for="m2" title="Annoying">😕</label>
               <input id="m3" type="radio" name="Urgency" value="😠 Frustrating">
-              <label for="m3">😠</label>
-              <input id="m4" type="radio" name="Urgency" value="🚨 Urgent" />
-              <label for="m4">🚨</label>
+              <label for="m3" title="Frustrating">😠</label>
+              <input id="m4" type="radio" name="Urgency" value="🚨 Urgent">
+              <label for="m4" title="Urgent">🚨</label>
             </div>
-
-            <!-- Optional image -->
-            <label>Attach a photo (optional)</label>
-            <input class="input" type="file" name="Attachment" accept="image/*" />
 
             <!-- Contact (optional) -->
             <div class="row row-2">
@@ -228,8 +228,11 @@ a:hover{text-decoration: underline}
 
             <div style="display:flex; gap:12px; align-items:center; margin-top:14px">
               <button class="pill" type="submit">SEND SUGGESTION</button>
-              <span id="status" class="muted"></span>
+              <span id="status" class="muted" aria-live="polite"></span>
             </div>
+
+            <div id="ok" class="success">Submitted! Thank you.</div>
+            <div id="err" class="error">There was a problem sending your suggestion. Please try again or call the office.</div>
 
             <div class="muted" style="margin-top:6px">
               For emergencies, call <strong>304-242-2820</strong>.
@@ -269,18 +272,9 @@ a:hover{text-decoration: underline}
         <p class="muted" style="margin:0 0 12px">Clear, specific, and actionable. Here are examples we can move on quickly:</p>
       </div>
       <div class="cards fadeUp d1">
-        <div class="tile">
-          <h3>✨ Quick Fix</h3>
-          <p>“3rd floor hallway light flickers near Apt 308.”</p>
-        </div>
-        <div class="tile">
-          <h3>🧭 Wayfinding</h3>
-          <p>“Sign for laundry hours by elevator B would help.”</p>
-        </div>
-        <div class="tile">
-          <h3>🛡️ Safety</h3>
-          <p>“Mat at north entrance gets slippery when it rains.”</p>
-        </div>
+        <div class="tile"><h3>✨ Quick Fix</h3><p>“3rd floor hallway light flickers near Apt 308.”</p></div>
+        <div class="tile"><h3>🧭 Wayfinding</h3><p>“Sign for laundry hours by elevator B would help.”</p></div>
+        <div class="tile"><h3>🛡️ Safety</h3><p>“Mat at north entrance gets slippery when it rains.”</p></div>
       </div>
     </div>
   </section>
@@ -290,21 +284,69 @@ a:hover{text-decoration: underline}
     Wheeling Housing Authority — Luau Manor • <a href="index.html">Back to Quick Links</a> • <a href="luau-work-order.html">Submit a Work Order</a>
   </footer>
 
+  <!-- Inline Thank You (overlay) -->
+  <div id="thanks">
+    <div class="ty-card">
+      <h2 style="margin:8px 0">✅ Thank you!</h2>
+      <p>Your suggestion was sent to management. We review submissions daily.</p>
+      <div class="ty-actions">
+        <a class="ty-btn" href="#" id="again">Submit another suggestion</a>
+        <a class="ty-btn" href="index.html">Back to Quick Links</a>
+        <a class="ty-btn" href="luau-work-order.html">Submit a Work Order</a>
+      </div>
+      <div style="font-size:12px;opacity:.85;margin-top:10px">For emergencies, call <strong>304-242-2820</strong>.</div>
+    </div>
+  </div>
+
 <script>
-/* Enhance chips (toggle visual state) */
-document.querySelectorAll('.chip').forEach(ch => {
+/* ====== Your Apps Script Web App URL ====== */
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwcoR7fzNRcHAxvDrdkLKAOL-KF29wfZMKd1X9D8cFUNiKTeK8UlwanwEMV89Qp_w-t/exec";
+/* ========================================= */
+
+function $(sel,root=document){ return root.querySelector(sel) }
+function $all(sel,root=document){ return Array.from(root.querySelectorAll(sel)) }
+
+/* Chips visual toggle */
+$all('.chip').forEach(ch => {
   const input = ch.querySelector('input');
   const set = () => ch.dataset.active = input.checked ? "true" : "false";
   ch.addEventListener('click', (e)=>{ if(e.target.tagName!=="INPUT"){ input.checked = !input.checked; } set(); });
   set();
 });
 
-/* Friendly status on submit (works with FormSubmit redirect too) */
-const form = document.getElementById('suggestForm');
-const statusEl = document.getElementById('status');
+const form = $('#suggestForm');
+const statusEl = $('#status');
+const okEl = $('#ok');
+const errEl = $('#err');
+const ty = $('#thanks');
+const again = $('#again');
 
-form.addEventListener('submit', ()=>{
+again.addEventListener('click', (e)=>{ e.preventDefault(); ty.style.display='none'; });
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
   statusEl.textContent = 'Sending…';
+  okEl.style.display = 'none';
+  errEl.style.display = 'none';
+
+  try{
+    const fd = new FormData(form);
+    const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd });
+    const json = await res.json().catch(()=>({ok:false}));
+    if (res.ok && json.ok){
+      statusEl.textContent = '';
+      okEl.style.display = 'block';
+      form.reset();
+      $all('.chip').forEach(ch => ch.dataset.active="false");
+      setTimeout(()=>{ ty.style.display = 'grid'; okEl.style.display='none'; }, 350);
+    } else {
+      statusEl.textContent = '';
+      errEl.style.display = 'block';
+    }
+  }catch(err){
+    statusEl.textContent = '';
+    errEl.style.display = 'block';
+  }
 });
 </script>
 </body>
