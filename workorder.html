@@ -5,142 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Work Order Request • Wheeling Housing Authority</title>
 <meta name="color-scheme" content="dark light" />
-
-<!--
-  Brand notes:
-  - Primary: WHA Purple #4B2E83
-  - Accent Gold: #DAA520
-  - Ink on dark: #F4F6FA
-  - Slate accents: #0B0E1A, #111827, #1F2937
--->
-
 <style>
   :root{
-    --bg1:#0b0e1a;
-    --bg2:#101428;
-    --card:#111827;
-    --ink:#f4f6fa;
-    --muted:#9ca3af;
-    --muted-2:#cbd5e1;
-    --brand:#4B2E83;        /* WHA Purple */
-    --gold:#DAA520;         /* WHA Gold */
-    --ring:#DAA52055;
-    --field:#1f2937;
-    --border:#26324a;
-    --ok:#10b981;
+    --bg1:#0b0e1a; --bg2:#101428; --card:#111827; --ink:#f4f6fa; --muted:#9ca3af;
+    --brand:#4B2E83; --gold:#DAA520; --ring:#DAA52055; --field:#1f2937; --border:#26324a;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
+    margin:0; min-height:100%; display:flex; align-items:center; justify-content:center; padding:20px;
     background:
       radial-gradient(1200px 800px at -10% -10%, #1a1f36 0%, transparent 55%),
       radial-gradient(1000px 700px at 110% 10%, #0f1630 0%, transparent 55%),
       linear-gradient(180deg,var(--bg1),var(--bg2));
-    color:var(--ink);
-    font:400 17px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-    display:flex; align-items:center; justify-content:center;
-    padding:22px;
+    color:var(--ink); font:400 17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
   }
-  .shell{width:100%; max-width:900px}
-  /* Top banner with logo */
+  .wrap{width:100%; max-width:860px}
   .brandbar{
-    display:flex; align-items:center; gap:14px;
-    padding:12px 14px; border:1px solid #ffffff12;
-    border-radius:14px; margin:0 auto 16px; backdrop-filter: blur(6px);
-    background:linear-gradient(180deg,#0e1224db, #0b0f20cc);
-    box-shadow:0 20px 60px #0006, inset 0 1px 0 #ffffff10;
+    display:flex; align-items:center; gap:12px; padding:10px 12px; margin:0 0 14px;
+    border:1px solid #ffffff18; border-radius:14px; background:linear-gradient(180deg,#0e1224db,#0b0f20cc);
+    box-shadow:0 18px 50px #0006, inset 0 1px 0 #ffffff10;
   }
   .logo{
-    width:42px; height:42px; display:grid; place-items:center;
-    border-radius:10px; overflow:hidden; background: radial-gradient(120% 120% at 0% 0%, var(--gold), #b38612 60%, #895f00 100%);
+    width:42px;height:42px;border-radius:10px;display:grid;place-items:center;overflow:hidden;
+    background: radial-gradient(120% 120% at 0% 0%, var(--gold), #b38612 60%, #895f00 100%);
     box-shadow:0 8px 20px #0008, inset 0 1px 0 #ffffff55;
   }
-  .logo svg{width:26px; height:26px}
-  .brandtxt b{letter-spacing:.2px}
-  .brandtxt{
-    display:flex; flex-direction:column; line-height:1.15;
-  }
-  .brandline1{font-weight:900; font-size:18px}
-  .brandline2{font-size:13px; color:var(--muted-2)}
-  .badge{
-    margin-left:auto; display:inline-block; padding:6px 10px; border-radius:999px; font-weight:800; font-size:12px;
-    color:#0a0d18; background:linear-gradient(90deg,var(--gold),#8df0cc);
-    box-shadow:0 8px 24px #0006;
-  }
-
-  /* Card */
+  .logo svg{width:26px;height:26px}
+  .brandtext{line-height:1.1}
+  .brandtext b{letter-spacing:.2px}
+  .brandline1{font-weight:900;font-size:18px}
+  .brandline2{font-size:13px;color:#cbd5e1}
+  .badge{margin-left:auto;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px;color:#0a0d18;background:linear-gradient(90deg,var(--gold),#8df0cc)}
   .card{
     background:linear-gradient(180deg,#0c1224 0%, #0a1020 100%);
-    border:1px solid var(--border);
-    border-radius:18px; padding:22px;
+    border:1px solid var(--border); border-radius:18px; padding:18px;
     box-shadow:0 24px 70px #0008, inset 0 1px 0 #ffffff10;
   }
-  header{ text-align:center; margin-bottom:10px}
-  h1{margin:8px 0 2px; font-size:clamp(24px,4.4vw,34px); line-height:1.12; color:var(--gold)}
-  p.lead{margin:0; color:var(--muted); font-size:16px}
-
-  form{display:grid; gap:16px; margin-top:12px}
-  .grid{display:grid; gap:12px}
+  header{text-align:center;margin-bottom:10px}
+  h1{margin:8px 0 2px;font-size:clamp(24px,4.4vw,34px);color:var(--gold)}
+  p.lead{margin:0;color:var(--muted);font-size:16px}
+  form{display:grid;gap:14px;margin-top:12px}
+  .grid{display:grid;gap:12px}
   @media (min-width:740px){ .grid-2{grid-template-columns:1fr 1fr} }
-
-  label{display:block; font-weight:700; margin-bottom:6px; letter-spacing:.2px}
+  label{display:block;font-weight:700;margin-bottom:6px}
   .req{color:var(--gold)}
-  input, select, textarea{
-    width:100%; background:var(--field); color:var(--ink);
-    border:1px solid #2a3852; border-radius:12px; padding:12px 14px; font-size:17px; outline:none;
-    transition:border-color .2s, box-shadow .2s, transform .04s;
+  input,select,textarea{
+    width:100%;background:var(--field);color:var(--ink);border:1px solid #2a3852;border-radius:12px;padding:12px 14px;font-size:17px;outline:none;
+    transition:border-color .2s,box-shadow .2s
   }
-  input:focus, select:focus, textarea:focus{
-    border-color:var(--gold); box-shadow:0 0 0 4px var(--ring);
-  }
-  input:active, select:active, textarea:active{ transform:translateY(0.5px) }
-  textarea{min-height:140px; resize:vertical}
-  .hint{color:var(--muted); font-size:14px}
-
-  .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--ring)}
+  textarea{min-height:140px;resize:vertical}
+  .hint{color:var(--muted);font-size:14px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
   button{
-    appearance:none; border:none; border-radius:12px; padding:12px 16px; font-weight:900; font-size:18px; cursor:pointer;
-    color:#0a0d18; background:
-      linear-gradient(180deg, #ffd976 0%, #f0b429 100%),
-      linear-gradient(90deg, var(--gold), #8df0cc);
-    box-shadow:0 12px 34px #0009, inset 0 1px 0 #ffffff88;
+    appearance:none;border:none;border-radius:12px;padding:12px 16px;font-weight:900;font-size:18px;cursor:pointer;
+    color:#0a0d18;background:linear-gradient(180deg,#ffd976 0%,#f0b429 100%);box-shadow:0 12px 34px #0009, inset 0 1px 0 #ffffff88;
   }
-  button:hover{filter:brightness(1.04)}
-  .ghost{
-    background:transparent; color:var(--ink); border:1px solid #2a344b; font-weight:700
-  }
-
-  .foot{
-    margin-top:8px; text-align:center; color:var(--muted); font-size:13px
-  }
-
-  /* Honeypot field hidden off-screen */
-  .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
-
-  footer{ margin-top:14px; text-align:center; color:var(--muted-2); font-size:13px }
-  .divider{
-    height:1px; width:100%; background:linear-gradient(90deg, transparent, #ffffff20, transparent);
-    margin:8px 0 2px;
-  }
+  .ghost{background:transparent;color:var(--ink);border:1px solid #2a344b;font-weight:700}
+  .foot{margin-top:4px;text-align:center;color:var(--muted);font-size:13px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  footer{margin-top:10px;text-align:center;color:#cbd5e1;font-size:13px}
 </style>
 </head>
 <body>
-  <div class="shell">
-    <!-- Brand bar -->
+  <div class="wrap">
     <div class="brandbar">
       <div class="logo" aria-hidden="true">
-        <!-- Simple inline crest-style SVG (swap with your file if you have one) -->
         <svg viewBox="0 0 24 24" fill="#111827" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
           <path d="M8 11h8v2H8zM10 7h4v2h-4z" fill="#F4F6FA"/>
         </svg>
       </div>
-      <div class="brandtxt">
-        <span class="brandline1"><b>Wheeling Housing Authority</b></span>
-        <span class="brandline2">Resident Services &amp; Maintenance</span>
+      <div class="brandtext">
+        <div class="brandline1"><b>Wheeling Housing Authority</b></div>
+        <div class="brandline2">Resident Services • Maintenance</div>
       </div>
-      <span class="badge">WHA • Purple &amp; Gold</span>
+      <span class="badge">Purple &amp; Gold</span>
     </div>
 
     <div class="card">
@@ -149,18 +90,13 @@
         <p class="lead">Tell us what needs attention. We’ll route this to maintenance and follow up with you.</p>
       </header>
 
-      <div class="divider" role="presentation"></div>
-
-      <!-- Classic HTML form submit (posts to your Apps Script URL) -->
       <form action="https://script.google.com/macros/s/AKfycbxmgUtnh2cCWaE70iZ7opvkY65JGLd8ZKME1BKhXSl24wYebvYqTDjS1EHF9oz4gxY/exec" method="POST" accept-charset="utf-8">
-        <!-- Honeypot (bot trap) -->
+        <!-- Honeypot -->
         <input type="text" name="company" class="hp" autocomplete="off" tabindex="-1" />
-
-        <!-- Optional meta (helpful in your Sheet/email logs) -->
+        <!-- Meta -->
         <input type="hidden" name="submittedPage" value="">
         <input type="hidden" name="ua" value="">
-        <!-- If your backend supports redirect, you can enable:
-        <input type="hidden" name="successRedirect" value="thank-you.html"> -->
+        <!-- <input type="hidden" name="successRedirect" value="thank-you.html"> -->
 
         <div class="grid grid-2">
           <div>
@@ -239,10 +175,10 @@
         </div>
 
         <div class="actions">
-          <button type="submit" aria-label="Submit Work Order">Submit Work Order</button>
-          <button type="reset" class="ghost" aria-label="Reset form">Reset</button>
+          <button type="submit">Submit Work Order</button>
+          <button type="reset" class="ghost">Reset</button>
         </div>
-        <div class="foot">For emergencies, call the office directly. Online submissions are monitored during business hours.</div>
+        <div class="foot">For emergencies, call the office. Online submissions are monitored during business hours.</div>
       </form>
     </div>
 
@@ -250,7 +186,6 @@
   </div>
 
   <script>
-    // Fill meta fields (optional)
     document.querySelector('input[name="submittedPage"]').value = location.href;
     document.querySelector('input[name="ua"]').value = navigator.userAgent;
     document.getElementById('yr').textContent = new Date().getFullYear();
