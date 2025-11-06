@@ -1,9 +1,208 @@
-<form action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec" method="POST">
-  <input name="formType" value="feedback">
-  <input name="property" value="Luau Manor">
-  <input name="name" value="Test User">
-  <input name="contact" value="304-000-0000">
-  <textarea name="description">Hello world</textarea>
-  <input type="hidden" name="successRedirect" value="thank-you.html">
-  <button type="submit">Send</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wheeling Housing Authority - Resident Services</title>
+<style>
+  body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(circle at top, #1a1a2e 0%, #0f0f1b 100%);
+    color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background: linear-gradient(90deg, #3b2175, #b18d28);
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 1.6em;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #1c1c2c;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  }
+
+  h2 {
+    color: #ffcc33;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-top: 12px;
+    color: #cfcfcf;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background: #29294a;
+    color: #fff;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+    background: linear-gradient(90deg, #5a3dc8, #cfa82e);
+    color: white;
+    font-size: 1.1em;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  .note {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #bbb;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    color: #777;
+    font-size: 0.8em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wheeling Housing Authority</h1>
+  <div>Resident Services • Maintenance & Feedback</div>
+</header>
+
+<div class="container">
+  <h2>Resident Service Form</h2>
+  <form action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec" method="POST" accept-charset="utf-8">
+    
+    <label for="formType">Form Type *</label>
+    <select name="formType" id="formType" required>
+      <option value="">Select type...</option>
+      <option value="work_order">Work Order Request</option>
+      <option value="feedback">General Feedback / Complaint / Suggestion</option>
+    </select>
+
+    <label for="property">Property *</label>
+    <select name="property" id="property" required>
+      <option value="">Select a property...</option>
+      <option value="Luau Manor">Luau Manor</option>
+      <option value="Booker T">Booker T</option>
+      <option value="Garden Park">Garden Park</option>
+      <option value="Riverside">Riverside</option>
+      <option value="Hil-Dar">Hil-Dar</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="unit">Apt/Unit *</label>
+    <input type="text" id="unit" name="unit" placeholder="e.g., 2B" required>
+
+    <label for="name">Your Name *</label>
+    <input type="text" id="name" name="name" placeholder="First & Last" required>
+
+    <label for="contact">Best Contact (phone or email) *</label>
+    <input type="text" id="contact" name="contact" placeholder="(304) 555-1234 or you@example.com" required>
+
+    <div id="workOrderFields">
+      <label for="issue">Issue Type</label>
+      <input type="text" id="issue" name="issue" placeholder="Describe the issue briefly">
+
+      <label for="entry">Permission to Enter</label>
+      <select name="entry" id="entry">
+        <option value="Yes">Yes, maintenance may enter if I’m not home</option>
+        <option value="No">No, please contact me to schedule</option>
+      </select>
+
+      <label for="urgency">Urgency</label>
+      <select name="urgency" id="urgency">
+        <option value="Normal">Normal</option>
+        <option value="High">High (safety or essential service issue)</option>
+      </select>
+
+      <label for="preferredTime">Preferred Time</label>
+      <input type="text" id="preferredTime" name="preferredTime" placeholder="e.g., Morning, Afternoon, Anytime">
+    </div>
+
+    <div id="feedbackFields" style="display:none;">
+      <label for="category">Category</label>
+      <select name="category" id="category">
+        <option value="General Suggestion">General Suggestion</option>
+        <option value="Complaint">Complaint</option>
+        <option value="Compliment">Compliment</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <label for="description">Description *</label>
+    <textarea id="description" name="description" placeholder="Please describe your request or feedback in detail." required></textarea>
+
+    <input type="hidden" name="submittedPage" value="Resident Form Page">
+    <input type="hidden" name="ua" value="">
+    <input type="hidden" name="successRedirect" value="thank-you.html">
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="note">
+    If this is an emergency maintenance issue, please call the office directly:<br>
+    <strong>(304) 233-0658</strong>
+  </div>
+</div>
+
+<footer>
+  © 2025 Wheeling Housing Authority · Resident Services Department
+</footer>
+
+<script>
+  // Switch fields dynamically
+  const formTypeSelect = document.getElementById('formType');
+  const workOrderFields = document.getElementById('workOrderFields');
+  const feedbackFields = document.getElementById('feedbackFields');
+  const uaField = document.querySelector('input[name="ua"]');
+  uaField.value = navigator.userAgent;
+
+  formTypeSelect.addEventListener('change', function() {
+    if (this.value === 'work_order') {
+      workOrderFields.style.display = 'block';
+      feedbackFields.style.display = 'none';
+    } else if (this.value === 'feedback') {
+      workOrderFields.style.display = 'none';
+      feedbackFields.style.display = 'block';
+    } else {
+      workOrderFields.style.display = 'none';
+      feedbackFields.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
