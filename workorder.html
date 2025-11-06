@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Wheeling Housing Authority — Resident Services</title>
 <meta name="theme-color" content="#4B2E83" />
-<meta name="description" content="Submit work orders or feedback to the Wheeling Housing Authority from your phone." />
+<meta name="description" content="Submit work orders or maintenance concerns to the Wheeling Housing Authority." />
 
 <style>
 /* ========= THEME ========= */
@@ -29,7 +29,10 @@ body{
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* ========= HEADER (MOBILE-FIRST) ========= */
+/* ========= UTILS ========= */
+.hidden{display:none !important}
+
+/* ========= HEADER ========= */
 .header{
   position:sticky; top:0; z-index:1000;
   background:linear-gradient(90deg,var(--purple),var(--gold));
@@ -44,10 +47,10 @@ body{
 .title b{font-size:17px}
 .title small{display:block; font-size:12px; opacity:.9}
 
-/* Mobile menu button */
+/* Menu button */
 .menuBtn{
   margin-left:auto; border:0; background:rgba(255,255,255,.18); color:#fff;
-  border-radius:10px; padding:8px 10px; font-size:16px;
+  border-radius:10px; padding:8px 10px; font-size:16px; cursor:pointer;
 }
 
 /* Slide-over drawer */
@@ -60,7 +63,7 @@ body{
 .drawerHeader b{font-size:16px}
 .drawer a{display:block; padding:14px 16px; color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.06)}
 .drawer a span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
-.drawerClose{border:0; background:transparent; color:#fff; font-size:24px; line-height:1}
+.drawerClose{border:0; background:transparent; color:#fff; font-size:24px; line-height:1; cursor:pointer}
 
 /* Backdrop */
 .backdrop{
@@ -109,10 +112,11 @@ textarea{min-height:120px; resize:vertical}
 .btn{
   width:100%; margin-top:16px; padding:14px; font-weight:900; letter-spacing:.2px;
   background:linear-gradient(90deg,var(--gold),#f0c24c); color:#111; border:0; border-radius:12px;
+  cursor:pointer;
 }
 .btn:active{transform:translateY(1px)}
 
-.note{margin-top:10px; text-align:center; color:var(--muted); font-size:13px}
+.note{margin-top:10px; text-align:center; color:#muted; font-size:13px}
 
 /* ========= FOOTER ========= */
 .footer{padding:18px; border-top:1px solid rgba(255,255,255,.08); text-align:center; color:var(--muted); font-size:12px}
@@ -130,7 +134,7 @@ textarea{min-height:120px; resize:vertical}
 <!-- Header -->
 <header class="header">
   <div class="logo" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path fill="#4B2E83" d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
       <path fill="#DAA520" d="M8 11h8v2H8zM10 7h4v2h-4z"/>
     </svg>
@@ -149,7 +153,7 @@ textarea{min-height:120px; resize:vertical}
     <button class="drawerClose" id="drawerClose" aria-label="Close">×</button>
   </div>
   <a href="#form"><strong>Submit Work Order</strong><span>Send to maintenance</span></a>
-  <a href="#form"><strong>Feedback & Suggestions</strong><span>Share ideas or concerns</span></a>
+  <a href="#form"><strong>Report a Building Issue</strong><span>Any maintenance concern</span></a>
   <a href="#faq"><strong>FAQ</strong><span>Common questions</span></a>
   <a href="tel:13042330658"><strong>Call Office</strong><span>(304) 233-0658</span></a>
 </div>
@@ -158,8 +162,8 @@ textarea{min-height:120px; resize:vertical}
 <!-- Hero -->
 <section class="hero">
   <div class="heroCard">
-    <h2>Mobile-first Resident Portal</h2>
-    <p>Use your phone to request maintenance or send suggestions. Your request routes to the right property team, and you’ll get a confirmation screen instantly.</p>
+    <h2>Resident Services Portal</h2>
+    <p>Submit a work order or report a maintenance problem. Your request is routed to the correct property team and you’ll see a confirmation after sending.</p>
 
     <div class="quick">
       <div class="info">
@@ -168,7 +172,7 @@ textarea{min-height:120px; resize:vertical}
       </div>
       <div class="info">
         <b>Tip</b>
-        <small>Approving entry speeds up non-urgent fixes.</small>
+        <small>Approving entry usually speeds up non-urgent fixes.</small>
       </div>
     </div>
   </div>
@@ -179,13 +183,13 @@ textarea{min-height:120px; resize:vertical}
   <form class="form" method="POST"
         action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec"
         accept-charset="utf-8">
-    <h3>Resident Service Form</h3>
+    <h3>Work Order / Maintenance Request</h3>
 
-    <label for="formType">Form Type *</label>
+    <label for="formType">Request Type *</label>
     <select id="formType" name="formType" required>
       <option value="">Select…</option>
       <option value="work_order">Work Order</option>
-      <option value="feedback">Feedback / Suggestion</option>
+      <option value="feedback">Other Maintenance Issue / Note</option>
     </select>
 
     <div class="row">
@@ -245,19 +249,19 @@ textarea{min-height:120px; resize:vertical}
       <div class="helper">For emergencies, call the office instead of using this form.</div>
     </div>
 
-    <!-- Feedback extras (shown when Feedback selected) -->
+    <!-- Feedback-style extras for other maintenance notes -->
     <div id="feedExtra" class="hidden">
       <label for="category">Category</label>
       <select id="category" name="category">
-        <option>General Suggestion</option>
-        <option>Complaint</option>
-        <option>Compliment</option>
+        <option>General Maintenance Issue</option>
+        <option>Common Area Problem</option>
+        <option>Noise / Safety Concern</option>
         <option>Other</option>
       </select>
     </div>
 
     <label for="description">Details *</label>
-    <textarea id="description" name="description" placeholder="Describe your request or feedback…" required></textarea>
+    <textarea id="description" name="description" placeholder="Describe the problem or request…" required></textarea>
 
     <!-- Hidden context + absolute redirect -->
     <input type="hidden" name="submittedPage" id="submittedPage" value="">
@@ -275,19 +279,18 @@ textarea{min-height:120px; resize:vertical}
 </footer>
 
 <script>
-/* Mobile drawer controls */
+/* Drawer controls */
 const menuBtn = document.getElementById('menuBtn');
 const drawer = document.getElementById('drawer');
 const closeBtn = document.getElementById('drawerClose');
 const backdrop = document.getElementById('backdrop');
-
 function openDrawer(){drawer.classList.add('open'); backdrop.classList.add('show');}
 function closeDrawer(){drawer.classList.remove('open'); backdrop.classList.remove('show');}
 menuBtn.addEventListener('click', openDrawer);
 closeBtn.addEventListener('click', closeDrawer);
 backdrop.addEventListener('click', closeDrawer);
 
-/* Form UX (mobile-first) */
+/* Form toggles */
 const formType = document.getElementById('formType');
 const workExtra = document.getElementById('workExtra');
 const feedExtra = document.getElementById('feedExtra');
@@ -297,14 +300,13 @@ formType.addEventListener('change', () => {
   feedExtra.classList.toggle('hidden', v !== 'feedback');
 });
 
-/* Hidden context + anti-iFrame redirect safety */
+/* Hidden context + footer year */
 document.getElementById('submittedPage').value = location.href;
 document.getElementById('ua').value = navigator.userAgent;
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* Client-side fallback redirect (in case CSP blocks meta refresh) */
+/* Fallback redirect to thank-you in case the Apps Script is slow */
 document.querySelector('form').addEventListener('submit', () => {
-  // if the script responds slowly, nudge user to thank-you after 2.5s
   setTimeout(() => {
     try { window.top.location.href = "https://4hfund.github.io/projects/thank-you.html"; }
     catch(e) { location.href = "https://4hfund.github.io/projects/thank-you.html"; }
