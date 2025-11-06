@@ -1,0 +1,9 @@
+<form action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec" method="POST">
+  <input name="formType" value="feedback">
+  <input name="property" value="Luau Manor">
+  <input name="name" value="Test User">
+  <input name="contact" value="304-000-0000">
+  <textarea name="description">Hello world</textarea>
+  <input type="hidden" name="successRedirect" value="thank-you.html">
+  <button type="submit">Send</button>
+</form>
