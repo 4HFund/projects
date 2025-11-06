@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Work Order • Wheeling Housing Authority</title>
+<title>Wheeling Housing Authority • Resident Help Portal</title>
 <meta name="color-scheme" content="dark light" />
 <style>
   :root{
-    --bg0:#070912; --bg1:#0b0e1a; --glass:#0f1428cc; --ink:#f4f6fa; --muted:#a3acc2; --muted2:#cbd5e1;
-    --wha-purple:#4B2E83; --wha-gold:#DAA520; --wha-cyan:#6ee7b7;
-    --ring:#DAA52055; --field:#111a33; --stroke:#23304c; --shadow: 0 24px 80px rgba(0,0,0,.55);
+    --bg0:#070912; --bg1:#0b0e1a; --ink:#f4f6fa; --muted:#a3acc2; --muted2:#cbd5e1;
+    --purple:#4B2E83; --gold:#DAA520; --cyan:#6ee7b7;
+    --ring:#DAA52055; --field:#111a33; --stroke:#23304c; --shadow:0 24px 80px rgba(0,0,0,.55);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -33,54 +33,48 @@
   }
   .logo{
     width:46px;height:46px;border-radius:12px;overflow:hidden;display:grid;place-items:center;flex:0 0 46px;
-    background: conic-gradient(from 220deg, var(--wha-gold), #b88312 25%, #885f05 55%, var(--wha-gold) 85%);
+    background: conic-gradient(from 220deg, var(--gold), #b88312 25%, #885f05 55%, var(--gold) 85%);
     box-shadow:0 10px 28px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.45);
   }
   .logo svg{width:28px;height:28px}
   .brandtext{line-height:1.1}
   .brand1{font-weight:900;letter-spacing:.2px;font-size:18px}
   .brand2{font-size:13px;color:var(--muted2)}
-  .chip{margin-left:auto;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;
-    font-weight:800;font-size:12px;color:#0a0d18;background:linear-gradient(90deg,var(--wha-gold),var(--wha-cyan));
-    box-shadow:0 8px 24px rgba(0,0,0,.45)}
-  .chip::before{content:'';width:8px;height:8px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #fff, #ffd977 60%, #f0b429); box-shadow:0 0 14px #ffd977aa}
-  .divider{height:1px;width:100%;margin:10px 0 4px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+  .chip{margin-left:auto;width:64px;height:26px;border-radius:999px;
+    background:linear-gradient(90deg,#4B2E83 0%, #DAA520 100%); box-shadow:0 8px 24px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2)}
   .card{
-    border-radius:20px;
-    background:radial-gradient(120% 120% at 0% 0%, rgba(218,165,32,.08), transparent 60%), linear-gradient(180deg,#0b1230,#090f25 60%,#090e20 100%);
+    border-radius:20px;background:radial-gradient(120% 120% at 0% 0%, rgba(218,165,32,.08), transparent 60%), linear-gradient(180deg,#0b1230,#090f25 60%,#090e20 100%);
     border:1px solid var(--stroke); box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.07); overflow:hidden;
   }
   header{padding:18px 18px 0;text-align:center}
-  h1{margin:2px 0 4px;font-size:clamp(24px,4.4vw,36px);
+  h1{margin:2px 0 4px;font-size:clamp(22px,4.4vw,34px);
      background:linear-gradient(90deg,#ffd977,#f0b429 45%,#ffe7a5);-webkit-background-clip:text;background-clip:text;color:transparent}
   .lead{margin:0 0 8px;color:var(--muted);font-size:15.5px}
+  .divider{height:1px;width:100%;margin:10px 0 4px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
   form{display:grid;gap:16px;padding:16px}
   .grid{display:grid;gap:12px}
   @media (min-width:760px){.grid-2{grid-template-columns:1fr 1fr}}
   label{display:block;font-weight:800;margin-bottom:6px;letter-spacing:.2px}
-  .req{color:var(--wha-gold)}
+  .req{color:var(--gold)}
   input,select,textarea{
     width:100%;background:var(--field);color:var(--ink);border:1px solid #2a3852;border-radius:12px;padding:12px 14px;font-size:17px;outline:none;
-    transition:border-color .18s, box-shadow .18s, transform .04s
+    transition:border-color .18s, box-shadow .18s
   }
-  input:focus,select:focus,textarea:focus{border-color:var(--wha-gold);box-shadow:0 0 0 4px var(--ring),0 0 0 1px #ffe7a566 inset}
-  input:active,select:active,textarea:active{transform:translateY(.5px)}
+  input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--ring),0 0 0 1px #ffe7a566 inset}
   textarea{min-height:140px;resize:vertical}
-  .hint{color:var(--muted);font-size:13.5px}
   .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   button{
     appearance:none;border:none;border-radius:12px;padding:12px 18px;font-weight:900;font-size:18px;cursor:pointer;color:#0a0d18;
-    background:linear-gradient(180deg,#ffd976 0%,#f0b429 100%);
-    box-shadow:0 16px 36px rgba(0,0,0,.5),0 0 18px #ffd97744, inset 0 1px 0 #fff8;
+    background:linear-gradient(180deg,#ffd976 0%,#f0b429 100%); box-shadow:0 16px 36px rgba(0,0,0,.5), inset 0 1px 0 #fff8;
     transition:transform .08s ease, filter .15s ease, box-shadow .15s ease
   }
-  button:hover{filter:brightness(1.05) saturate(1.05);box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 22px #ffd97766, inset 0 1px 0 #fff8}
-  button:active{transform:translateY(1px)}
+  button:hover{filter:brightness(1.05) saturate(1.05);box-shadow:0 18px 40px rgba(0,0,0,.55), inset 0 1px 0 #fff8}
   .ghost{background:transparent;color:var(--ink);border:1px solid #2a344b;font-weight:800}
+  .hint{color:var(--muted);font-size:13.5px}
   .foot{padding:0 16px 18px;text-align:center;color:var(--muted);font-size:13px}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   footer{margin-top:14px;text-align:center;color:var(--muted2);font-size:13px}
+  .hidden{display:none}
 </style>
 </head>
 <body>
@@ -94,29 +88,37 @@
       </div>
       <div class="brandtext">
         <div class="brand1">Wheeling Housing Authority</div>
-        <div class="brand2">Resident Services • Maintenance</div>
+        <div class="brand2">Resident Help Portal</div>
       </div>
-      <span class="chip">WHA • Purple &amp; Gold</span>
+      <span class="chip" aria-label="WHA colors"></span>
     </div>
 
     <div class="card">
       <header>
-        <h1>Work Order Request</h1>
-        <p class="lead">Tell us what needs attention. We’ll route it to maintenance and follow up with you.</p>
+        <h1>Submit a Request</h1>
+        <p class="lead">Choose a type and tell us what you need. We’ll route it to the right team.</p>
       </header>
       <div class="divider" role="presentation"></div>
 
-      <form action="https://script.google.com/macros/s/AKfycbxmgUtnh2cCWaE70iZ7opvkY65JGLd8ZKME1BKhXSl24wYebvYqTDjS1EHF9oz4gxY/exec" method="POST" accept-charset="utf-8">
-        <!-- Honeypot -->
+      <form action="https://script.google.com/macros/s/AKfycbxmgUtnh2cCWaE70iZ7opvkY65JGLd8ZKME1BKhXSl24wYebvYqTDjS1EHF9oz4gxY/exec" method="POST" accept-charset="utf-8" id="residentForm">
+        <!-- hidden controls -->
         <input type="text" name="company" class="hp" autocomplete="off" tabindex="-1" />
-
-        <!-- ✅ Redirect after submit -->
-        <input type="hidden" name="successRedirect" value="thank-you.html">
-
-        <!-- Meta for logs -->
         <input type="hidden" name="submittedPage" value="">
         <input type="hidden" name="ua" value="">
+        <input type="hidden" name="successRedirect" value="thank-you.html">
 
+        <!-- Type selector -->
+        <div>
+          <label for="formType">What are you submitting? <span class="req">*</span></label>
+          <select id="formType" name="formType" required>
+            <option value="">Select…</option>
+            <option value="work_order">Work Order (maintenance)</option>
+            <option value="feedback">General Complaint / Suggestion</option>
+          </select>
+          <div class="hint">Pick “Work Order” for repairs; “Complaint/Suggestion” for anything else.</div>
+        </div>
+
+        <!-- Common: resident + property -->
         <div class="grid grid-2">
           <div>
             <label for="property">Property <span class="req">*</span></label>
@@ -124,15 +126,16 @@
               <option value="">Select a property…</option>
               <option>Booker T</option>
               <option>Luau Manor</option>
-              <option>Grandview Manor</option>
+              <option>Garden Park</option>
+              <option>Riverside</option>
               <option>Hil-Dar</option>
               <option>Other</option>
             </select>
-            <div class="hint">Choose the site where the issue is located.</div>
+            <div class="hint">Choose your site.</div>
           </div>
           <div>
-            <label for="unit">Apt/Unit <span class="req">*</span></label>
-            <input id="unit" name="unit" placeholder="e.g., 2B" required />
+            <label for="unit">Apt/Unit</label>
+            <input id="unit" name="unit" placeholder="e.g., 2B" />
           </div>
         </div>
 
@@ -147,10 +150,11 @@
           </div>
         </div>
 
-        <div class="grid grid-2">
+        <!-- Work order section -->
+        <div id="workOrderFields" class="grid grid-2 hidden">
           <div>
             <label for="issue">Issue Type <span class="req">*</span></label>
-            <select id="issue" name="issue" required>
+            <select id="issue" name="issue">
               <option value="">Choose one…</option>
               <option>Plumbing</option>
               <option>Electrical</option>
@@ -161,11 +165,10 @@
               <option>General Maintenance</option>
               <option>Other</option>
             </select>
-            <div class="hint">Pick the closest category. Details go below.</div>
           </div>
           <div>
             <label for="entry">Permission to enter if you’re not home? <span class="req">*</span></label>
-            <select id="entry" name="entry" required>
+            <select id="entry" name="entry">
               <option value="">Select…</option>
               <option>Yes</option>
               <option>No</option>
@@ -173,12 +176,7 @@
           </div>
         </div>
 
-        <div>
-          <label for="description">Describe the Problem <span class="req">*</span></label>
-          <textarea id="description" name="description" placeholder="What’s wrong? Where exactly? When did it start? Any leaks, odors, or noises?" required></textarea>
-        </div>
-
-        <div class="grid grid-2">
+        <div id="workOrderExtra" class="grid grid-2 hidden">
           <div>
             <label for="urgency">Urgency</label>
             <select id="urgency" name="urgency">
@@ -193,22 +191,67 @@
           </div>
         </div>
 
+        <!-- Feedback section -->
+        <div id="feedbackFields" class="grid hidden">
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option>General Complaint</option>
+              <option>Suggestion</option>
+              <option>Noise/Disturbance</option>
+              <option>Safety Concern</option>
+              <option>Cleanliness/Common Areas</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Description (shared) -->
+        <div>
+          <label for="description">Tell us the details <span class="req">*</span></label>
+          <textarea id="description" name="description" placeholder="What happened? Where? When? Anything else we should know?" required></textarea>
+        </div>
+
         <div class="actions">
-          <button type="submit" aria-label="Submit Work Order">Submit Work Order</button>
-          <button type="reset" class="ghost" aria-label="Reset form">Reset</button>
+          <button type="submit">Submit</button>
+          <button type="reset" class="ghost">Reset</button>
         </div>
       </form>
 
       <div class="foot">For emergencies, call the office. Online submissions are monitored during business hours.</div>
     </div>
 
-    <footer>© <span id="yr"></span> Wheeling Housing Authority • Maintenance Services</footer>
+    <footer>© <span id="yr"></span> Wheeling Housing Authority • Resident Services</footer>
   </div>
 
   <script>
+    // Fill meta
     document.querySelector('input[name="submittedPage"]').value = location.href;
     document.querySelector('input[name="ua"]').value = navigator.userAgent;
     document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Toggle sections by form type
+    const typeSel = document.getElementById('formType');
+    const wo1 = document.getElementById('workOrderFields');
+    const wo2 = document.getElementById('workOrderExtra');
+    const fb = document.getElementById('feedbackFields');
+    const issue = document.getElementById('issue');
+    const entry = document.getElementById('entry');
+
+    function updateSections(){
+      const t = typeSel.value;
+      if (t === 'work_order') {
+        wo1.classList.remove('hidden'); wo2.classList.remove('hidden'); fb.classList.add('hidden');
+        issue.setAttribute('required',''); entry.setAttribute('required','');
+      } else if (t === 'feedback') {
+        fb.classList.remove('hidden'); wo1.classList.add('hidden'); wo2.classList.add('hidden');
+        issue.removeAttribute('required'); entry.removeAttribute('required');
+      } else {
+        wo1.classList.add('hidden'); wo2.classList.add('hidden'); fb.classList.add('hidden');
+        issue.removeAttribute('required'); entry.removeAttribute('required');
+      }
+    }
+    typeSel.addEventListener('change', updateSections);
   </script>
 </body>
 </html>
