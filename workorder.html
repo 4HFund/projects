@@ -1,208 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wheeling Housing Authority - Resident Services</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Wheeling Housing Authority — Resident Services</title>
+<meta name="theme-color" content="#4B2E83" />
+<meta name="description" content="Submit work orders or feedback to the Wheeling Housing Authority from your phone." />
+
 <style>
-  body {
-    font-family: "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(circle at top, #1a1a2e 0%, #0f0f1b 100%);
-    color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
+/* ========= THEME ========= */
+:root{
+  --purple:#4B2E83;
+  --gold:#DAA520;
+  --bg:#0b0f1e;
+  --card:#121735;
+  --ink:#f6f7ff;
+  --muted:#b7bfdf;
+  --stroke:#26345a;
+  --radius:14px;
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
 
-  header {
-    background: linear-gradient(90deg, #3b2175, #b18d28);
-    padding: 20px;
-    text-align: center;
-    color: white;
-  }
+/* ========= HEADER (MOBILE-FIRST) ========= */
+.header{
+  position:sticky; top:0; z-index:1000;
+  background:linear-gradient(90deg,var(--purple),var(--gold));
+  padding:12px 16px; display:flex; align-items:center; gap:12px;
+}
+.logo{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+  background:conic-gradient(from 220deg,var(--gold),#b88312 25%,#885f05 55%,var(--gold) 85%);
+}
+.logo svg{width:22px;height:22px}
+.title{line-height:1}
+.title b{font-size:17px}
+.title small{display:block; font-size:12px; opacity:.9}
 
-  header h1 {
-    margin: 0;
-    font-size: 1.6em;
-  }
+/* Mobile menu button */
+.menuBtn{
+  margin-left:auto; border:0; background:rgba(255,255,255,.18); color:#fff;
+  border-radius:10px; padding:8px 10px; font-size:16px;
+}
 
-  .container {
-    max-width: 600px;
-    margin: 40px auto;
-    background: #1c1c2c;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  }
+/* Slide-over drawer */
+.drawer{
+  position:fixed; inset:0 0 0 auto; width:min(86vw,360px); background:#0f1430; color:var(--ink);
+  transform:translateX(100%); transition:transform .25s ease; box-shadow:var(--shadow); z-index:1100;
+}
+.drawer.open{ transform:translateX(0); }
+.drawerHeader{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08)}
+.drawerHeader b{font-size:16px}
+.drawer a{display:block; padding:14px 16px; color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.06)}
+.drawer a span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+.drawerClose{border:0; background:transparent; color:#fff; font-size:24px; line-height:1}
 
-  h2 {
-    color: #ffcc33;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+/* Backdrop */
+.backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.5); opacity:0; visibility:hidden; transition:opacity .2s;
+  z-index:1050;
+}
+.backdrop.show{opacity:1; visibility:visible}
 
-  label {
-    display: block;
-    margin-top: 12px;
-    color: #cfcfcf;
-  }
+/* ========= HERO ========= */
+.hero{padding:18px 16px 8px}
+.heroCard{
+  border-radius:var(--radius); background:linear-gradient(180deg,#11183a,#0c1026);
+  border:1px solid rgba(255,255,255,.08); padding:16px; box-shadow:var(--shadow)
+}
+.hero h2{margin:0 0 6px; font-size:22px; color:var(--gold)}
+.hero p{margin:0; color:var(--muted); font-size:14px}
 
-  input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    background: #29294a;
-    color: #fff;
-  }
+/* Quick info row */
+.quick{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
+.info{
+  background:#0e1433; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px 12px
+}
+.info b{display:block; color:#ffd56a; font-size:14px; margin-bottom:2px}
+.info small{color:var(--muted); font-size:12px}
 
-  textarea {
-    min-height: 100px;
-  }
+/* ========= FORM ========= */
+.formWrap{padding:14px 16px 28px}
+.form{
+  background:linear-gradient(180deg,#131a3f,#0d122b);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius); box-shadow:var(--shadow); padding:16px
+}
+.form h3{margin:0 0 10px; color:#ffd56a; font-size:18px; text-align:center}
+label{display:block; margin-top:12px; color:var(--muted); font-size:14px}
+input,select,textarea{
+  width:100%; margin-top:6px; padding:12px; border-radius:12px;
+  border:1px solid var(--stroke); background:#151b3a; color:var(--ink); font-size:16px;
+}
+input:focus,select:focus,textarea:focus{outline:0; border-color:#3a5fb7; box-shadow:0 0 0 3px rgba(58,95,183,.25)}
+textarea{min-height:120px; resize:vertical}
+.row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+@media (max-width:560px){ .row{grid-template-columns:1fr} }
 
-  button {
-    margin-top: 20px;
-    width: 100%;
-    background: linear-gradient(90deg, #5a3dc8, #cfa82e);
-    color: white;
-    font-size: 1.1em;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+.helper{font-size:12px; color:#94a0c8; margin-top:4px}
 
-  button:hover {
-    opacity: 0.9;
-  }
+.btn{
+  width:100%; margin-top:16px; padding:14px; font-weight:900; letter-spacing:.2px;
+  background:linear-gradient(90deg,var(--gold),#f0c24c); color:#111; border:0; border-radius:12px;
+}
+.btn:active{transform:translateY(1px)}
 
-  .note {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 0.9em;
-    color: #bbb;
-  }
+.note{margin-top:10px; text-align:center; color:var(--muted); font-size:13px}
 
-  footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 15px;
-    color: #777;
-    font-size: 0.8em;
-  }
+/* ========= FOOTER ========= */
+.footer{padding:18px; border-top:1px solid rgba(255,255,255,.08); text-align:center; color:var(--muted); font-size:12px}
+
+/* ========= DESKTOP ENHANCEMENTS ========= */
+@media (min-width:900px){
+  .header{padding:14px 22px}
+  .title b{font-size:18px}
+  .hero h2{font-size:24px}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Wheeling Housing Authority</h1>
-  <div>Resident Services • Maintenance & Feedback</div>
+<!-- Header -->
+<header class="header">
+  <div class="logo" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path fill="#4B2E83" d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
+      <path fill="#DAA520" d="M8 11h8v2H8zM10 7h4v2h-4z"/>
+    </svg>
+  </div>
+  <div class="title">
+    <b>Wheeling Housing Authority</b>
+    <small>Resident Services</small>
+  </div>
+  <button class="menuBtn" id="menuBtn" aria-label="Open menu">☰</button>
 </header>
 
-<div class="container">
-  <h2>Resident Service Form</h2>
-  <form action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec" method="POST" accept-charset="utf-8">
-    
-    <label for="formType">Form Type *</label>
-    <select name="formType" id="formType" required>
-      <option value="">Select type...</option>
-      <option value="work_order">Work Order Request</option>
-      <option value="feedback">General Feedback / Complaint / Suggestion</option>
-    </select>
-
-    <label for="property">Property *</label>
-    <select name="property" id="property" required>
-      <option value="">Select a property...</option>
-      <option value="Luau Manor">Luau Manor</option>
-      <option value="Booker T">Booker T</option>
-      <option value="Garden Park">Garden Park</option>
-      <option value="Riverside">Riverside</option>
-      <option value="Hil-Dar">Hil-Dar</option>
-      <option value="Other">Other</option>
-    </select>
-
-    <label for="unit">Apt/Unit *</label>
-    <input type="text" id="unit" name="unit" placeholder="e.g., 2B" required>
-
-    <label for="name">Your Name *</label>
-    <input type="text" id="name" name="name" placeholder="First & Last" required>
-
-    <label for="contact">Best Contact (phone or email) *</label>
-    <input type="text" id="contact" name="contact" placeholder="(304) 555-1234 or you@example.com" required>
-
-    <div id="workOrderFields">
-      <label for="issue">Issue Type</label>
-      <input type="text" id="issue" name="issue" placeholder="Describe the issue briefly">
-
-      <label for="entry">Permission to Enter</label>
-      <select name="entry" id="entry">
-        <option value="Yes">Yes, maintenance may enter if I’m not home</option>
-        <option value="No">No, please contact me to schedule</option>
-      </select>
-
-      <label for="urgency">Urgency</label>
-      <select name="urgency" id="urgency">
-        <option value="Normal">Normal</option>
-        <option value="High">High (safety or essential service issue)</option>
-      </select>
-
-      <label for="preferredTime">Preferred Time</label>
-      <input type="text" id="preferredTime" name="preferredTime" placeholder="e.g., Morning, Afternoon, Anytime">
-    </div>
-
-    <div id="feedbackFields" style="display:none;">
-      <label for="category">Category</label>
-      <select name="category" id="category">
-        <option value="General Suggestion">General Suggestion</option>
-        <option value="Complaint">Complaint</option>
-        <option value="Compliment">Compliment</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <label for="description">Description *</label>
-    <textarea id="description" name="description" placeholder="Please describe your request or feedback in detail." required></textarea>
-
-    <input type="hidden" name="submittedPage" value="Resident Form Page">
-    <input type="hidden" name="ua" value="">
-    <input type="hidden" name="successRedirect" value="thank-you.html">
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <div class="note">
-    If this is an emergency maintenance issue, please call the office directly:<br>
-    <strong>(304) 233-0658</strong>
+<!-- Drawer -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Main menu">
+  <div class="drawerHeader">
+    <b>Menu</b>
+    <button class="drawerClose" id="drawerClose" aria-label="Close">×</button>
   </div>
+  <a href="#form"><strong>Submit Work Order</strong><span>Send to maintenance</span></a>
+  <a href="#form"><strong>Feedback & Suggestions</strong><span>Share ideas or concerns</span></a>
+  <a href="#faq"><strong>FAQ</strong><span>Common questions</span></a>
+  <a href="tel:13042330658"><strong>Call Office</strong><span>(304) 233-0658</span></a>
 </div>
+<div class="backdrop" id="backdrop" tabindex="-1"></div>
 
-<footer>
-  © 2025 Wheeling Housing Authority · Resident Services Department
+<!-- Hero -->
+<section class="hero">
+  <div class="heroCard">
+    <h2>Mobile-first Resident Portal</h2>
+    <p>Use your phone to request maintenance or send suggestions. Your request routes to the right property team, and you’ll get a confirmation screen instantly.</p>
+
+    <div class="quick">
+      <div class="info">
+        <b>Office</b>
+        <small>(304) 233-0658 • Mon–Fri 8:30a–4:30p</small>
+      </div>
+      <div class="info">
+        <b>Tip</b>
+        <small>Approving entry speeds up non-urgent fixes.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Form -->
+<section class="formWrap" id="form">
+  <form class="form" method="POST"
+        action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec"
+        accept-charset="utf-8">
+    <h3>Resident Service Form</h3>
+
+    <label for="formType">Form Type *</label>
+    <select id="formType" name="formType" required>
+      <option value="">Select…</option>
+      <option value="work_order">Work Order</option>
+      <option value="feedback">Feedback / Suggestion</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <label for="property">Property *</label>
+        <select id="property" name="property" required>
+          <option value="">Select…</option>
+          <option>Luau Manor</option>
+          <option>Booker T</option>
+          <option>Garden Park</option>
+          <option>Riverside</option>
+          <option>Hil-Dar</option>
+        </select>
+      </div>
+      <div>
+        <label for="unit">Apt/Unit *</label>
+        <input id="unit" name="unit" placeholder="e.g., 2B" required />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="name">Your Name *</label>
+        <input id="name" name="name" placeholder="First & Last" required />
+      </div>
+      <div>
+        <label for="contact">Best Contact *</label>
+        <input id="contact" name="contact" placeholder="(304) 555-1234 or email" required />
+      </div>
+    </div>
+
+    <!-- Work order extras (shown when Work Order selected) -->
+    <div id="workExtra" class="hidden">
+      <label for="issue">Issue Type</label>
+      <input id="issue" name="issue" placeholder="e.g., plumbing, no heat, fridge not cooling" />
+
+      <div class="row">
+        <div>
+          <label for="entry">Permission to Enter *</label>
+          <select id="entry" name="entry">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div>
+          <label for="urgency">Urgency</label>
+          <select id="urgency" name="urgency">
+            <option>Routine</option>
+            <option>Priority (24–48 hrs)</option>
+            <option>Emergency</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="preferredTime">Preferred Contact Time</label>
+      <input id="preferredTime" name="preferredTime" placeholder="e.g., mornings / after 3pm" />
+      <div class="helper">For emergencies, call the office instead of using this form.</div>
+    </div>
+
+    <!-- Feedback extras (shown when Feedback selected) -->
+    <div id="feedExtra" class="hidden">
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option>General Suggestion</option>
+        <option>Complaint</option>
+        <option>Compliment</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <label for="description">Details *</label>
+    <textarea id="description" name="description" placeholder="Describe your request or feedback…" required></textarea>
+
+    <!-- Hidden context + absolute redirect -->
+    <input type="hidden" name="submittedPage" id="submittedPage" value="">
+    <input type="hidden" name="ua" id="ua" value="">
+    <input type="hidden" name="successRedirect" value="https://4hfund.github.io/projects/thank-you.html">
+
+    <button class="btn" type="submit">Submit</button>
+    <div class="note">🚨 Emergency? Call <a href="tel:13042330658" style="color:#ffd56a; text-decoration:none;">(304) 233-0658</a></div>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  © <span id="yr"></span> Wheeling Housing Authority — Resident Services
 </footer>
 
 <script>
-  // Switch fields dynamically
-  const formTypeSelect = document.getElementById('formType');
-  const workOrderFields = document.getElementById('workOrderFields');
-  const feedbackFields = document.getElementById('feedbackFields');
-  const uaField = document.querySelector('input[name="ua"]');
-  uaField.value = navigator.userAgent;
+/* Mobile drawer controls */
+const menuBtn = document.getElementById('menuBtn');
+const drawer = document.getElementById('drawer');
+const closeBtn = document.getElementById('drawerClose');
+const backdrop = document.getElementById('backdrop');
 
-  formTypeSelect.addEventListener('change', function() {
-    if (this.value === 'work_order') {
-      workOrderFields.style.display = 'block';
-      feedbackFields.style.display = 'none';
-    } else if (this.value === 'feedback') {
-      workOrderFields.style.display = 'none';
-      feedbackFields.style.display = 'block';
-    } else {
-      workOrderFields.style.display = 'none';
-      feedbackFields.style.display = 'none';
-    }
-  });
+function openDrawer(){drawer.classList.add('open'); backdrop.classList.add('show');}
+function closeDrawer(){drawer.classList.remove('open'); backdrop.classList.remove('show');}
+menuBtn.addEventListener('click', openDrawer);
+closeBtn.addEventListener('click', closeDrawer);
+backdrop.addEventListener('click', closeDrawer);
+
+/* Form UX (mobile-first) */
+const formType = document.getElementById('formType');
+const workExtra = document.getElementById('workExtra');
+const feedExtra = document.getElementById('feedExtra');
+formType.addEventListener('change', () => {
+  const v = formType.value;
+  workExtra.classList.toggle('hidden', v !== 'work_order');
+  feedExtra.classList.toggle('hidden', v !== 'feedback');
+});
+
+/* Hidden context + anti-iFrame redirect safety */
+document.getElementById('submittedPage').value = location.href;
+document.getElementById('ua').value = navigator.userAgent;
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* Client-side fallback redirect (in case CSP blocks meta refresh) */
+document.querySelector('form').addEventListener('submit', () => {
+  // if the script responds slowly, nudge user to thank-you after 2.5s
+  setTimeout(() => {
+    try { window.top.location.href = "https://4hfund.github.io/projects/thank-you.html"; }
+    catch(e) { location.href = "https://4hfund.github.io/projects/thank-you.html"; }
+  }, 2500);
+});
 </script>
-
 </body>
 </html>
