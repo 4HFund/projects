@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Wheeling Housing Authority — Resident Hub</title>
+<meta name="theme-color" content="#4B2E83" />
+<meta name="description" content="Resident updates, alerts, events, and service forms for the Wheeling Housing Authority." />
+
+<!-- =========================
+      THEME + BASE VARIABLES
+     ========================= -->
+<style>
+:root{
+  --purple:#4B2E83; /* Primary */
+  --purple-600:#3a2366;
+  --purple-700:#2d1c50;
+  --gold:#DAA520;  /* Accent */
+  --gold-600:#b38614;
+  --ink:#f7f7ff;  /* On dark */
+  --ink-2:#e7e9ff;
+  --muted:#b7bfdf;
+  --bg:#0b0f1e;   /* Page bg */
+  --card:#111634; /* Card bg */
+  --card-2:#0f1330;
+  --stroke:#23315a;
+  --success:#37c977;
+  --warn:#ffcc66;
+  --danger:#ff5d5d;
+  --radius:16px;
+  --radius-sm:12px;
+  --shadow-lg:0 30px 80px rgba(0,0,0,.45);
+  --shadow-md:0 16px 50px rgba(0,0,0,.35);
+  --shadow-sm:0 8px 30px rgba(0,0,0,.25);
+  --maxw:1100px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #2e1e52 0%, transparent 60%),
+    radial-gradient(1400px 900px at 120% 10%, #1a2146 0%, transparent 60%),
+    linear-gradient(180deg, #0b0f1e 0%, #0b0f1e 100%);
+  background-attachment: fixed;
+}
+
+/* Utility */
+.container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+.grid{display:grid; gap:18px}
+.grid-2{grid-template-columns: 1fr}
+@media (min-width: 960px){ .grid-2{grid-template-columns: 1.2fr .8fr} }
+
+.card{
+  background:linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:18px;
+}
+.card.headline{padding:0; overflow:hidden}
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  background:linear-gradient(180deg, var(--purple) 0%, var(--purple-600) 100%);
+  border:1px solid #2c1b52;
+  color:#fff; font-weight:700; letter-spacing:.2px;
+  padding:12px 16px; border-radius:12px; cursor:pointer;
+  box-shadow:0 10px 30px rgba(75,46,131,.35);
+  transition:transform .08s ease, box-shadow .2s ease, opacity .2s ease;
+  text-decoration:none;
+}
+.btn:hover{transform:translateY(-1px); box-shadow:0 18px 40px rgba(75,46,131,.45)}
+.btn.ghost{
+  background:transparent; border-color:var(--stroke); color:var(--ink-2);
+  box-shadow:none;
+}
+.btn.gold{
+  background:linear-gradient(180deg, var(--gold) 0%, var(--gold-600) 100%);
+  color:#1b1201; border-color:#6a5207; box-shadow:0 12px 36px rgba(218,165,32,.35);
+}
+
+/* Tags & pills */
+.pill{display:inline-flex; align-items:center; gap:.4rem; padding:6px 10px; border-radius:20px; border:1px solid var(--stroke); background:#0e1431; color:var(--muted); font-size:.85rem}
+.pill.warn{background:#261a00; border-color:#664c00; color:#ffdfa3}
+.pill.danger{background:#2a0f12; border-color:#6b1f27; color:#ffb5b5}
+.pill.success{background:#062617; border-color:#1c5637; color:#b6ffdb}
+
+/* Forms */
+label{display:block; font-weight:700; margin:.6rem 0 .3rem}
+input, select, textarea{
+  width:100%; color:var(--ink);
+  background:#0c1333; border:1px solid var(--stroke);
+  border-radius:12px; padding:12px 14px; outline:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+}
+textarea{min-height:120px; resize:vertical}
+input[type="date"],input[type="time"]{padding:10px 12px}
+.field-row{display:grid; gap:12px}
+@media (min-width:720px){
+  .field-row.two{grid-template-columns:1fr 1fr}
+  .field-row.three{grid-template-columns:1fr 1fr 1fr}
+}
+
+.help{font-size:.85rem; color:var(--muted); margin-top:.35rem}
+.req{color:#ffafaf}
+
+/* Header */
+.header{
+  position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
+  background:linear-gradient(180deg, rgba(11,15,30,.95) 0%, rgba(11,15,30,.7) 100%);
+  border-bottom:1px solid var(--stroke);
+}
+.header .bar{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{width:42px; height:42px; border-radius:50%; border:1px solid var(--stroke); background:#0c1030; object-fit:cover}
+.brand .name{font-weight:900; letter-spacing:.4px}
+.brand .sub{font-size:.85rem; color:var(--muted)}
+.nav{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.nav a{color:var(--ink-2); text-decoration:none; padding:10px 12px; border-radius:10px}
+.nav a:hover{background:#111846}
+.menu{display:flex; gap:6px; align-items:center}
+
+/* Hero */
+.hero{
+  position:relative; overflow:hidden; border-bottom:1px solid var(--stroke);
+  background:
+    radial-gradient(1200px 800px at 0% -10%, rgba(75,46,131,.35) 0%, transparent 60%),
+    radial-gradient(1200px 900px at 120% 10%, rgba(218,165,32,.15) 0%, transparent 60%);
+}
+.hero .wrap{display:grid; gap:16px; padding:30px 0 22px}
+@media (min-width:960px){ .hero .wrap{grid-template-columns: 1.2fr .8fr; align-items:center} }
+.kpis{display:flex; gap:10px; flex-wrap:wrap}
+.kpi{flex:1 1 160px; background:linear-gradient(180deg, #12183b, #0f1534); border:1px solid var(--stroke); border-radius:12px; padding:12px}
+.kpi .big{font-size:1.6rem; font-weight:900}
+.kpi .small{font-size:.85rem; color:var(--muted)}
+
+/* Sections */
+.section{padding:18px 0}
+.section h2{margin:0 0 10px; font-size:1.3rem; letter-spacing:.3px}
+.section .subtext{color:var(--muted); margin:4px 0 12px}
+
+/* Lists */
+.list{display:grid; gap:12px}
+.item{
+  display:grid; gap:8px;
+  background:linear-gradient(180deg, #0e1332, #0b1130);
+  border:1px solid var(--stroke); border-radius:14px; padding:14px;
+}
+.item .row{display:flex; align-items:center; gap:10px; justify-content:space-between; flex-wrap:wrap}
+.item .title{font-weight:800}
+.item .meta{display:flex; gap:8px; flex-wrap:wrap}
+.item .body{color:#d6dbff}
+
+/* Announcements layout */
+.ann-head{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.ann-filters{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.search{position:relative; flex:1}
+.search input{padding-left:40px}
+.search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.6}
+
+/* Event calendar styles */
+.event{display:grid; gap:6px; padding:12px; border-radius:12px; border:1px solid var(--stroke); background:linear-gradient(180deg, #0e1536, #0a102c)}
+.event .when{font-weight:800}
+.event .where{color:var(--muted)}
+.event .desc{color:#dce2ff}
+
+/* Sidebar cards */
+.tape{
+  position:relative; padding-top:14px;
+}
+.tape::before{
+  content:"";
+  position:absolute; top:0; left:10%; right:10%; height:22px;
+  background:repeating-linear-gradient(45deg, #daa52055 0 10px, #4b2e8355 10px 20px);
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.5));
+  border-radius:6px;
+}
+
+/* Footer */
+.footer{
+  margin-top:30px; padding:30px 0; border-top:1px solid var(--stroke);
+  color:var(--muted); font-size:.95rem;
+}
+.footer a{color:#d9d4ff}
+
+/* Banners */
+.banner{
+  border:1px dashed var(--stroke); background:#0b1337; padding:10px 12px; border-radius:12px;
+  display:flex; align-items:center; gap:10px; color:#e8ecff;
+}
+.banner.urgent{border-style:solid; border-color:#6b1f27; background:#2a0f12}
+.banner.info{border-color:#2a355d; background:#101947}
+.banner.success{border-color:#1c5637; background:#062617}
+
+/* Toasts */
+.toast{
+  position:fixed; z-index:60; inset:auto 12px 12px auto;
+  background:#0d1436; border:1px solid var(--stroke); color:#fff;
+  padding:12px 14px; border-radius:12px; box-shadow:var(--shadow-md); display:none;
+}
+.toast.show{display:block}
+
+/* Collapsible FAQ */
+details{
+  background:linear-gradient(180deg, #0e1433, #0a0f28);
+  border:1px solid var(--stroke); border-radius:12px; padding:12px 14px;
+}
+summary{cursor:pointer; font-weight:800; list-style:none}
+summary::-webkit-details-marker{display:none}
+
+/* Admin modal */
+.modal{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:100;
+  background:rgba(2,6,18,.7);
+}
+.modal .sheet{
+  width:min(840px, 94vw); max-height:90vh; overflow:auto;
+  background:linear-gradient(180deg, #12183c, #0b1130);
+  border:1px solid var(--stroke); border-radius:16px; padding:18px; box-shadow:var(--shadow-lg);
+}
+.modal.show{display:flex}
+
+/* Accent rules and separators */
+.rule{height:1px; background:linear-gradient(90deg, transparent, #49306f, transparent); margin:10px 0}
+.hr{border:none; height:1px; background:linear-gradient(90deg, transparent, #2d3a68, transparent); margin:18px 0}
+
+/* Image placeholders */
+.logo{
+  width:48px; height:48px; border-radius:48px; background:#0e1336; border:1px solid var(--stroke);
+  display:inline-flex; align-items:center; justify-content:center; overflow:hidden;
+}
+
+/* Responsive hide */
+.hide-mobile{display:none}
+@media (min-width:840px){ .hide-mobile{display:initial} }
+
+/* Small print */
+.small{font-size:.85rem; color:var(--muted)}
+.caption{font-size:.88rem; color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- =========================
+      HEADER
+     ========================= -->
+<header class="header">
+  <div class="container bar">
+    <div class="brand">
+      <!-- Replace src with your GitHub-hosted logo if desired -->
+      <span class="logo">
+        <img id="whalogo" alt="Wheeling Housing Authority" src="" />
+      </span>
+      <div>
+        <div class="name">Wheeling Housing Authority</div>
+        <div class="sub">Resident Information Hub</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a class="btn ghost" href="#announcements" aria-label="Go to Announcements">Announcements</a>
+      <a class="btn ghost" href="#events" aria-label="Go to Events">Events</a>
+      <a class="btn ghost" href="#forms" aria-label="Go to Forms">Forms</a>
+      <a class="btn ghost hide-mobile" href="#resources" aria-label="Go to Resources">Resources</a>
+      <button id="adminBtn" class="btn gold" title="Staff quick-post panel">Post Update</button>
+    </nav>
+  </div>
+</header>
+
+<!-- =========================
+      HERO / KPIs / ALERT
+     ========================= -->
+<section class="hero">
+  <div class="container wrap">
+    <div class="card headline">
+      <div style="padding:16px 16px 2px">
+        <div class="banner urgent" id="urgentBanner" role="status" aria-live="polite" style="display:none">
+          <strong>Urgent:</strong>
+          <span id="urgentText">Water line maintenance at Luau Manor 8–11am. Expect brief outages.</span>
+          <span class="pill danger" id="urgentScope">Luau Manor</span>
+        </div>
+
+        <h1 style="margin:10px 0 6px; font-size:1.6rem; letter-spacing:.3px">Stay informed. Get help fast. Be part of the community.</h1>
+        <p class="subtext">
+          Live announcements, building-specific alerts, upcoming events, and quick tools to submit work orders and suggestions —
+          all in one place.
+        </p>
+
+        <div class="kpis">
+          <div class="kpi">
+            <div class="small">Active Alerts</div>
+            <div class="big" id="kpiAlerts">0</div>
+          </div>
+          <div class="kpi">
+            <div class="small">This Week’s Events</div>
+            <div class="big" id="kpiEvents">0</div>
+          </div>
+          <div class="kpi">
+            <div class="small">Open Announcements</div>
+            <div class="big" id="kpiPosts">0</div>
+          </div>
+          <div class="kpi">
+            <div class="small">Avg. Response Time</div>
+            <div class="big">24–48 hrs</div>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="field-row two" style="align-items:end">
+          <div>
+            <label for="buildingSelect">Your Building</label>
+            <select id="buildingSelect" aria-label="Select your building">
+              <option value="all">All Properties</option>
+              <option>Luau Manor</option>
+              <option>Booker T</option>
+              <option>Hil-Dar</option>
+              <option>Osiris</option>
+              <option>Garden Park</option>
+              <option>Elm Grove</option>
+            </select>
+            <div class="help">Filter announcements and events to your building.</div>
+          </div>
+          <div>
+            <label for="subscribePhone">Get Text Updates</label>
+            <div class="field-row two">
+              <input id="subscribePhone" inputmode="tel" placeholder="(304) 555-1234" />
+              <button class="btn" id="subscribeBtn">Subscribe</button>
+            </div>
+            <div class="help">Standard msg/data rates may apply. You can unsubscribe anytime.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="card tape">
+      <div class="banner info" style="margin-bottom:10px">
+        <strong>Office Hours:</strong> Mon–Fri 8:30am–4:30pm · Main: <a href="tel:13042330658" style="color:#fff">304-233-0658</a>
+      </div>
+      <div class="banner success">
+        <strong>New:</strong> Online Work Orders & Suggestion Box are live — get quicker responses with clear details.
+      </div>
+      <div class="hr"></div>
+      <div class="small">Tip: Add this page to your phone’s home screen for 1-tap access.</div>
+    </aside>
+  </div>
+</section>
+
+<!-- =========================
+      MAIN CONTENT
+     ========================= -->
+<main class="container section grid grid-2">
+
+  <!-- ===== Left: Announcements + Events + Forms ===== -->
+  <section>
+
+    <!-- Announcements -->
+    <section class="section" id="announcements">
+      <div class="ann-head">
+        <h2>Announcements</h2>
+        <div class="ann-filters" style="flex:1">
+          <div class="search" aria-label="Search announcements">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21l-4.2-4.2M10.8 18.6a7.8 7.8 0 1 1 0-15.6 7.8 7.8 0 0 1 0 15.6Z" stroke="#b7bfdf" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <input id="annSearch" placeholder="Search by keyword (e.g., ‘elevator’, ‘food giveaway’)" />
+          </div>
+          <select id="categoryFilter" title="Filter by category">
+            <option value="all">All Types</option>
+            <option value="general">General</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="safety">Safety</option>
+            <option value="community">Community</option>
+            <option value="benefits">Benefits & Services</option>
+          </select>
+          <button id="clearFilters" class="btn ghost">Clear</button>
+        </div>
+      </div>
+      <div class="subtext">New posts are pinned to the top. Building filter applies automatically.</div>
+
+      <div id="annList" class="list" aria-live="polite"></div>
+
+      <div class="hr"></div>
+      <button id="loadMore" class="btn ghost">Load more</button>
+    </section>
+
+    <!-- Events -->
+    <section class="section" id="events">
+      <h2>Events</h2>
+      <div class="subtext">Resident activities, clinics, and community events around your building.</div>
+      <div class="list" id="eventList"></div>
+    </section>
+
+    <!-- Forms -->
+    <section class="section" id="forms">
+      <h2>Service Forms</h2>
+      <div class="subtext">Submit work orders and suggestions. You’ll receive a copy by email if provided.</div>
+
+      <div class="grid" style="grid-template-columns: 1fr">
+        <!-- Work Order -->
+        <article class="card" id="workOrderCard">
+          <div class="row" style="align-items:center; justify-content:space-between">
+            <div>
+              <div class="pill">Form</div>
+              <h3 style="margin:6px 0 2px">Work Order Request</h3>
+              <div class="caption">Please provide detailed information so we can respond quickly.</div>
+            </div>
+          </div>
+          <form id="workOrderForm" autocomplete="on" novalidate>
+            <div class="field-row two">
+              <div>
+                <label for="woName">Your Name <span class="req">*</span></label>
+                <input id="woName" required placeholder="First & Last" />
+              </div>
+              <div>
+                <label for="woPhone">Phone <span class="req">*</span></label>
+                <input id="woPhone" required inputmode="tel" placeholder="(304) 555-1234" />
+              </div>
+            </div>
+
+            <div class="field-row three">
+              <div>
+                <label for="woBuilding">Building <span class="req">*</span></label>
+                <select id="woBuilding" required>
+                  <option value="">Select…</option>
+                  <option>Luau Manor</option>
+                  <option>Booker T</option>
+                  <option>Hil-Dar</option>
+                  <option>Osiris</option>
+                  <option>Garden Park</option>
+                  <option>Elm Grove</option>
+                </select>
+              </div>
+              <div>
+                <label for="woUnit">Unit #</label>
+                <input id="woUnit" placeholder="e.g., 2B" />
+              </div>
+              <div>
+                <label for="woPriority">Priority</label>
+                <select id="woPriority">
+                  <option>Normal</option>
+                  <option>Urgent</option>
+                  <option>Emergency</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row two">
+              <div>
+                <label for="woIssueType">Issue Type</label>
+                <select id="woIssueType">
+                  <option>Plumbing</option>
+                  <option>Electrical</option>
+                  <option>Appliance</option>
+                  <option>Heating / Cooling</option>
+                  <option>Door / Window</option>
+                  <option>Pest</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="woAccess">Entry Permission</label>
+                <select id="woAccess">
+                  <option>Enter if I'm not home</option>
+                  <option>Call me first</option>
+                  <option>No entry without me</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="woDetails">Details <span class="req">*</span></label>
+            <textarea id="woDetails" required placeholder="Describe the issue (what, where, when it happens, any photos referenced)"></textarea>
+
+            <div class="field-row two">
+              <div>
+                <label for="woEmail">Email (optional)</label>
+                <input id="woEmail" type="email" placeholder="you@example.com" />
+                <div class="help">We’ll send a confirmation copy to your email.</div>
+              </div>
+              <div>
+                <label for="woBestTime">Best Time to Visit</label>
+                <input id="woBestTime" placeholder="e.g., Weekdays after 2pm" />
+              </div>
+            </div>
+
+            <div class="hr"></div>
+            <button class="btn" type="submit">Submit Work Order</button>
+            <span id="woStatus" class="small" style="margin-left:10px"></span>
+          </form>
+        </article>
+
+        <!-- Suggestion Box -->
+        <article class="card" id="suggestCard">
+          <div class="row" style="align-items:center; justify-content:space-between">
+            <div>
+              <div class="pill">Form</div>
+              <h3 style="margin:6px 0 2px">Resident Suggestion Box</h3>
+              <div class="caption">Ideas to make your building better — programs, events, fixes, anything.</div>
+            </div>
+          </div>
+
+          <form id="suggestForm" autocomplete="on" novalidate>
+            <div class="field-row two">
+              <div>
+                <label for="sgName">Name (optional)</label>
+                <input id="sgName" placeholder="You can leave blank" />
+              </div>
+              <div>
+                <label for="sgContact">Contact (optional)</label>
+                <input id="sgContact" placeholder="Phone or email if you'd like a reply" />
+              </div>
+            </div>
+
+            <div class="field-row two">
+              <div>
+                <label for="sgBuilding">Building <span class="req">*</span></label>
+                <select id="sgBuilding" required>
+                  <option value="">Select…</option>
+                  <option>Luau Manor</option>
+                  <option>Booker T</option>
+                  <option>Hil-Dar</option>
+                  <option>Osiris</option>
+                  <option>Garden Park</option>
+                  <option>Elm Grove</option>
+                </select>
+              </div>
+              <div>
+                <label for="sgCategory">Topic</label>
+                <select id="sgCategory">
+                  <option>Community Event</option>
+                  <option>Building Improvement</option>
+                  <option>Policy / Process</option>
+                  <option>Safety</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="sgIdea">Your Idea <span class="req">*</span></label>
+            <textarea id="sgIdea" required placeholder="What should we do and why would it help? Be as specific as you can."></textarea>
+
+            <div class="hr"></div>
+            <button class="btn" type="submit">Send Suggestion</button>
+            <span id="sgStatus" class="small" style="margin-left:10px"></span>
+          </form>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== Right: Resources, Quick Links, FAQ ===== -->
+  <aside>
+    <!-- Quick Links -->
+    <section class="section card">
+      <h2>Quick Links</h2>
+      <div class="list">
+        <a class="item" href="#forms">
+          <div class="row">
+            <div class="title">Submit a Work Order</div>
+            <span class="pill success">Fastest Response</span>
+          </div>
+          <div class="body">Give details and permission to enter so we can resolve it quickly.</div>
+        </a>
+
+        <a class="item" href="#forms">
+          <div class="row">
+            <div class="title">Send a Suggestion</div>
+            <span class="pill">Ideas Welcome</span>
+          </div>
+          <div class="body">Program ideas, small fixes, or big dreams — we want to hear them.</div>
+        </a>
+
+        <div class="item">
+          <div class="row">
+            <div class="title">Main Office</div>
+            <a class="pill" href="tel:13042330658">Call 304-233-0658</a>
+          </div>
+          <div class="body">Hours: Mon–Fri 8:30am–4:30pm. For emergencies, call 911.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources" class="section card">
+      <h2>Resident Resources</h2>
+      <div class="subtext">Local help for food, health, utilities, and more.</div>
+      <div id="resourceList" class="list"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section card">
+      <h2>FAQ</h2>
+      <div class="subtext">Tap a question to expand.</div>
+      <div class="field-row" style="margin-bottom:8px">
+        <input id="faqSearch" placeholder="Search FAQs…" />
+      </div>
+      <div id="faqWrap" class="grid"></div>
+    </section>
+  </aside>
+</main>
+
+<!-- =========================
+      FOOTER
+     ========================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="grid" style="grid-template-columns:1fr; gap:12px">
+      <div>
+        <div class="small">© <span id="year"></span> Wheeling Housing Authority. All rights reserved.</div>
+        <div class="small">This page is provided to help residents stay informed. For emergencies call 911.</div>
+      </div>
+      <div class="small">Brand colors: Purple #4B2E83 · Gold #DAA520.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================
+      ADMIN MODAL
+     ========================= -->
+<div id="adminModal" class="modal" aria-hidden="true" role="dialog" aria-label="Admin Post Panel">
+  <div class="sheet">
+    <div class="row" style="justify-content:space-between; align-items:center">
+      <h3 style="margin:0">Quick Post (Staff Only)</h3>
+      <button class="btn ghost" id="closeModal">Close</button>
+    </div>
+    <div class="hr"></div>
+
+    <form id="adminForm" class="grid" style="grid-template-columns:1fr">
+      <div class="field-row two">
+        <div>
+          <label for="adTitle">Title <span class="req">*</span></label>
+          <input id="adTitle" required placeholder="e.g., Elevator Scheduled Maintenance" />
+        </div>
+        <div>
+          <label for="adCategory">Category</label>
+          <select id="adCategory">
+            <option>general</option>
+            <option>maintenance</option>
+            <option>safety</option>
+            <option>community</option>
+            <option>benefits</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row two">
+        <div>
+          <label for="adBuilding">Building</label>
+          <select id="adBuilding">
+            <option>All</option>
+            <option>Luau Manor</option>
+            <option>Booker T</option>
+            <option>Hil-Dar</option>
+            <option>Osiris</option>
+            <option>Garden Park</option>
+            <option>Elm Grove</option>
+          </select>
+        </div>
+        <div>
+          <label for="adDate">Date</label>
+          <input id="adDate" type="date" />
+        </div>
+      </div>
+
+      <label for="adBody">Message <span class="req">*</span></label>
+      <textarea id="adBody" required placeholder="Short, clear details residents need to know."></textarea>
+
+      <div class="field-row two">
+        <div>
+          <label for="adUrgent">Urgent Banner</label>
+          <select id="adUrgent">
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+          <div class="help">If “Yes,” this post headline appears in the red banner.</div>
+        </div>
+        <div>
+          <label for="adPin">Pin to Top</label>
+          <select id="adPin">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="field-row two">
+        <div>
+          <label for="adminCode">Admin Code</label>
+          <input id="adminCode" placeholder="Enter staff code" />
+          <div class="help">Default demo code is <strong>WHA2025</strong> — change in JS if desired.</div>
+        </div>
+        <div style="display:flex; align-items:end; gap:10px">
+          <button class="btn" type="submit">Post Announcement</button>
+          <button id="wipeAll" class="btn ghost" type="button">Clear All Demo Data</button>
+        </div>
+      </div>
+      <div id="adminStatus" class="small"></div>
+    </form>
+  </div>
+</div>
+
+<!-- =========================
+      SCRIPTS
+     ========================= -->
+<script>
+/* =======================================================
+   WHEELING HOUSING AUTHORITY — RESIDENT HUB
+   Single-file, no dependencies. All data persists in
+   localStorage for simple GitHub Pages hosting.
+   ======================================================= */
+
+/* ---------- Helpers ---------- */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const load = (k,fallback) => JSON.parse(localStorage.getItem(k) || JSON.stringify(fallback));
+const fmtDate = d => new Date(d).toLocaleDateString(undefined,{month:'short', day:'numeric', year:'numeric'});
+
+const STATE = {
+  adminCode: 'WHA2025',
+  postsKey: 'wha_posts_v1',
+  eventsKey: 'wha_events_v1',
+  resourcesKey: 'wha_resources_v1',
+  urgentKey: 'wha_urgent_v1',
+  smsKey: 'wha_sms_v1'
+};
+
+/* ---------- Logo (optional data URI) ---------- */
+/* If you want to embed a logo without hosting a separate file, paste a data URI below. */
+(function setLogo(){
+  const img = $('#whalogo');
+  img.alt = 'Wheeling Housing Authority';
+  // If you have the logo at the repo root, use: img.src = 'logo.png';
+  img.src = ''; // leave blank to hide if not available
+})();
+
+/* ---------- Seed demo data on first run ---------- */
+(function seed(){
+  if(!localStorage.getItem(STATE.postsKey)){
+    const sample = [
+      {id:'p1', title:'Flu Shot Clinic — Free', body:'Free flu shots and Medicare enrollment help in the community room.',
+       date:new Date().toISOString(), category:'benefits', building:'All', pinned:true},
+      {id:'p2', title:'Elevator Inspection Tuesday', body:'Short pauses between 9–11am. Stairs open. Thanks for your patience.',
+       date:new Date(Date.now()-86400000).toISOString(), category:'maintenance', building:'Luau Manor', pinned:false},
+      {id:'p3', title:'Chili Day + Food Giveaway', body:'Stop by for a hot bowl and grab staples for the week.',
+       date:new Date(Date.now()-172800000).toISOString(), category:'community', building:'All', pinned:false},
+      {id:'p4', title:'Laundry Soap Workshop', body:'Learn to make affordable, effective laundry soap. Supplies provided.',
+       date:new Date(Date.now()-259200000).toISOString(), category:'community', building:'Booker T', pinned:false},
+      {id:'p5', title:'Safety Reminder', body:'Keep hallways clear. Don’t prop exterior doors. Report concerns to office.',
+       date:new Date(Date.now()-3600*1000*24*4).toISOString(), category:'safety', building:'All', pinned:false},
+      {id:'p6', title:'Pest Treatment Friday', body:'Units on 2nd floor will be treated 10am–2pm. See prep sheet posted.',
+       date:new Date(Date.now()-3600*1000*24*5).toISOString(), category:'maintenance', building:'Hil-Dar', pinned:false}
+    ];
+    save(STATE.postsKey, sample);
+  }
+  if(!localStorage.getItem(STATE.eventsKey)){
+    const evs = [
+      {id:'e1', when:new Date(Date.now()+86400000).toISOString(), where:'Luau Manor — Community Room', title:'Open Enrollment Help', desc:'Medicare plans & questions.'},
+      {id:'e2', when:new Date(Date.now()+86400000*2).toISOString(), where:'Booker T — Lobby', title:'Food Giveaway', desc:'Fresh produce & pantry staples.'},
+      {id:'e3', when:new Date(Date.now()+86400000*4).toISOString(), where:'All Sites (Virtual)', title:'Tenant Rights Workshop', desc:'Know your rights & responsibilities.'}
+    ];
+    save(STATE.eventsKey, evs);
+  }
+  if(!localStorage.getItem(STATE.resourcesKey)){
+    const rs = [
+      {name:'Main Office', info:'Mon–Fri 8:30–4:30', link:'tel:13042330658', badge:'Call'},
+      {name:'Emergency', info:'Dial 911', link:'tel:911', badge:'911'},
+      {name:'WV 211', info:'Community services line', link:'https://wv211.org', badge:'Web'},
+      {name:'Food Help — Catholic Charities', info:'Wheeling pantry & assistance', link:'https://catholiccharitieswv.org', badge:'Web'},
+      {name:'YWCA Wheeling', info:'Housing, advocacy, support', link:'https://ywcawheeling.org', badge:'Web'},
+      {name:'Utility Assistance — DHHR', info:'Programs & applications', link:'https://dhhr.wv.gov', badge:'Web'}
+    ];
+    save(STATE.resourcesKey, rs);
+  }
+  if(!localStorage.getItem(STATE.urgentKey)){
+    save(STATE.urgentKey, {active:false, text:'', scope:'All'});
+  }
+  if(!localStorage.getItem(STATE.smsKey)){
+    save(STATE.smsKey, []);
+  }
+})();
+
+/* ---------- Renderers ---------- */
+function renderKPIs(){
+  const posts = load(STATE.postsKey, []);
+  const evs = load(STATE.eventsKey, []);
+  const urgent = load(STATE.urgentKey, {});
+  $('#kpiAlerts').textContent = urgent.active ? 1 : 0;
+  $('#kpiEvents').textContent = evs.filter(e => new Date(e.when) - Date.now() < 7*86400000 && new Date(e.when) >= new Date().setHours(0,0,0,0)).length;
+  $('#kpiPosts').textContent = posts.length;
+}
+
+function renderUrgent(){
+  const u = load(STATE.urgentKey, {active:false});
+  const banner = $('#urgentBanner');
+  if(u.active){
+    banner.style.display = 'flex';
+    $('#urgentText').textContent = u.text || '';
+    $('#urgentScope').textContent = u.scope || 'All';
+  }else{
+    banner.style.display = 'none';
+  }
+}
+
+function currentBuilding(){
+  return $('#buildingSelect').value || 'all';
+}
+
+function matchBuilding(target){
+  const b = currentBuilding();
+  if(b === 'all' || !target) return true;
+  return (target === b) || (target === 'All');
+}
+
+let annPage = 1;
+const PAGE_SIZE = 5;
+
+function getFilteredPosts(){
+  const q = ($('#annSearch').value || '').trim().toLowerCase();
+  const cat = $('#categoryFilter').value;
+  const posts = load(STATE.postsKey, []);
+  return posts
+    .filter(p => matchBuilding(p.building))
+    .filter(p => cat === 'all' ? true : (p.category === cat))
+    .filter(p => q ? (p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)) : true)
+    .sort((a,b) => (b.pinned===true)-(a.pinned===true) || new Date(b.date)-new Date(a.date));
+}
+
+function renderAnnouncements(){
+  const list = $('#annList');
+  list.innerHTML = '';
+  const all = getFilteredPosts();
+  const items = all.slice(0, annPage*PAGE_SIZE);
+  items.forEach(p => {
+    const el = document.createElement('article');
+    el.className = 'item';
+    el.innerHTML = `
+      <div class="row">
+        <div class="title">${p.title}</div>
+        <div class="meta">
+          ${p.pinned?'<span class="pill success">Pinned</span>':''}
+          <span class="pill">${p.category}</span>
+          <span class="pill">${p.building}</span>
+          <span class="pill">${fmtDate(p.date)}</span>
+        </div>
+      </div>
+      <div class="body">${p.body}</div>
+    `;
+    list.appendChild(el);
+  });
+  $('#loadMore').style.display = (all.length > items.length) ? 'inline-flex' : 'none';
+}
+
+function renderEvents(){
+  const b = currentBuilding();
+  const list = $('#eventList');
+  list.innerHTML = '';
+
+  const evs = load(STATE.eventsKey, [])
+    .filter(e => {
+      if(b==='all') return true;
+      return (e.where || '').toLowerCase().includes(b.toLowerCase());
+    })
+    .sort((a,b)=> new Date(a.when)-new Date(b.when));
+
+  evs.forEach(e => {
+    const el = document.createElement('div');
+    el.className = 'event';
+    el.innerHTML = `
+      <div class="when">${new Date(e.when).toLocaleString([], {weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}</div>
+      <div class="where">${e.where}</div>
+      <div class="title" style="font-weight:800">${e.title}</div>
+      <div class="desc">${e.desc}</div>
+    `;
+    list.appendChild(el);
+  });
+}
+
+function renderResources(){
+  const wrap = $('#resourceList');
+  wrap.innerHTML = '';
+  const rs = load(STATE.resourcesKey, []);
+  rs.forEach(r => {
+    const a = document.createElement('a');
+    a.className = 'item';
+    a.href = r.link || '#';
+    a.target = (r.link||'').startsWith('http') ? '_blank' : '_self';
+    a.rel = 'noopener';
+    a.innerHTML = `
+      <div class="row">
+        <div class="title">${r.name}</div>
+        <span class="pill">${r.badge||'Open'}</span>
+      </div>
+      <div class="body">${r.info||''}</div>
+    `;
+    wrap.appendChild(a);
+  });
+}
+
+function renderFAQ(){
+  const data = [
+    {q:'How do I submit a work order?', a:'Use the Work Order form on this page. Provide details, your unit, and entry permission.'},
+    {q:'What’s considered an emergency?', a:'Gas odor, active water leak, no heat in freezing weather, or anything life-threatening. Call 911 first if needed.'},
+    {q:'How long do repairs take?', a:'Most non-emergency repairs are addressed within 24–48 business hours.'},
+    {q:'Can I host a community event?', a:'Yes! Send an idea via the Suggestion Box and staff will follow up.'},
+    {q:'How do I get text updates?', a:'Enter your phone number at the top of the page and tap Subscribe.'},
+    {q:'Where can I get help with utilities or food?', a:'See the Resident Resources section for local organizations and links.'}
+  ];
+  const wrap = $('#faqWrap');
+  wrap.innerHTML = '';
+  data.forEach((f, i) => {
+    const d = document.createElement('details');
+    d.innerHTML = `<summary>${f.q}</summary><div class="small" style="margin-top:8px">${f.a}</div>`;
+    wrap.appendChild(d);
+  });
+}
+
+/* ---------- Form Handlers ---------- */
+function toast(msg, ms=2600){
+  const t = document.createElement('div');
+  t.className = 'toast show';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{ t.remove(); }, ms);
+}
+
+function submitToAppsScript(url, payload){
+  // If url not provided, simulate success without network call
+  if(!url){ return Promise.resolve({ok:true, local:true}); }
+  return fetch(url, {
+    method:'POST',
+    mode:'no-cors',
+    headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify(payload)
+  }).then(()=>({ok:true}));
+}
+
+$('#workOrderForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = $('#woName').value.trim();
+  const phone = $('#woPhone').value.trim();
+  const building = $('#woBuilding').value.trim();
+  const unit = $('#woUnit').value.trim();
+  const priority = $('#woPriority').value;
+  const issueType = $('#woIssueType').value;
+  const access = $('#woAccess').value;
+  const details = $('#woDetails').value.trim();
+  const email = $('#woEmail').value.trim();
+  const best = $('#woBestTime').value.trim();
+
+  if(!name || !phone || !building || !details){
+    $('#woStatus').textContent = 'Please fill the required fields.';
+    toast('Please complete required fields.');
+    return;
+  }
+
+  const payload = { type:'work-order', ts:Date.now(), name, phone, building, unit, priority, issueType, access, details, email, best };
+  $('#woStatus').textContent = 'Submitting…';
+
+  try{
+    const res = await submitToAppsScript('YOUR_APPS_SCRIPT_URL_HERE', payload);
+    $('#woStatus').textContent = 'Submitted. You’ll hear from us soon.';
+    toast('Work order submitted!');
+    e.target.reset();
+  }catch(err){
+    $('#woStatus').textContent = 'Saved locally (offline). We’ll try again automatically.';
+    toast('Saved offline — will resubmit when online.');
+    // Save to retry queue if you want:
+    const q = load('wha_queue_v1', []);
+    q.push(payload);
+    save('wha_queue_v1', q);
+  }
+});
+
+$('#suggestForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = $('#sgName').value.trim();
+  const contact = $('#sgContact').value.trim();
+  const building = $('#sgBuilding').value.trim();
+  const category = $('#sgCategory').value;
+  const idea = $('#sgIdea').value.trim();
+  if(!building || !idea){
+    $('#sgStatus').textContent = 'Please include a building and your idea.';
+    toast('Please complete required fields.');
+    return;
+  }
+  const payload = { type:'suggestion', ts:Date.now(), name, contact, building, category, idea };
+  $('#sgStatus').textContent = 'Submitting…';
+
+  try{
+    const res = await submitToAppsScript('YOUR_APPS_SCRIPT_URL_HERE', payload);
+    $('#sgStatus').textContent = 'Sent. Thank you for the idea!';
+    toast('Suggestion sent — thank you!');
+    e.target.reset();
+  }catch(err){
+    $('#sgStatus').textContent = 'Saved locally (offline). We’ll try again automatically.';
+    toast('Saved offline — will resubmit when online.');
+    const q = load('wha_queue_v1', []);
+    q.push(payload);
+    save('wha_queue_v1', q);
+  }
+});
+
+/* ---------- Search + Filters ---------- */
+$('#annSearch').addEventListener('input', ()=>{ annPage = 1; renderAnnouncements(); });
+$('#categoryFilter').addEventListener('change', ()=>{ annPage = 1; renderAnnouncements(); });
+$('#clearFilters').addEventListener('click', ()=>{
+  $('#annSearch').value=''; $('#categoryFilter').value='all'; annPage=1; renderAnnouncements();
+});
+$('#loadMore').addEventListener('click', ()=>{ annPage++; renderAnnouncements(); });
+
+$('#buildingSelect').addEventListener('change', ()=>{
+  renderAnnouncements(); renderEvents();
+});
+
+/* ---------- Subscribe mock ---------- */
+$('#subscribeBtn').addEventListener('click', ()=>{
+  const phone = $('#subscribePhone').value.replace(/[^\d]/g,'');
+  if(phone.length < 10){ toast('Enter a valid phone number.'); return; }
+  const list = load(STATE.smsKey, []);
+  if(!list.includes(phone)){ list.push(phone); save(STATE.smsKey, list); }
+  toast('Subscribed to text updates!');
+  $('#subscribePhone').value='';
+});
+
+/* ---------- Admin Modal ---------- */
+const adminModal = $('#adminModal');
+$('#adminBtn').addEventListener('click', ()=> adminModal.classList.add('show'));
+$('#closeModal').addEventListener('click', ()=> adminModal.classList.remove('show'));
+
+$('#wipeAll').addEventListener('click', ()=>{
+  if(confirm('Remove all demo announcements, events, and resources?')){
+    localStorage.removeItem(STATE.postsKey);
+    localStorage.removeItem(STATE.eventsKey);
+    localStorage.removeItem(STATE.resourcesKey);
+    localStorage.removeItem(STATE.urgentKey);
+    annPage = 1;
+    seed(); // reseed
+    renderAll();
+    toast('Demo data restored.');
+  }
+});
+
+$('#adminForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const code = $('#adminCode').value.trim();
+  if(code !== STATE.adminCode){ $('#adminStatus').textContent='Invalid admin code.'; toast('Admin code not recognized.'); return; }
+
+  const title = $('#adTitle').value.trim();
+  const category = $('#adCategory').value;
+  const building = $('#adBuilding').value;
+  const date = $('#adDate').value || new Date().toISOString();
+  const body = $('#adBody').value.trim();
+  const urgent = $('#adUrgent').value === 'Yes';
+  const pin = $('#adPin').value === 'Yes';
+
+  if(!title || !body){ $('#adminStatus').textContent='Title and message required.'; return; }
+
+  const posts = load(STATE.postsKey, []);
+  posts.push({id:'p'+(Date.now()), title, category, building, date, body, pinned:pin});
+  save(STATE.postsKey, posts);
+
+  if(urgent){
+    save(STATE.urgentKey, {active:true, text:title, scope:building || 'All'});
+  }
+
+  $('#adminStatus').textContent='Posted!';
+  toast('Announcement posted.');
+  e.target.reset();
+  renderAll();
+});
+
+window.addEventListener('online', ()=>{
+  const q = load('wha_queue_v1', []);
+  if(q.length){ toast('Back online — attempting queued submissions…'); }
+  // In a real app, you’d POST the queue to your endpoint.
+  save('wha_queue_v1', []); // clear immediately for demo
+});
+
+/* ---------- FAQ Search ---------- */
+$('#faqSearch').addEventListener('input', ()=>{
+  const q = $('#faqSearch').value.toLowerCase();
+  $$('#faqWrap details').forEach(d=>{
+    const txt = d.textContent.toLowerCase();
+    d.style.display = txt.includes(q) ? '' : 'none';
+  });
+});
+
+/* ---------- Init ---------- */
+function renderAll(){
+  renderUrgent(); renderKPIs(); renderAnnouncements(); renderEvents(); renderResources(); renderFAQ();
+  $('#year').textContent = new Date().getFullYear();
+}
+renderAll();
+</script>
+
+</body>
+</html>
