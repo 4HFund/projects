@@ -1,736 +1,571 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Wheeling Housing Authority — Resident Welcome & Hub</title>
-<meta name="theme-color" content="#4B2E83" />
-<meta name="description" content="Welcome from your Housing Manager, community resources, events, and forms for Wheeling Housing Authority residents." />
+  <meta charset="UTF-8" />
+  <title>Luau Manor Resident Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --teal: #00A8A8;
+      --coral: #FF6F61;
+      --sunset: #FF9E2C;
+      --yellow: #FFD447;
+      --green: #00A86B;
+      --bg: #FFF8F2;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255, 158, 44, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 168, 168, 0.18), transparent 60%),
+        var(--bg);
+      color: #222;
+      padding: 1.5rem;
+    }
+    .shell {
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      padding: 1.6rem 1.75rem 2.2rem;
+      border: 2px solid rgba(255, 111, 97, 0.18);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      background: linear-gradient(90deg, var(--coral), var(--sunset), var(--teal));
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+    header p {
+      font-size: 0.98rem;
+      color: #444;
+    }
+    .tagline {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #777;
+    }
 
-<style>
-/* ========= THEME ========= */
-:root{
-  --purple:#4B2E83;     /* WHA primary */
-  --purple-600:#3a2366;
-  --purple-700:#2b1b4c;
-  --gold:#DAA520;       /* WHA accent */
-  --gold-700:#b38614;
-  --ink:#f6f7ff;
-  --ink-2:#e9eaff;
-  --muted:#b7bfdf;
-  --bg:#0b0f1e;
-  --card:#111634;
-  --stroke:#25325a;
-  --radius:16px;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem;
+      margin: 1.5rem 0 1.25rem;
+    }
+    .card {
+      border-radius: 18px;
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(255, 248, 242, 0.98));
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+    }
+    .card h2 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(0, 168, 168, 0.08);
+      color: var(--teal);
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.45rem;
+    }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  color:var(--ink);
-  font:16px/1.6 system-ui, -apple-system, Segoe UI, Inter, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(1200px 800px at -10% -20%, rgba(75,46,131,.35) 0%, transparent 60%),
-    radial-gradient(1000px 700px at 120% 10%, rgba(218,165,32,.18) 0%, transparent 60%),
-    #0b0f1e;
-  background-attachment: fixed;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), var(--green));
+      box-shadow: 0 6px 12px rgba(0, 168, 168, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+    }
+    .btn span.icon {
+      margin-left: 0.35rem;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 10px 18px rgba(0, 168, 168, 0.35);
+    }
+    .btn.alt {
+      background: linear-gradient(135deg, var(--coral), var(--sunset));
+      box-shadow: 0 6px 12px rgba(255, 111, 97, 0.4);
+    }
 
-.container{max-width:1080px; margin:0 auto; padding:0 18px}
-.section{padding:18px 0}
-.grid{display:grid; gap:16px}
-.grid-2{grid-template-columns:1fr}
-@media(min-width:980px){ .grid-2{grid-template-columns:1.2fr .8fr} }
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #777;
+      margin-top: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
 
-.card{
-  background:linear-gradient(180deg, #12183b, #0c1131);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
-}
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.6rem;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+    .pill {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 158, 44, 0.12);
+      color: #a55611;
+      font-size: 0.8rem;
+    }
 
-h1,h2,h3{margin:.2em 0 .4em}
-h1{font-size:1.7rem}
-h2{font-size:1.35rem}
-h3{font-size:1.1rem}
-p{margin:.5em 0}
-.small{font-size:.9rem; color:var(--muted)}
-.caption{font-size:.92rem; color:var(--muted)}
+    section.forms {
+      margin-top: 1.2rem;
+    }
+    form {
+      margin-bottom: 1.3rem;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+    }
+    form h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    form .hint {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.4rem;
+    }
+    .field-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .field {
+      flex: 1 1 min(220px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.13rem;
+    }
+    label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #666;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      padding: 0.45rem 0.55rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.12);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease;
+      background: #fff;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 2px rgba(0,168,168,0.15);
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .actions {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .note-small {
+      font-size: 0.78rem;
+      color: #777;
+    }
 
-.btn{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:11px 14px; border-radius:12px; cursor:pointer;
-  background:linear-gradient(180deg, var(--purple) 0%, var(--purple-600) 100%);
-  color:#fff; border:1px solid #2a1b4e; font-weight:700; letter-spacing:.2px;
-  text-decoration:none; box-shadow:0 10px 28px rgba(75,46,131,.35);
-}
-.btn:hover{transform:translateY(-1px)}
-.btn.gold{background:linear-gradient(180deg, var(--gold) 0%, var(--gold-700) 100%); color:#1a1404; border-color:#6b5207}
-.btn.ghost{background:transparent; border-color:var(--stroke); color:var(--ink-2); box-shadow:none}
+    footer {
+      margin-top: 1.6rem;
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+    }
+    footer strong {
+      color: var(--teal);
+    }
 
-.header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(1.1) blur(8px);
-  background:linear-gradient(180deg, rgba(11,15,30,.92) 0%, rgba(11,15,30,.7) 100%);
-  border-bottom:1px solid var(--stroke);
-}
-.header .bar{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-.brand{display:flex; align-items:center; gap:12px}
-.brand img{width:44px; height:44px; border-radius:50%; border:1px solid var(--stroke); object-fit:cover; background:#0d1334}
-
-.nav{display:flex; gap:8px; flex-wrap:wrap}
-
-.hero{
-  border-bottom:1px solid var(--stroke);
-  background:
-    radial-gradient(1200px 700px at 10% -10%, rgba(75,46,131,.35) 0%, transparent 60%),
-    radial-gradient(1200px 700px at 120% 10%, rgba(218,165,32,.15) 0%, transparent 60%);
-}
-
-.kpi-wrap{display:flex; gap:10px; flex-wrap:wrap}
-.kpi{flex:1 1 160px; background:linear-gradient(180deg, #131a41, #0e1435); border:1px solid var(--stroke); border-radius:14px; padding:12px}
-.kpi .big{font-size:1.5rem; font-weight:900}
-.kpi .small{font-size:.9rem; color:var(--muted)}
-
-.item{
-  display:grid; gap:8px; padding:14px; border-radius:14px;
-  background:linear-gradient(180deg, #0e1436, #0a102c);
-  border:1px solid var(--stroke);
-}
-.row{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
-.meta{display:flex; gap:8px; flex-wrap:wrap}
-.pill{display:inline-flex; align-items:center; gap:.35rem; padding:6px 10px; border-radius:20px; background:#0c1333; border:1px solid var(--stroke); color:var(--muted); font-size:.86rem}
-.pill.gold{background:#261e04; color:#ffe6a3; border-color:#5f4706}
-.pill.good{background:#072416; color:#b9ffd8; border-color:#1a5236}
-
-input,select,textarea{
-  width:100%; color:var(--ink);
-  background:#0c1333; border:1px solid var(--stroke);
-  border-radius:12px; padding:12px 14px; outline:none;
-}
-textarea{min-height:120px; resize:vertical}
-label{display:block; font-weight:800; margin:.6rem 0 .3rem}
-.field-row{display:grid; gap:12px}
-@media(min-width:760px){
-  .field-row.two{grid-template-columns:1fr 1fr}
-  .field-row.three{grid-template-columns:1fr 1fr 1fr}
-}
-
-.banner{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; border:1px solid var(--stroke); background:#0b1337; color:#fff}
-.banner.urgent{border-color:#6b1f27; background:#2a0f12}
-.banner.info{border-color:#2a365e; background:#0f1948}
-.banner.success{border-color:#1c5537; background:#092416}
-
-.hr{height:1px; background:linear-gradient(90deg, transparent, #2a355f, transparent); margin:14px 0}
-footer{border-top:1px solid var(--stroke); color:var(--muted); padding:24px 0; margin-top:26px}
-
-.toast{
-  position:fixed; right:12px; bottom:12px; z-index:60;
-  background:#0e1538; border:1px solid var(--stroke); padding:12px 14px; border-radius:12px; display:none
-}
-.toast.show{display:block}
-
-/* Print-friendly block for newsletter QR */
-.print-card{
-  background:#fff; color:#111; border:1px solid #ddd; border-radius:14px; padding:16px;
-}
-.print-card h3{color:#111}
-.print-qr{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-.print-qr canvas{background:#fff; border:1px solid #ccc; border-radius:8px}
-.print-small{color:#333; font-size:.92rem}
-</style>
+    @media (max-width: 600px) {
+      body {
+        padding: 0.9rem;
+      }
+      .shell {
+        padding: 1.1rem 1.1rem 1.5rem;
+        border-radius: 18px;
+      }
+      header h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="shell">
+    <header>
+      <h1>Luau Manor Resident Portal</h1>
+      <p>Quick links for maintenance, concerns, and community — all in one place.</p>
+      <div class="tagline">Welcome Home • Stay Informed • Stay Connected</div>
+    </header>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
-  <div class="container bar">
-    <div class="brand">
-      <img id="logo" alt="Wheeling Housing Authority" src="" />
-      <div>
-        <div style="font-weight:900; letter-spacing:.3px">Wheeling Housing Authority</div>
-        <div class="small">Resident Welcome & Information Hub</div>
-      </div>
-    </div>
-    <nav class="nav">
-      <a class="btn ghost" href="#welcome">Welcome</a>
-      <a class="btn ghost" href="#events">Events</a>
-      <a class="btn ghost" href="#resources">Resources</a>
-      <a class="btn ghost" href="#jobs">Jobs</a>
-      <a class="btn ghost" href="#forms">Forms</a>
-      <a class="btn gold" id="adminOpen">Post Update</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="container section">
-    <div class="grid-2 grid">
-      <div class="card">
-        <div class="banner info" id="urgentBanner" style="display:none">
-          <strong>Urgent:</strong>
-          <span id="urgentText"></span>
-          <span class="pill gold" id="urgentScope"></span>
-        </div>
-        <h1 id="welcomeTitle">Welcome, WHA Residents!</h1>
-        <p class="caption">We’re committed to safe, quality housing and strong neighborhoods — with **respect for the dignity of every resident.**</p>
-        <div class="kpi-wrap" style="margin-top:8px">
-          <div class="kpi">
-            <div class="small">Active Alerts</div>
-            <div class="big" id="kpiAlerts">0</div>
-          </div>
-          <div class="kpi">
-            <div class="small">Upcoming Events (7 days)</div>
-            <div class="big" id="kpiEvents">0</div>
-          </div>
-          <div class="kpi">
-            <div class="small">Announcements</div>
-            <div class="big" id="kpiPosts">0</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Print-ready QR block -->
-      <aside class="card">
-        <h2>Newsletter QR (Print-Ready)</h2>
-        <p class="small">When your page is live, press <b>Set Site URL</b>, paste the final link, and the QR below updates. Right-click the QR → <b>Save image</b> to place it in your newsletter.</p>
-        <div class="print-card">
-          <div class="print-qr">
-            <canvas id="qrCanvas" width="180" height="180" aria-label="QR code"></canvas>
-            <div>
-              <h3 id="qrHeadline">Scan for WHA Resident Hub</h3>
-              <div class="print-small" id="qrUrl">https://example.org/resident-hub</div>
-              <div class="hr" style="margin:10px 0"></div>
-              <button class="btn gold" id="setUrlBtn">Set Site URL</button>
-              <button class="btn ghost" id="downloadQR">Download QR</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ============== MAIN CONTENT ============== -->
-<main class="container section grid grid-2">
-
-  <!-- LEFT: Welcome, Announcements, Events, Forms -->
-  <section>
-
-    <!-- Welcome Letter -->
-    <article class="card" id="welcome">
-      <div class="pill">Welcome Letter</div>
-      <h2>Hi neighbors — I’m your Housing Manager</h2>
-      <p>
-        I’m excited to serve the residents of the Wheeling Housing Authority. This page is your one-stop
-        hub for building updates, events, local resources, and ways to reach us quickly. Please bookmark it and
-        share it with your neighbors. If you ever need help, <b>we’re here for you</b> — from maintenance and safety to
-        connecting with food, health, and job resources.
-      </p>
-      <p class="small">Questions or ideas? Use the Suggestion Box below or call the office during business hours. For emergencies, dial 911.</p>
-    </article>
-
-    <!-- Announcements -->
-    <section class="card" id="announcements">
-      <div class="row">
-        <h2 style="margin:0">Announcements</h2>
-        <div class="row" style="gap:6px">
-          <select id="buildingFilter">
-            <option value="all">All Properties</option>
-            <option>Luau Manor</option>
-            <option>Booker T</option>
-            <option>Hil-Dar</option>
-            <option>Osiris</option>
-            <option>Garden Park</option>
-            <option>Elm Grove</option>
-          </select>
-          <input id="annSearch" placeholder="Search announcements…" />
-        </div>
-      </div>
-      <div class="caption">New posts appear at the top. Use the building filter to narrow your view.</div>
-      <div id="annList" class="grid" style="margin-top:10px"></div>
-      <div class="row" style="margin-top:8px"><button class="btn ghost" id="loadMore">Load more</button></div>
-    </section>
-
-    <!-- Events -->
-    <section class="card" id="events">
-      <h2>Events</h2>
-      <p class="caption">Here’s what’s officially scheduled. (No filler — only real events.)</p>
-      <div id="eventList" class="grid"></div>
-    </section>
-
-    <!-- Forms -->
-    <section class="card" id="forms">
-      <h2>Forms</h2>
+    <!-- Quick cards / shortcuts -->
+    <section>
       <div class="grid">
-        <article class="item">
-          <div class="row">
-            <div>
-              <div class="pill">Form</div>
-              <h3 style="margin:6px 0 0">Work Order Request</h3>
+        <div class="card">
+          <h2>Maintenance Request <span class="badge">Most Used</span></h2>
+          <p>Something broken or not working right? Tell us and we’ll schedule maintenance.</p>
+          <a class="btn" href="#maintenance"><span>Make a Request</span><span class="icon">🔧</span></a>
+        </div>
+
+        <div class="card">
+          <h2>Report a Concern</h2>
+          <p>Noise, safety, or building concerns — let management know so we can help.</p>
+          <a class="btn alt" href="#concern"><span>Report a Concern</span><span class="icon">📋</span></a>
+        </div>
+
+        <div class="card">
+          <h2>Suggestion Box</h2>
+          <p>Have an idea to improve Luau Manor? Share it here.</p>
+          <a class="btn" href="#suggestion"><span>Share a Suggestion</span><span class="icon">💡</span></a>
+        </div>
+
+        <div class="card">
+          <h2>Resident of the Month</h2>
+          <p>Nominate a neighbor who makes the building kinder, cleaner, or more peaceful.</p>
+          <a class="btn alt" href="#resident-of-month"><span>Nominate Someone</span><span class="icon">⭐</span></a>
+        </div>
+
+        <div class="card">
+          <h2>Events & Activities</h2>
+          <p>See what’s coming up: coffee hours, bingo, resource days, and more.</p>
+          <a class="btn" href="#events"><span>View Events</span><span class="icon">📅</span></a>
+        </div>
+
+        <div class="card">
+          <h2>Building Info & Rules</h2>
+          <p>Quick reference for trash, pests, housekeeping, and quiet hours.</p>
+          <a class="btn alt" href="#info"><span>View Info</span><span class="icon">📖</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Office info -->
+    <section>
+      <div class="section-title">Office & Contact</div>
+      <div class="info-row">
+        <div><strong>Office Hours:</strong> <span>Posted in Lobby • Subject to Change</span></div>
+      </div>
+      <div class="info-row">
+        <div><strong>Office Phone:</strong> <span>(304) XXX-XXXX</span></div>
+      </div>
+      <div class="info-row">
+        <div><strong>Emergency:</strong> <span>For fire, medical, or danger: call 911 first.</span></div>
+      </div>
+      <div class="info-row">
+        <span class="pill">Non-emergency requests are handled as quickly as possible during business hours.</span>
+      </div>
+    </section>
+
+    <!-- Quick building info -->
+    <section id="info">
+      <div class="section-title">Quick Building Info</div>
+      <ul style="margin-left: 1rem; margin-top: 0.15rem; font-size: 0.9rem; color: #555; line-height: 1.45;">
+        <li><strong>Trash:</strong> Bag all trash tightly and do not leave bags in hallways.</li>
+        <li><strong>Pest Control:</strong> Report pests to the office. Do not use foggers or Raid — it makes treatment less effective.</li>
+        <li><strong>Housekeeping:</strong> Keep walkways clear and maintain safe, sanitary conditions.</li>
+        <li><strong>Quiet Hours:</strong> 10:00 PM – 7:00 AM. Please be considerate of neighbors at all times.</li>
+      </ul>
+    </section>
+
+    <!-- Forms section -->
+    <section class="forms">
+
+      <!-- Maintenance Request -->
+      <section id="maintenance">
+        <div class="section-title">Maintenance Request</div>
+        <form id="maintenance-form">
+          <h3>Maintenance Request Form 🔧</h3>
+          <p class="hint">Use this for non-emergency maintenance. For emergencies that can cause damage or injury, call the office or 911 as appropriate.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="m-name">Your Name *</label>
+              <input type="text" id="m-name" name="Name" required />
+            </div>
+            <div class="field">
+              <label for="m-unit">Unit # *</label>
+              <input type="text" id="m-unit" name="Unit" required />
+            </div>
+            <div class="field">
+              <label for="m-phone">Phone *</label>
+              <input type="tel" id="m-phone" name="Phone" required />
             </div>
           </div>
-          <form id="woForm" novalidate>
-            <div class="field-row two">
-              <div><label for="woName">Name *</label><input id="woName" required placeholder="First & Last" /></div>
-              <div><label for="woPhone">Phone *</label><input id="woPhone" inputmode="tel" required placeholder="(304) 555-1234" /></div>
-            </div>
-            <div class="field-row three">
-              <div>
-                <label for="woBuilding">Building *</label>
-                <select id="woBuilding" required>
-                  <option value="">Select…</option>
-                  <option>Luau Manor</option><option>Booker T</option><option>Hil-Dar</option>
-                  <option>Osiris</option><option>Garden Park</option><option>Elm Grove</option>
-                </select>
-              </div>
-              <div><label for="woUnit">Unit #</label><input id="woUnit" placeholder="e.g., 2B" /></div>
-              <div>
-                <label for="woPriority">Priority</label>
-                <select id="woPriority"><option>Normal</option><option>Urgent</option><option>Emergency</option></select>
-              </div>
-            </div>
-            <div class="field-row two">
-              <div>
-                <label for="woIssue">Issue Type</label>
-                <select id="woIssue"><option>Plumbing</option><option>Electrical</option><option>Appliance</option><option>Heating / Cooling</option><option>Pest</option><option>Door / Window</option><option>Other</option></select>
-              </div>
-              <div>
-                <label for="woAccess">Entry Permission</label>
-                <select id="woAccess"><option>Enter if I’m not home</option><option>Call me first</option><option>No entry without me</option></select>
-              </div>
-            </div>
-            <label for="woDetails">Details *</label>
-            <textarea id="woDetails" required placeholder="Describe the issue — what, where, when it happens, anything helpful."></textarea>
-            <div class="field-row two">
-              <div><label for="woEmail">Email (optional)</label><input id="woEmail" type="email" placeholder="you@example.com" /></div>
-              <div><label for="woTime">Best Time to Visit</label><input id="woTime" placeholder="e.g., Weekdays after 2pm" /></div>
-            </div>
-            <div class="hr"></div>
-            <button class="btn" type="submit">Submit Work Order</button>
-            <span id="woMsg" class="small"></span>
-          </form>
-        </article>
 
-        <article class="item">
-          <div class="row">
-            <div>
-              <div class="pill">Form</div>
-              <h3 style="margin:6px 0 0">Resident Suggestion Box</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="m-urgency">Urgency</label>
+              <select id="m-urgency" name="Urgency">
+                <option value="Not urgent">Not urgent</option>
+                <option value="Soon">Soon</option>
+                <option value="As soon as possible">As soon as possible</option>
+              </select>
             </div>
           </div>
-          <form id="sgForm" novalidate>
-            <div class="field-row two">
-              <div><label for="sgName">Name (optional)</label><input id="sgName" placeholder="You can leave this blank" /></div>
-              <div><label for="sgContact">Contact (optional)</label><input id="sgContact" placeholder="Phone or email" /></div>
+
+          <div class="field-row">
+            <div class="field" style="flex: 1 1 100%;">
+              <label for="m-details">What’s wrong? *</label>
+              <textarea id="m-details" name="Details" required></textarea>
             </div>
-            <div class="field-row two">
-              <div>
-                <label for="sgBuilding">Building *</label>
-                <select id="sgBuilding" required>
-                  <option value="">Select…</option>
-                  <option>Luau Manor</option><option>Booker T</option><option>Hil-Dar</option>
-                  <option>Osiris</option><option>Garden Park</option><option>Elm Grove</option>
-                </select>
-              </div>
-              <div>
-                <label for="sgTopic">Topic</label>
-                <select id="sgTopic"><option>Community Event</option><option>Building Improvement</option><option>Policy / Process</option><option>Safety</option><option>Other</option></select>
-              </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn">
+              <span>Send Maintenance Request</span><span class="icon">📨</span>
+            </button>
+            <span class="note-small">This will open your email app with the request filled in. Just press send.</span>
+          </div>
+        </form>
+      </section>
+
+      <!-- Report a Concern -->
+      <section id="concern">
+        <div class="section-title">Report a Concern</div>
+        <form id="concern-form">
+          <h3>Concern / Issue Report 📋</h3>
+          <p class="hint">Use this for noise, safety, building issues, or other concerns. You may leave your name or stay anonymous.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="c-name">Your Name (optional)</label>
+              <input type="text" id="c-name" name="Name (optional)" />
             </div>
-            <label for="sgIdea">Your Idea *</label>
-            <textarea id="sgIdea" required placeholder="What should we do and why would it help? Be specific."></textarea>
-            <div class="hr"></div>
-            <button class="btn" type="submit">Send Suggestion</button>
-            <span id="sgMsg" class="small"></span>
-          </form>
-        </article>
-      </div>
+            <div class="field">
+              <label for="c-unit">Unit # (optional)</label>
+              <input type="text" id="c-unit" name="Unit (optional)" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="c-type">Type of Concern</label>
+              <select id="c-type" name="Type of Concern">
+                <option value="">Select one</option>
+                <option>Noise / Disturbance</option>
+                <option>Safety / Security</option>
+                <option>Building / Property Condition</option>
+                <option>Neighbor Issue</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field" style="flex: 1 1 100%;">
+              <label for="c-details">What happened? *</label>
+              <textarea id="c-details" name="Details" required></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn alt">
+              <span>Send Concern</span><span class="icon">📨</span>
+            </button>
+            <span class="note-small">For emergencies or immediate danger, call 911 first.</span>
+          </div>
+        </form>
+      </section>
+
+      <!-- Suggestion Box -->
+      <section id="suggestion">
+        <div class="section-title">Suggestion Box</div>
+        <form id="suggestion-form">
+          <h3>Suggestion Box 💡</h3>
+          <p class="hint">Ideas for events, improvements, resources, or ways to make Luau Manor better.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="s-name">Your Name (optional)</label>
+              <input type="text" id="s-name" name="Name (optional)" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field" style="flex: 1 1 100%;">
+              <label for="s-idea">Your suggestion *</label>
+              <textarea id="s-idea" name="Suggestion" required></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn">
+              <span>Send Suggestion</span><span class="icon">📨</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Resident of the Month -->
+      <section id="resident-of-month">
+        <div class="section-title">Resident of the Month</div>
+        <form id="rom-form">
+          <h3>Resident of the Month Nomination ⭐</h3>
+          <p class="hint">Nominate someone who shows kindness, keeps things clean, or helps others.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="r-nominee">Resident Name *</label>
+              <input type="text" id="r-nominee" name="Nominee Name" required />
+            </div>
+            <div class="field">
+              <label for="r-unit">Nominee Unit # (if known)</label>
+              <input type="text" id="r-unit" name="Nominee Unit (optional)" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="r-yourname">Your Name (optional)</label>
+              <input type="text" id="r-yourname" name="Your Name (optional)" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field" style="flex: 1 1 100%;">
+              <label for="r-why">Why are you nominating them? *</label>
+              <textarea id="r-why" name="Why They Were Nominated" required></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn alt">
+              <span>Send Nomination</span><span class="icon">📨</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Events placeholder -->
+      <section id="events">
+        <div class="section-title">Events & Activities</div>
+        <p style="font-size:0.86rem; color:#666; margin-bottom:0.6rem;">
+          This section can list upcoming events (coffee hours, bingo, giveaways, resource tables, etc.).
+          You can update this text manually whenever you have something new.
+        </p>
+        <ul style="margin-left:1rem; font-size:0.88rem; color:#555; line-height:1.45;">
+          <li><em>Example:</em> Coffee & Conversation – 1st Tuesday of each month, 9–11 AM in the community room.</li>
+          <li><em>Example:</em> Bingo Night – Date/Time TBD.</li>
+        </ul>
+      </section>
+
     </section>
-  </section>
 
-  <!-- RIGHT: Resources & Jobs -->
-  <aside>
-    <!-- Resources -->
-    <section class="card" id="resources">
-      <h2>Local Resources (Wheeling & Ohio Valley)</h2>
-      <div class="grid" id="resourceList"></div>
-    </section>
+    <footer>
+      <p><strong>Luau Manor</strong> • This portal is for convenience and does not replace your lease or official policies.</p>
+    </footer>
+  </main>
 
-    <!-- Jobs & Skills -->
-    <section class="card" id="jobs">
-      <h2>Jobs & Skill Building</h2>
-      <p class="caption">We can help with resumes, applications, and referrals to training or GED programs.</p>
-      <div class="grid" id="jobList"></div>
-      <div class="hr"></div>
-      <div class="banner success">
-        <strong>Resume Help:</strong> Need a resume or a refresh? Use the Suggestion Box to request <em>resume assistance</em> and we’ll reach out.
-      </div>
-    </section>
-  </aside>
-</main>
+  <script>
+    // 🔧 CHANGE THIS TO YOUR REAL EMAIL:
+    const MANAGER_EMAIL = "sidney.mozingo@gmail.com";
 
-<footer>
-  <div class="container">
-    <div class="small">© <span id="yr"></span> Wheeling Housing Authority • Main Office: <a href="tel:13042330658" style="color:#dcd9ff">304-233-0658</a>. For emergencies, call 911.</div>
-  </div>
-</footer>
-
-<!-- ================= ADMIN MODAL ================= -->
-<div id="adminModal" style="position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(3,6,20,.7); z-index:100">
-  <div class="card" style="width:min(860px,94vw); max-height:90vh; overflow:auto">
-    <div class="row"><h3 style="margin:0">Quick Post (Staff Only)</h3><button class="btn ghost" id="adminClose">Close</button></div>
-    <div class="hr"></div>
-    <form id="adminForm" class="grid">
-      <div class="field-row two">
-        <div><label for="adTitle">Title *</label><input id="adTitle" required placeholder="e.g., Elevator Inspection Tuesday" /></div>
-        <div>
-          <label for="adCategory">Category</label>
-          <select id="adCategory"><option>general</option><option>maintenance</option><option>safety</option><option>community</option><option>benefits</option></select>
-        </div>
-      </div>
-      <div class="field-row two">
-        <div>
-          <label for="adBuilding">Building</label>
-          <select id="adBuilding"><option>All</option><option>Luau Manor</option><option>Booker T</option><option>Hil-Dar</option><option>Osiris</option><option>Garden Park</option><option>Elm Grove</option></select>
-        </div>
-        <div><label for="adDate">Date</label><input id="adDate" type="date" /></div>
-      </div>
-      <label for="adBody">Message *</label>
-      <textarea id="adBody" required></textarea>
-      <div class="field-row two">
-        <div>
-          <label for="adUrgent">Urgent Banner</label>
-          <select id="adUrgent"><option>No</option><option>Yes</option></select>
-        </div>
-        <div>
-          <label for="adminCode">Admin Code</label>
-          <input id="adminCode" placeholder="WHA2025" />
-        </div>
-      </div>
-      <div class="hr"></div>
-      <div class="row"><button class="btn" type="submit">Post</button><button class="btn ghost" id="wipeDemo" type="button">Restore Demo</button></div>
-      <div class="small" id="adminMsg"></div>
-    </form>
-  </div>
-</div>
-
-<!-- ================= SCRIPTS ================= -->
-<script>
-/* ---------- Utility ---------- */
-const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
-const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const load=(k,f)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(f));
-const fmt=(d)=>new Date(d).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
-const fmtDT=(d)=>new Date(d).toLocaleString([],{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-
-/* ---------- App State ---------- */
-const STATE={
-  admin:'WHA2025',
-  postsKey:'wha_posts_v2',
-  eventsKey:'wha_events_v2',
-  resKey:'wha_res_v2',
-  jobKey:'wha_job_v2',
-  urgentKey:'wha_urgent_v2',
-  siteUrlKey:'wha_site_url'
-};
-
-/* ---------- Optional inline logo (leave empty to hide) ---------- */
-(() => { const img = $('#logo'); img.src=''; })();
-
-/* ---------- Seed data on first load ---------- */
-(function seed(){
-  if(!localStorage.getItem(STATE.postsKey)){
-    const posts=[
-      {id:'p1',title:'Welcome to the Resident Hub',category:'general',building:'All',date:new Date().toISOString(),body:'Bookmark this page for updates, events, and resources. Use the forms below to reach us quickly.'},
-      {id:'p2',title:'Laundry Room Courtesy',category:'community',building:'All',date:new Date(Date.now()-86400000).toISOString(),body:'Please remove laundry promptly so neighbors can use the machines.'},
-      {id:'p3',title:'Safety Reminder',category:'safety',building:'All',date:new Date(Date.now()-86400000*2).toISOString(),body:'Keep hallways clear. Do not prop exterior doors open.'}
-    ];
-    save(STATE.postsKey, posts);
-  }
-  if(!localStorage.getItem(STATE.eventsKey)){
-    const events=[
-      // Resident-confirmed event (requested):
-      {id:'e1',when:new Date(new Date().getFullYear(),10,13,12,0,0).toISOString(),where:'Luau Manor — Community Room',title:'Bingo Social',desc:'Friendly bingo with neighbors. Light refreshments.'}
-      // Add more real events as they’re scheduled.
-    ];
-    save(STATE.eventsKey, events);
-  }
-  if(!localStorage.getItem(STATE.resKey)){
-    const resources=[
-      {name:'Main Office',info:'Mon–Fri 8:30–4:30',link:'tel:13042330658',badge:'Call'},
-      {name:'Emergency',info:'Call 911 for emergencies',link:'tel:911',badge:'911'},
-      {name:'WV 211',info:'Statewide referral for food, utilities, childcare, counseling',link:'https://wv211.org',badge:'Web'},
-      {name:'Catholic Charities — Neighborhood Center',info:'Meals & pantry support (Wheeling)',link:'https://catholiccharitieswv.org',badge:'Food'},
-      {name:'Wheeling Health Right',info:'Free/low-cost clinic, dental & vision (eligibility applies)',link:'https://wheelinghealthright.com',badge:'Clinic'},
-      {name:'YWCA Wheeling',info:'Housing, advocacy, and support services',link:'https://ywcawheeling.org',badge:'Support'},
-      {name:'House of the Carpenter',info:'Food pantry & community support',link:'https://houseofthecarpenter.com',badge:'Pantry'}
-    ];
-    save(STATE.resKey, resources);
-  }
-  if(!localStorage.getItem(STATE.jobKey)){
-    const jobs=[
-      {name:'WorkForce West Virginia — Wheeling Career Center',info:'Job search, resume help, training referrals',link:'https://workforcewv.org',badge:'Jobs'},
-      {name:'Ohio County Schools Adult Education (GED/HSE)',info:'Free classes toward your diploma',link:'https://wvde.us/adult-education',badge:'GED'},
-      {name:'WV Adult Education Locator',info:'Find adult-ed and ESL programs',link:'https://wvadulted.wv.gov',badge:'Learn'},
-      {name:'WV Division of Rehabilitation Services',info:'Employment services for eligible residents',link:'https://wvdrs.org',badge:'Support'}
-    ];
-    save(STATE.jobKey, jobs);
-  }
-  if(!localStorage.getItem(STATE.urgentKey)){
-    save(STATE.urgentKey,{active:false,text:'',scope:'All'});
-  }
-})();
-
-/* ---------- Renderers ---------- */
-function renderKPIs(){
-  const posts = load(STATE.postsKey,[]);
-  const evs = load(STATE.eventsKey,[]);
-  const urgent = load(STATE.urgentKey,{});
-  $('#kpiAlerts').textContent = urgent.active?1:0;
-  const next7 = evs.filter(e=> new Date(e.when) >= new Date() && (new Date(e.when)-Date.now()) < 7*86400000);
-  $('#kpiEvents').textContent = next7.length;
-  $('#kpiPosts').textContent = posts.length;
-}
-
-function renderUrgent(){
-  const u = load(STATE.urgentKey,{active:false});
-  const b = $('#urgentBanner');
-  if(u.active){ b.style.display='flex'; $('#urgentText').textContent=u.text||''; $('#urgentScope').textContent=u.scope||'All'; }
-  else b.style.display='none';
-}
-
-let page=1; const PAGE=5;
-function getFilteredPosts(){
-  const posts = load(STATE.postsKey,[]);
-  const q = ($('#annSearch').value||'').toLowerCase();
-  const b = $('#buildingFilter').value;
-  return posts
-    .filter(p=> b==='all' ? true : (p.building===b || p.building==='All'))
-    .filter(p=> q? (p.title.toLowerCase().includes(q)||p.body.toLowerCase().includes(q)) : true)
-    .sort((a,b)=> new Date(b.date)-new Date(a.date));
-}
-function renderAnnouncements(){
-  const list = $('#annList'); list.innerHTML='';
-  const items = getFilteredPosts().slice(0,page*PAGE);
-  items.forEach(p=>{
-    const el=document.createElement('article'); el.className='item';
-    el.innerHTML=`
-      <div class="row">
-        <div style="font-weight:900">${p.title}</div>
-        <div class="meta">
-          <span class="pill">${p.category}</span>
-          <span class="pill">${p.building}</span>
-          <span class="pill">${fmt(p.date)}</span>
-        </div>
-      </div>
-      <div>${p.body}</div>
-    `;
-    list.appendChild(el);
-  });
-  const all=getFilteredPosts();
-  $('#loadMore').style.display = (all.length>items.length) ? 'inline-flex':'none';
-}
-
-function renderEvents(){
-  const evs = load(STATE.eventsKey,[]).sort((a,b)=> new Date(a.when)-new Date(b.when));
-  const wrap = $('#eventList'); wrap.innerHTML='';
-  evs.forEach(e=>{
-    const el=document.createElement('div'); el.className='item';
-    el.innerHTML=`
-      <div class="row"><div style="font-weight:900">${e.title}</div><span class="pill good">${new Date(e.when).toDateString()}</span></div>
-      <div class="meta"><span class="pill">${new Date(e.when).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</span><span class="pill gold">${e.where}</span></div>
-      <div>${e.desc||''}</div>
-    `;
-    wrap.appendChild(el);
-  });
-}
-
-function renderLinks(listKey, targetSel){
-  const data = load(listKey,[]);
-  const wrap = $(targetSel); wrap.innerHTML='';
-  data.forEach(r=>{
-    const a=document.createElement('a'); a.className='item'; a.href=r.link; a.target=r.link.startsWith('http')?'_blank':'_self'; a.rel='noopener';
-    a.innerHTML=`
-      <div class="row">
-        <div style="font-weight:900">${r.name}</div>
-        <span class="pill">${r.badge||'Open'}</span>
-      </div>
-      <div class="small">${r.info||''}</div>
-    `;
-    wrap.appendChild(a);
-  });
-}
-
-/* ---------- Forms (Apps Script optional) ---------- */
-const ENDPOINT = 'YOUR_APPS_SCRIPT_URL_HERE'; // optional; leave blank to simulate success
-function submitToEndpoint(payload){
-  if(!ENDPOINT) return Promise.resolve({ok:true, local:true});
-  return fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>({ok:true}));
-}
-
-$('#woForm').addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const required = ['#woName','#woPhone','#woBuilding','#woDetails'];
-  for(const sel of required){ if(!$(sel).value.trim()){ $('#woMsg').textContent='Please complete required fields.'; toast('Please complete required fields.'); return; } }
-  const payload={
-    type:'work-order', ts:Date.now(),
-    name:$('#woName').value.trim(), phone:$('#woPhone').value.trim(),
-    building:$('#woBuilding').value, unit:$('#woUnit').value.trim(),
-    priority:$('#woPriority').value, issueType:$('#woIssue').value, access:$('#woAccess').value,
-    details:$('#woDetails').value.trim(), email:$('#woEmail').value.trim(), best:$('#woTime').value.trim()
-  };
-  $('#woMsg').textContent='Submitting…';
-  try{ await submitToEndpoint(payload); $('#woMsg').textContent='Submitted. Thank you!'; toast('Work order submitted.'); e.target.reset(); }
-  catch{ $('#woMsg').textContent='Saved locally; will retry when online.'; toast('Saved offline.'); }
-});
-
-$('#sgForm').addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const building=$('#sgBuilding').value.trim(), idea=$('#sgIdea').value.trim();
-  if(!building || !idea){ $('#sgMsg').textContent='Please include your building and idea.'; toast('Please include your building and idea.'); return; }
-  const payload={type:'suggestion', ts:Date.now(), name:$('#sgName').value.trim(), contact:$('#sgContact').value.trim(), building, topic:$('#sgTopic').value, idea};
-  $('#sgMsg').textContent='Submitting…';
-  try{ await submitToEndpoint(payload); $('#sgMsg').textContent='Sent. Thank you!'; toast('Suggestion sent.'); e.target.reset(); }
-  catch{ $('#sgMsg').textContent='Saved locally; will retry when online.'; toast('Saved offline.'); }
-});
-
-/* ---------- Admin ---------- */
-$('#adminOpen').addEventListener('click',()=> $('#adminModal').style.display='flex');
-$('#adminClose').addEventListener('click',()=> $('#adminModal').style.display='none');
-$('#wipeDemo').addEventListener('click',()=>{
-  if(confirm('Restore demo data? This clears current announcements/resources/events lists.')){
-    localStorage.removeItem(STATE.postsKey);
-    localStorage.removeItem(STATE.eventsKey);
-    localStorage.removeItem(STATE.resKey);
-    localStorage.removeItem(STATE.jobKey);
-    localStorage.removeItem(STATE.urgentKey);
-    location.reload();
-  }
-});
-$('#adminForm').addEventListener('submit',(e)=>{
-  e.preventDefault();
-  const code=$('#adminCode').value.trim();
-  if(code!==STATE.admin){ $('#adminMsg').textContent='Invalid admin code.'; toast('Admin code not recognized.'); return; }
-  const posts=load(STATE.postsKey,[]);
-  const title=$('#adTitle').value.trim(), cat=$('#adCategory').value, bld=$('#adBuilding').value, dt=$('#adDate').value||new Date().toISOString(), body=$('#adBody').value.trim();
-  if(!title || !body){ $('#adminMsg').textContent='Title and message required.'; return; }
-  posts.push({id:'p'+Date.now(),title,category:cat,building:bld,date:dt,body});
-  save(STATE.postsKey,posts);
-  if($('#adUrgent').value==='Yes'){ save(STATE.urgentKey,{active:true,text:title,scope:bld||'All'}); }
-  $('#adminMsg').textContent='Posted.'; toast('Announcement posted.'); renderAll();
-  e.target.reset();
-});
-
-/* ---------- Announcement Filters ---------- */
-$('#annSearch').addEventListener('input', ()=>{ page=1; renderAnnouncements(); });
-$('#buildingFilter').addEventListener('change', ()=>{ page=1; renderAnnouncements(); });
-$('#loadMore').addEventListener('click', ()=>{ page++; renderAnnouncements(); });
-
-/* ---------- Toast ---------- */
-function toast(msg,ms=2400){ const t=$('.toast')||document.body.appendChild(Object.assign(document.createElement('div'),{className:'toast'})); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),ms); }
-
-/* ---------- Simple QR (pure JS, no deps) ---------- */
-/* Lightweight numeric/byte QR generator adapted for single-file use. */
-(function(){
-  // Minimal QR generator using qrcode.js-inspired approach
-  const QRUtil = {
-    // polynomial math over GF(256)
-    glog(n){ if(n<1) throw new Error('glog'); return QRUtil.LOG_TABLE[n]; },
-    gexp(n){ while(n<0) n+=255; while(n>=256) n-=255; return QRUtil.EXP_TABLE[n]; },
-    EXP_TABLE:new Array(256), LOG_TABLE:new Array(256),
-  };
-  for (let i=0, x=1; i<256; i++){ QRUtil.EXP_TABLE[i]=x; QRUtil.LOG_TABLE[x]=i; x<<=1; if(x&0x100) x^=0x11d; }
-  function rsPoly(len){
-    let poly=[1];
-    for(let i=0;i<len;i++){
-      poly = poly.map((v,idx)=> (v<<8) ^ 0).concat([0]);
-      for(let j=0;j<poly.length-1;j++){
-        poly[j] ^= QRUtil.gexp((QRUtil.glog(poly[j]) + i) % 255);
+    function buildMailtoBody(form) {
+      const data = new FormData(form);
+      let body = "";
+      for (const [key, value] of data.entries()) {
+        if (value && value.trim() !== "") {
+          body += key + ": " + value.trim() + "%0D%0A";
+        }
       }
+      return body;
     }
-    return poly;
-  }
-  function makeBytes(str){ return new TextEncoder().encode(str); }
 
-  // Very tiny “version chooser” for short URLs (versions 1–4, L error correction)
-  function pickVersion(len){ if(len<=17) return 1; if(len<=32) return 2; if(len<=53) return 3; return 4; }
-
-  function drawQR(text, canvas){
-    const data = makeBytes(text);
-    const ver = pickVersion(data.length);
-    const size = 21 + (ver-1)*4;
-    const scale = Math.floor(Math.min(canvas.width, canvas.height) / (size+8));
-    const margin = 4;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle='#000';
-
-    // Very simplified pattern: not a full spec implementation (but scannable for short URLs)
-    // Draw finder patterns
-    function finder(x,y){
-      const s=7;
-      ctx.fillRect((x)*scale,(y)*scale,s*scale,s*scale);
-      ctx.clearRect((x+1)*scale,(y+1)*scale,(s-2)*scale,(s-2)*scale);
-      ctx.fillRect((x+2)*scale,(y+2)*scale,(s-4)*scale,(s-4)*scale);
+    function setupForm(formId, subjectPrefix) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Basic required-field check using HTML5 validity
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const body = buildMailtoBody(form);
+        const unitField =
+          form.querySelector("input[name='Unit']") ||
+          form.querySelector("input[name='Unit (optional)']") ||
+          null;
+        const unitValue = unitField && unitField.value ? " - Unit " + unitField.value.trim() : "";
+        const subject = encodeURIComponent(subjectPrefix + unitValue);
+        const mailtoUrl = "mailto:" + encodeURIComponent(MANAGER_EMAIL) +
+          "?subject=" + subject +
+          "&body=" + body;
+        window.location.href = mailtoUrl;
+      });
     }
-    finder(margin,margin);
-    finder(size-7+margin,margin);
-    finder(margin,size-7+margin);
 
-    // Pseudo data pattern (stripe) — enough for phones to lock quickly for short strings
-    let bit=0;
-    for(let y=0;y<size;y++){
-      for(let x=0;x<size;x++){
-        // leave finder areas blank
-        const inFinder =
-          (x<7 && y<7) ||
-          (x>=size-7 && y<7) ||
-          (x<7 && y>=size-7);
-        if(inFinder) continue;
-        // simple alternating fill seeded by data
-        const v = (x*y + data[bit%data.length]*7 + bit) % 19;
-        if(v<3){ ctx.fillRect((x+margin)*scale,(y+margin)*scale,scale,scale); }
-        bit++;
-      }
-    }
-  }
-  window.quickQR = drawQR;
-})();
-
-/* ---------- QR controls ---------- */
-function setSiteUrl(u){
-  save(STATE.siteUrlKey, u);
-  $('#qrUrl').textContent = u;
-  $('#qrHeadline').textContent = 'Scan for WHA Resident Hub';
-  quickQR(u, $('#qrCanvas'));
-}
-$('#setUrlBtn').addEventListener('click', ()=>{
-  const cur = load(STATE.siteUrlKey,'https://example.org/resident-hub');
-  const u = prompt('Paste the FINAL site URL this QR should open:', cur) || cur;
-  setSiteUrl(u);
-});
-$('#downloadQR').addEventListener('click', ()=>{
-  const c=$('#qrCanvas');
-  const a=document.createElement('a');
-  a.href=c.toDataURL('image/png'); a.download='WHA_ResidentHub_QR.png'; a.click();
-});
-
-/* ---------- Init ---------- */
-function renderAll(){
-  renderUrgent(); renderKPIs(); renderAnnouncements(); renderEvents();
-  renderLinks(STATE.resKey, '#resourceList'); renderLinks(STATE.jobKey, '#jobList');
-  $('#yr').textContent = new Date().getFullYear();
-  const url = load(STATE.siteUrlKey, 'https://example.org/resident-hub');
-  setSiteUrl(url);
-}
-renderAll();
-</script>
-
-<div class="toast" aria-live="polite"></div>
+    document.addEventListener("DOMContentLoaded", function () {
+      setupForm("maintenance-form", "[Luau Manor] Maintenance Request");
+      setupForm("concern-form", "[Luau Manor] Concern Report");
+      setupForm("suggestion-form", "[Luau Manor] Suggestion");
+      setupForm("rom-form", "[Luau Manor] Resident of the Month Nomination");
+    });
+  </script>
 </body>
 </html>
