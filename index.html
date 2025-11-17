@@ -1,423 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>WHA After Hours • Work Orders & Emergency Info</title>
-  <meta name="theme-color" content="#4B2E83" />
-  <meta name="description" content="Wheeling Housing Authority after-hours number, mobile work order form, and guidance for residents." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work Order Request</title>
+    <style>
+      /* Basic reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
 
-  <style>
-    /* ========================================================
-       WHA MOBILE-FIRST THEME (Purple & Gold)
-       ======================================================== */
-    :root{
-      --purple:#4B2E83;           /* WHA Purple */
-      --gold:#DAA520;             /* WHA Gold   */
-      --bg-0:#0b0f1e;
-      --bg-1:#10163a;
-      --ink-0:#f7f8ff;
-      --ink-1:#c9cfee;
-      --ink-dim:#9aa2c8;
-      --card:#121735;
-      --stroke:#24325a;
-      --radius:16px;
-      --shadow:0 24px 70px rgba(0,0,0,.55);
-    }
+      body {
+        background-color: #f5f7fa;
+        padding: 20px;
+        color: #333;
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
-      color:var(--ink-0);
-      background:
-        radial-gradient(1200px 800px at -10% -10%, rgba(75,46,131,.25), transparent 60%),
-        radial-gradient(1200px 800px at 120% 120%, rgba(218,165,32,.16), transparent 60%),
-        linear-gradient(180deg,var(--bg-1),var(--bg-0));
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
 
-    /* ========================================================
-       STICKY HEADER (mobile first)
-       ======================================================== */
-    .header{
-      position:sticky; top:0; z-index:1000;
-      background:linear-gradient(90deg,var(--purple),var(--gold));
-      padding:12px 14px;
-      display:flex; align-items:center; gap:12px;
-      box-shadow:0 6px 20px rgba(0,0,0,.35);
-    }
-    .logo{
-      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
-      background:conic-gradient(from 220deg,var(--gold),#b88312 25%,#885f05 55%,var(--gold) 85%);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
-    }
-    .logo svg{width:22px;height:22px}
-    .brand{
-      line-height:1;
-      display:flex; flex-direction:column;
-    }
-    .brand b{font-size:17px}
-    .brand small{font-size:12px; opacity:.95}
+      h1 {
+        margin-bottom: 20px;
+        font-size: 28px;
+        text-align: center;
+        color: #2d3e50;
+      }
 
-    .menuBtn{
-      margin-left:auto; border:0; background:rgba(255,255,255,.18);
-      color:#fff; border-radius:10px; padding:8px 10px; font-size:16px;
-    }
+      p.description {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #596a7b;
+      }
 
-    /* Drawer */
-    .drawer{
-      position:fixed; inset:0 0 0 auto; width:min(86vw,360px);
-      background:#0f1430; color:var(--ink-0);
-      transform:translateX(100%); transition:transform .25s ease; box-shadow:var(--shadow); z-index:1100;
-    }
-    .drawer.open{ transform:translateX(0); }
-    .drawerHeader{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08)}
-    .drawerHeader b{font-size:16px}
-    .drawer a{display:block; padding:14px 16px; color:var(--ink-0); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.06)}
-    .drawer a span{display:block; color:var(--ink-1); font-size:12px; margin-top:2px}
-    .drawerClose{border:0; background:transparent; color:#fff; font-size:24px; line-height:1}
+      form {
+        display: flex;
+        flex-direction: column;
+      }
 
-    .backdrop{
-      position:fixed; inset:0; background:rgba(0,0,0,.5);
-      opacity:0; visibility:hidden; transition:opacity .2s; z-index:1050;
-    }
-    .backdrop.show{opacity:1; visibility:visible}
+      label {
+        margin-top: 15px;
+        font-weight: bold;
+      }
 
-    /* ========================================================
-       HERO / AFTER-HOURS CARD
-       ======================================================== */
-    .wrap{padding:18px 14px}
-    .hero{
-      border-radius:var(--radius);
-      background:linear-gradient(180deg,#11183a,#0c1026);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      padding:16px;
-    }
-    .hero .kicker{
-      display:inline-block; font-weight:800; letter-spacing:.2px;
-      color:#111; background:linear-gradient(90deg,var(--gold),#f0c24c);
-      padding:6px 10px; border-radius:999px; margin-bottom:10px;
-    }
-    .hero h1{margin:6px 0 6px; font-size:22px; color:var(--gold)}
-    .hero p{margin:0; color:var(--ink-1); font-size:14px}
+      input,
+      textarea {
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
 
-    .callout{
-      margin-top:12px; display:grid; grid-template-columns:1fr; gap:10px;
-    }
-    .card{
-      background:#0e1433; border:1px solid rgba(255,255,255,.1);
-      border-radius:12px; padding:12px 14px;
-    }
-    .card b{display:block; color:#ffd56a; font-size:16px}
-    .card .big{font-size:22px; color:#fff; font-weight:900; letter-spacing:.5px}
-    .card small{color:var(--ink-1)}
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
 
-    .tips{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
-    @media (max-width:560px){ .tips{grid-template-columns:1fr} }
+      button {
+        margin-top: 20px;
+        padding: 12px;
+        background-color: #0066cc;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-    /* ========================================================
-       FORM
-       ======================================================== */
-    .formWrap{padding:14px 14px 26px}
-    .form{
-      background:linear-gradient(180deg,#131a3f,#0d122b);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:var(--radius); box-shadow:var(--shadow); padding:16px
-    }
-    .form h2{margin:0 0 10px; color:#ffd56a; font-size:18px; text-align:center}
-    label{display:block; margin-top:12px; color:var(--ink-1); font-size:14px}
-    input,select,textarea{
-      width:100%; margin-top:6px; padding:12px; border-radius:12px; border:1px solid var(--stroke);
-      background:#151b3a; color:var(--ink-0); font-size:16px; outline:0;
-    }
-    input:focus,select:focus,textarea:focus{border-color:#3a5fb7; box-shadow:0 0 0 3px rgba(58,95,183,.25)}
-    textarea{min-height:130px; resize:vertical}
+      button:hover {
+        background-color: #004999;
+      }
 
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width:680px){ .row{grid-template-columns:1fr} }
+      .note {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #888;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Maintenance Work Order Request</h1>
+      <p class="description">
+        Please fill out the form below to request a maintenance work order. Your
+        request will be sent directly to our maintenance team. Fields marked
+        with <strong>*</strong> are required.
+      </p>
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <!-- Disable CAPTCHA (optional). You can remove this line if you'd like to use the default formsubmit captcha. -->
+        <input type="hidden" name="_captcha" value="false" />
 
-    .helper{font-size:12px; color:#94a0c8; margin-top:4px}
-    .btn{
-      width:100%; margin-top:16px; padding:14px; font-weight:900; letter-spacing:.2px;
-      background:linear-gradient(90deg,var(--gold),#f0c24c); color:#111; border:0; border-radius:12px; cursor:pointer;
-    }
-    .btn:active{transform:translateY(1px)}
-    .note{margin-top:10px; text-align:center; color:var(--ink-1); font-size:13px}
+        <!-- Redirect after form submission (optional). Change this URL to another page you host if desired. -->
+        <input type="hidden" name="_next" value="https://www.wheelingwv-pha.org/thank-you" />
 
-    /* ========================================================
-       INFO / FAQ
-       ======================================================== */
-    .infoWrap{padding:0 14px 26px}
-    .infoGrid{display:grid; grid-template-columns:1fr; gap:12px}
-    .infoTile{
-      background:#0f1434; border:1px solid rgba(255,255,255,.08);
-      border-radius:14px; padding:14px;
-    }
-    .infoTile h3{margin:0 0 6px; color:#ffd56a; font-size:16px}
-    .infoTile p{margin:0; color:var(--ink-1); font-size:14px}
+        <!-- Customize the email subject line -->
+        <input type="hidden" name="_subject" value="New Work Order Request from Resident" />
 
-    /* ========================================================
-       FOOTER
-       ======================================================== */
-    .footer{
-      padding:18px 14px; border-top:1px solid rgba(255,255,255,.08);
-      color:var(--ink-1); text-align:center; font-size:12px
-    }
-    .footer a{color:#ffd56a; text-decoration:none}
-    .footer a:hover{text-decoration:underline}
+        <!-- Name -->
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
 
-    /* ========================================================
-       DESKTOP ENHANCEMENTS
-       ======================================================== */
-    @media (min-width:980px){
-      .wrap{padding:26px 18px}
-      .formWrap{padding:18px 18px 32px}
-      .infoWrap{padding:0 18px 32px}
-      .hero h1{font-size:24px}
-    }
-  </style>
-</head>
-<body>
+        <!-- Unit Number -->
+        <label for="unit">Unit Number *</label>
+        <input type="text" id="unit" name="unit" placeholder="e.g., 618" required />
 
-  <!-- ======================================================
-       HEADER
-       ====================================================== -->
-  <header class="header">
-    <div class="logo" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path fill="#4B2E83" d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
-        <path fill="#DAA520" d="M8 11h8v2H8zM10 7h4v2h-4z"/>
-      </svg>
+        <!-- Phone Number -->
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+
+        <!-- Email Address -->
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+        <!-- Description -->
+        <label for="description">Description of Issue *</label>
+        <textarea id="description" name="description" placeholder="Describe your maintenance issue in detail" required></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Work Order</button>
+      </form>
+      <p class="note">
+        After submitting, you will see a confirmation page. You may receive an
+        email asking you to verify your address if this is your first time using the form.
+        Verification is required to ensure we receive your requests.
+      </p>
     </div>
-    <div class="brand">
-      <b>Wheeling Housing Authority</b>
-      <small>Resident Services • Mobile Portal</small>
-    </div>
-    <button class="menuBtn" id="menuBtn" aria-label="Open menu">☰</button>
-  </header>
-
-  <!-- Drawer -->
-  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Main menu">
-    <div class="drawerHeader">
-      <b>Quick Links</b>
-      <button class="drawerClose" id="drawerClose" aria-label="Close">×</button>
-    </div>
-    <a href="#form"><strong>Submit Work Order</strong><span>Send to maintenance (all properties)</span></a>
-    <a href="#form"><strong>Feedback / Suggestion</strong><span>Share ideas or concerns</span></a>
-    <a href="#afterhours"><strong>After-Hours Number</strong><span>Emergencies only</span></a>
-    <a href="https://4hfund.github.io/projects/workorder" target="_blank" rel="noopener"><strong>Open Full Workorder Page</strong><span>External page</span></a>
-  </div>
-  <div class="backdrop" id="backdrop" tabindex="-1" aria-hidden="true"></div>
-
-  <!-- ======================================================
-       HERO: AFTER-HOURS + OVERVIEW
-       ====================================================== -->
-  <main class="wrap" id="afterhours">
-    <section class="hero" aria-labelledby="hero-title">
-      <span class="kicker">WHA After Hours</span>
-      <h1 id="hero-title">Work Orders & Emergency Guidance</h1>
-      <p>Use this mobile form for routine requests and suggestions. If it’s an urgent issue after hours, weekends, or holidays, please call the emergency line below.</p>
-
-      <div class="callout">
-        <div class="card">
-          <b>After-Hours Emergency Line</b>
-          <div class="big">304-242-2820</div>
-          <small>After 4:30 PM on weekdays, weekends, holidays, water leak, no heat, fridge not cooling, toilet overflowing, etc.</small>
-        </div>
-
-        <div class="tips">
-          <div class="card">
-            <b>Tip</b>
-            <small>Approving “Permission to Enter” allows maintenance to resolve routine issues faster.</small>
-          </div>
-          <div class="card">
-            <b>Heads up</b>
-            <small>Photos or short descriptions help maintenance bring the right tools on the first visit.</small>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ======================================================
-       FORM: GOOGLE SCRIPT CONNECTED + ABS REDIRECT
-       ====================================================== -->
-  <section class="formWrap" id="form">
-    <form class="form" method="POST"
-      action="https://script.google.com/macros/s/AKfycbwONIzHokMfrvHobG7bwisnOcTykbeU3qU2n7v-cu3Vu2WOy7j6QBSjztw5IrXMobAX/exec"
-      accept-charset="utf-8">
-
-      <h2>Submit a Work Order or Feedback</h2>
-
-      <label for="formType">Form Type *</label>
-      <select id="formType" name="formType" required>
-        <option value="">Select…</option>
-        <option value="work_order">Work Order (Maintenance)</option>
-        <option value="feedback">Feedback / Suggestion</option>
-      </select>
-
-      <div class="row">
-        <div>
-          <label for="property">Property *</label>
-          <select id="property" name="property" required>
-            <option value="">Select property…</option>
-            <option>Luau Manor</option>
-            <option>Booker T</option>
-            <option>Garden Park</option>
-            <option>Riverside</option>
-            <option>Hil-Dar</option>
-            <option>Other / Not sure</option>
-          </select>
-        </div>
-        <div>
-          <label for="unit">Apt/Unit *</label>
-          <input id="unit" name="unit" placeholder="e.g., 2B" required />
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label for="name">Your Name *</label>
-          <input id="name" name="name" placeholder="First & Last" required />
-        </div>
-        <div>
-          <label for="contact">Best Contact (phone or email) *</label>
-          <input id="contact" name="contact" placeholder="(304) 555-1234 or you@example.com" required />
-        </div>
-      </div>
-
-      <!-- Work-order-only fields -->
-      <div id="workOnly">
-        <label for="issue">Issue Type *</label>
-        <select id="issue" name="issue">
-          <option value="">Select an issue…</option>
-          <option>Water Leak</option>
-          <option>No Heat / AC</option>
-          <option>Appliance Issue</option>
-          <option>Electrical Problem</option>
-          <option>Lock / Door Issue</option>
-          <option>Pest / Infestation</option>
-          <option>Other</option>
-        </select>
-
-        <div class="row">
-          <div>
-            <label for="entry">Permission to Enter *</label>
-            <select id="entry" name="entry">
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-          <div>
-            <label for="urgency">Urgency</label>
-            <select id="urgency" name="urgency">
-              <option>Routine</option>
-              <option>Priority (24–48 hrs)</option>
-              <option>Emergency</option>
-            </select>
-          </div>
-        </div>
-
-        <label for="preferredTime">Preferred Contact Time</label>
-        <input id="preferredTime" name="preferredTime" placeholder="e.g., mornings / after 3pm" />
-        <div class="helper">For emergencies, please call <b>304-242-2820</b> instead of the form.</div>
-      </div>
-
-      <!-- Shared details -->
-      <label for="description">Details *</label>
-      <textarea id="description" name="description" placeholder="Describe your issue or feedback…" required></textarea>
-
-      <!-- Hidden diagnostic / redirect fields -->
-      <input type="hidden" name="submittedPage" id="submittedPage" value="">
-      <input type="hidden" name="ua" id="ua" value="">
-      <input type="hidden" name="successRedirect" value="https://4hfund.github.io/projects/thank-you.html">
-
-      <button class="btn" type="submit">Submit</button>
-      <div class="note">🚨 After hours emergency? Call <a href="tel:13042422820" style="color:#ffd56a;text-decoration:none;">304-242-2820</a></div>
-    </form>
-  </section>
-
-  <!-- ======================================================
-       INFO / FAQ
-       ====================================================== -->
-  <section class="infoWrap">
-    <div class="infoGrid">
-      <article class="infoTile">
-        <h3>What counts as emergency?</h3>
-        <p>Active water leaks, no heat in cold weather, sparking electrical, fridge completely dead, toilet overflowing, broken exterior door lock, gas smell, or anything that could cause damage or danger. Call <b>304-242-2820</b>.</p>
-      </article>
-      <article class="infoTile">
-        <h3>How long for routine repairs?</h3>
-        <p>Routine items are typically addressed in the order received during business hours. Accurate details help us resolve it faster.</p>
-      </article>
-      <article class="infoTile">
-        <h3>Can I submit suggestions?</h3>
-        <p>Yes! Choose “Feedback / Suggestion” to share ideas, compliments, or general concerns not tied to a repair.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ======================================================
-       FOOTER
-       ====================================================== -->
-  <footer class="footer">
-    © <span id="yr"></span> Wheeling Housing Authority — Resident Services · <a href="tel:13042330658">(304) 233-0658</a>
-  </footer>
-
-  <script>
-    /* Drawer controls */
-    const menuBtn   = document.getElementById('menuBtn');
-    const drawer    = document.getElementById('drawer');
-    const closeBtn  = document.getElementById('drawerClose');
-    const backdrop  = document.getElementById('backdrop');
-
-    function openDrawer(){drawer.classList.add('open'); backdrop.classList.add('show');}
-    function closeDrawer(){drawer.classList.remove('open'); backdrop.classList.remove('show');}
-    menuBtn.addEventListener('click', openDrawer);
-    closeBtn.addEventListener('click', closeDrawer);
-    backdrop.addEventListener('click', closeDrawer);
-
-    /* Year + diagnostics */
-    document.getElementById('yr').textContent = new Date().getFullYear();
-    document.getElementById('submittedPage').value = location.href;
-    document.getElementById('ua').value = navigator.userAgent;
-
-    /* Show/hide work-order-specific fields */
-    const formType  = document.getElementById('formType');
-    const workOnly  = document.getElementById('workOnly');
-    function syncWorkOnly(){
-      const v = formType.value;
-      workOnly.style.display = (v === 'work_order') ? 'block' : 'none';
-      // Make work-order-only fields required only when work order is selected
-      document.getElementById('issue').required = (v === 'work_order');
-    }
-    syncWorkOnly();
-    formType.addEventListener('change', syncWorkOnly);
-
-    /* Client-side fallback redirect (in case meta refresh is blocked) */
-    document.querySelector('form').addEventListener('submit', () => {
-      setTimeout(() => {
-        try { window.top.location.href = "https://4hfund.github.io/projects/thank-you.html"; }
-        catch(e){ location.href = "https://4hfund.github.io/projects/thank-you.html"; }
-      }, 2500);
-    });
-  </script>
-
-  <!--
-    ==========================================================
-    NOTES
-    - WHA brand colors (purple/gold) used consistently.
-    - Mobile-first layout: single column; large touch targets.
-    - All properties included; after-hours number set to 304-242-2820.
-    - Issue Type dropdown + Details textarea as requested.
-    - Absolute successRedirect hidden input + JS fallback.
-    - Accessible labels, clear focus states, high contrast.
-    ==========================================================
-  -->
-</body>
+  </body>
 </html>
