@@ -3,137 +3,302 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Work Order Request</title>
+    <title>Luau Manor Work Order & Complaint Form – Wheeling Housing Authority</title>
     <style>
       /* Basic reset */
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: Arial, sans-serif;
       }
 
       body {
-        background-color: #f5f7fa;
+        background-color: #f4f4f4;
         padding: 20px;
         color: #333;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
       }
 
       .container {
-        max-width: 600px;
+        max-width: 650px;
         margin: 40px auto;
-        background-color: #fff;
-        padding: 30px;
+        background-color: #ffffff;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
       }
 
-      h1 {
-        margin-bottom: 20px;
-        font-size: 28px;
+      /* Header section with WHA primary color */
+      .header {
+        background-color: #4b0082; /* dark purple */
+        color: #ffffff;
+        padding: 24px;
         text-align: center;
-        color: #2d3e50;
       }
 
-      p.description {
-        margin-bottom: 20px;
+      .header h1 {
+        font-size: 30px;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      .description {
+        padding: 16px 24px;
+        color: #4b0082;
+        font-size: 16px;
+        line-height: 1.5;
         text-align: center;
-        color: #596a7b;
       }
 
       form {
         display: flex;
         flex-direction: column;
+        padding: 0 24px 24px;
+        gap: 12px;
       }
 
       label {
-        margin-top: 15px;
-        font-weight: bold;
+        font-weight: 600;
+        color: #4b0082;
+        margin-top: 8px;
       }
 
       input,
-      textarea {
-        padding: 10px;
-        margin-top: 5px;
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 4px;
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 16px;
+        background-color: #fdfdfd;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #4b0082;
+        box-shadow: 0 0 0 2px rgba(75, 0, 130, 0.15);
       }
 
       textarea {
         resize: vertical;
-        min-height: 120px;
+        min-height: 160px;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 24px;
+        margin-top: 4px;
+        align-items: center;
+      }
+
+      .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        color: #4b0082;
       }
 
       button {
-        margin-top: 20px;
-        padding: 12px;
-        background-color: #0066cc;
-        color: #fff;
+        margin-top: 16px;
+        padding: 14px;
+        background-color: #ffd700; /* gold accent */
+        color: #4b0082;
         border: none;
         border-radius: 4px;
         font-size: 16px;
+        font-weight: 600;
         cursor: pointer;
+        width: 100%;
+        transition: background-color 0.2s ease;
       }
 
       button:hover {
-        background-color: #004999;
+        background-color: #e6c200; /* slightly darker gold */
       }
 
       .note {
-        margin-top: 20px;
+        padding: 16px 24px;
         font-size: 14px;
-        color: #888;
+        color: #666;
         text-align: center;
+        background-color: #f9f9f9;
+        border-top: 1px solid #eee;
+      }
+
+      /* Styles for complaint mode */
+      .container.complaint .header {
+        background-color: #b22222; /* firebrick red */
+      }
+
+      .container.complaint button {
+        background-color: #b22222;
+        color: #ffffff;
+      }
+
+      .container.complaint label,
+      .container.complaint .radio-group label,
+      .container.complaint .description {
+        color: #b22222;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Maintenance Work Order Request</h1>
+      <div class="header">
+        <h1 id="formTitle">Luau Manor Work Order &amp; Complaint Form</h1>
+      </div>
       <p class="description">
-        Please fill out the form below to request a maintenance work order. Your
-        request will be sent directly to our maintenance team. Fields marked
-        with <strong>*</strong> are required.
+        Use this form to submit a maintenance work order or file a complaint for your apartment at Luau Manor. Select the appropriate request type below.
       </p>
-      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+      <p class="description">
+        Provide the required information about the work needed. Completing all fields helps us respond promptly. Fields marked with <strong>*</strong> are required.
+      </p>
+
+      <!-- Additional information sections that will be shown based on the selected request type -->
+      <p class="description" id="workOrderInfo" style="display: none;">
+        When requesting maintenance, please describe the work needed as clearly as possible, including the room or area (e.g., kitchen, bathroom) and any specific issues you have noticed. This helps our maintenance team prepare and respond efficiently.
+      </p>
+      <p class="description" id="complaintInfo" style="display: none;">
+        When submitting a complaint, please provide details such as what happened, where and when it occurred, and who was involved. Complaints can include issues related to building conditions, policy violations, or behavior of residents or staff.
+      </p>
+      <form
+        action="https://formsubmit.co/sidney@wheelingwv-pha.org"
+        method="POST"
+      >
         <!-- Disable CAPTCHA (optional). You can remove this line if you'd like to use the default formsubmit captcha. -->
         <input type="hidden" name="_captcha" value="false" />
 
         <!-- Redirect after form submission (optional). Change this URL to another page you host if desired. -->
-        <input type="hidden" name="_next" value="https://www.wheelingwv-pha.org/thank-you" />
+        <input
+          type="hidden"
+          name="_next"
+          value="https://www.wheelingwv-pha.org/thank-you"
+        />
 
         <!-- Customize the email subject line -->
-        <input type="hidden" name="_subject" value="New Work Order Request from Resident" />
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Luau Manor Work Order or Complaint Request"
+        />
 
         <!-- Name -->
         <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" placeholder="Your full name" required />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your full name"
+          required
+        />
 
-        <!-- Unit Number -->
-        <label for="unit">Unit Number *</label>
-        <input type="text" id="unit" name="unit" placeholder="e.g., 618" required />
+        <!-- Apartment Number -->
+        <label for="apartment">Apartment Number *</label>
+        <input
+          type="text"
+          id="apartment"
+          name="apartment"
+          placeholder="e.g., 618"
+          required
+        />
+
+        <!-- Date -->
+        <label for="date">Date *</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          required
+        />
 
         <!-- Phone Number -->
         <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Your phone number"
+          required
+        />
 
-        <!-- Email Address -->
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" placeholder="Your email address" required />
+        <!-- Permission to Enter -->
+        <label for="permission">Is it OK to enter if you are not there? *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="permission" value="Yes" required /> Yes</label>
+          <label><input type="radio" name="permission" value="No" /> No</label>
+        </div>
+
+        <!-- Request Type Dropdown -->
+        <label for="requestType">Type of Request *</label>
+        <select id="requestType" name="requestType" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Work Order">Work Order</option>
+          <option value="Complaint">Complaint</option>
+        </select>
 
         <!-- Description -->
-        <label for="description">Description of Issue *</label>
-        <textarea id="description" name="description" placeholder="Describe your maintenance issue in detail" required></textarea>
+        <label id="descriptionLabel" for="description">Description of Work Needed *</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Describe the work needed or your complaint in detail"
+          required
+        ></textarea>
 
         <!-- Submit Button -->
-        <button type="submit">Submit Work Order</button>
+        <button type="submit">Submit Request</button>
       </form>
       <p class="note">
-        After submitting, you will see a confirmation page. You may receive an
-        email asking you to verify your address if this is your first time using the form.
-        Verification is required to ensure we receive your requests.
+        If this is an emergency and it is after hours, please call 304‑242‑2820; do not complete this form.
       </p>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const selectElement = document.getElementById('requestType');
+        const container = document.querySelector('.container');
+        const formTitle = document.getElementById('formTitle');
+        const workInfo = document.getElementById('workOrderInfo');
+        const complaintInfo = document.getElementById('complaintInfo');
+        const descriptionLabel = document.getElementById('descriptionLabel');
+        const descriptionTextarea = document.getElementById('description');
+
+        function updateForm() {
+          const value = selectElement.value;
+          if (value === 'Work Order') {
+            container.classList.remove('complaint');
+            formTitle.textContent = 'Luau Manor Work Order Form';
+            workInfo.style.display = 'block';
+            complaintInfo.style.display = 'none';
+            // Update the description label and placeholder for work orders
+            if (descriptionLabel) descriptionLabel.textContent = 'Description of Work Needed *';
+            if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe the work needed in detail';
+          } else if (value === 'Complaint') {
+            container.classList.add('complaint');
+            formTitle.textContent = 'Luau Manor Complaint Form';
+            workInfo.style.display = 'none';
+            complaintInfo.style.display = 'block';
+            // Update the description label and placeholder for complaints
+            if (descriptionLabel) descriptionLabel.textContent = 'Description of Complaint *';
+            if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe your complaint in detail';
+          } else {
+            container.classList.remove('complaint');
+            formTitle.textContent = 'Luau Manor Work Order & Complaint Form';
+            workInfo.style.display = 'none';
+            complaintInfo.style.display = 'none';
+            // Provide a generic label and placeholder when no option is selected
+            if (descriptionLabel) descriptionLabel.textContent = 'Description *';
+            if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe the work needed or your complaint in detail';
+          }
+        }
+
+        selectElement.addEventListener('change', updateForm);
+      });
+    </script>
   </body>
 </html>
