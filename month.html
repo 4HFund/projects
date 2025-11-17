@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luau Manor – Resident of the Month Nomination</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --yellow: #f9d548;
+      --navy: #001833;
+      --accent: #fca311;
+      --bg: #f5f5f5;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(160deg, var(--navy) 0%, #021f46 35%, #073b73 70%, #0b567c 100%);
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .card {
+      background: #fffdf5;
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      border: 4px solid var(--yellow);
+    }
+
+    .card-header {
+      background: radial-gradient(circle at top left, var(--yellow), #ffe58a);
+      padding: 24px 24px 18px;
+      text-align: center;
+      position: relative;
+    }
+
+    .card-header::after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--navy);
+      opacity: 0.3;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      font-size: 0.98rem;
+      color: #362701;
+    }
+
+    .card-body {
+      padding: 26px 24px 24px;
+    }
+
+    .intro-text {
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      background: #fff7d5;
+      border-radius: var(--radius);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .highlight-box strong {
+      color: var(--navy);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    label span.required {
+      color: #c0392b;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea,
+    select {
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 9px 11px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.05s;
+      background: #fff;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.25);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .help-text {
+      font-size: 0.8rem;
+      color: #5a5a5a;
+    }
+
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .options-row label {
+      font-weight: 500;
+      color: #222;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #444;
+      margin-top: 4px;
+    }
+
+    button[type="submit"] {
+      margin-top: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--navy), #053566);
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+      transform: translateY(0);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s;
+    }
+
+    button[type="submit"]:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+      transform: translateY(-1px);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-footer {
+      padding: 10px 18px 16px;
+      background: #00142b;
+      color: #f0f0f0;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .card-footer strong {
+      color: var(--yellow);
+    }
+
+    @media (max-width: 600px) {
+      .card-header {
+        padding: 20px 16px 16px;
+      }
+
+      .card-body {
+        padding: 20px 16px 18px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card" role="main">
+      <header class="card-header">
+        <div class="subtitle">Luau Manor Presents</div>
+        <h1>Resident of the Month</h1>
+        <p class="tagline">
+          Nominate a neighbor who brightens your day, helps others, or brings positivity to our community.
+        </p>
+      </header>
+
+      <section class="card-body">
+        <p class="intro-text">
+          Use this form to submit your nomination for Luau Manor’s Resident of the Month.
+          Your nomination will be sent directly to the Housing Manager for review.
+        </p>
+
+        <div class="highlight-box">
+          <strong>Who can you nominate?</strong><br />
+          Any Luau Manor resident who shows kindness, helps others, or makes this building feel more like home.
+        </div>
+
+        <!--
+          IMPORTANT:
+          1. Replace the "action" URL below with your real Formspree endpoint:
+             https://formspree.io/f/YOUR_FORMSPREE_ID_HERE
+          2. Log into Formspree to set which email address receives submissions.
+        -->
+        <form
+          action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"
+          method="POST"
+        >
+          <!-- Let Formspree know what this form is -->
+          <input type="hidden" name="form_name" value="Luau Manor Resident of the Month" />
+          <!-- Optional redirect after submit:
+          <input type="hidden" name="_redirect" value="https://4hfund.github.io/projects/thankyou.html" />
+          -->
+
+          <div class="form-row">
+            <label for="resident_name">
+              Nominated Resident’s Name <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="resident_name"
+              name="resident_name"
+              placeholder="Neighbor’s full name"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="resident_apartment">
+              Apartment / Floor (if known)
+            </label>
+            <input
+              type="text"
+              id="resident_apartment"
+              name="resident_apartment"
+              placeholder="Example: Apt 304, 5th floor"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="reason">
+              Why are you nominating this neighbor? <span class="required">*</span>
+            </label>
+            <textarea
+              id="reason"
+              name="reason"
+              required
+              placeholder="Tell us how they brighten your day, help others, or bring positivity to Luau Manor."
+            ></textarea>
+            <p class="help-text">
+              The more detail you give, the easier it is for us to celebrate them well.
+            </p>
+          </div>
+
+          <div class="form-row">
+            <label for="your_name">Your Name (optional)</label>
+            <input
+              type="text"
+              id="your_name"
+              name="your_name"
+              placeholder="You can remain anonymous if you prefer"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="your_contact">
+              Your Phone or Apartment # (optional)
+            </label>
+            <input
+              type="tel"
+              id="your_contact"
+              name="your_contact"
+              placeholder="Only if we need follow-up details"
+            />
+          </div>
+
+          <div class="form-row">
+            <label>Can we share your comments? <span class="required">*</span></label>
+            <div class="options-row">
+              <label>
+                <input
+                  type="radio"
+                  name="share_permission"
+                  value="Yes, you may share my comments (first names only)."
+                  required
+                />
+                Yes, you may share my comments (first names only).
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="share_permission"
+                  value="No, please keep my comments private."
+                />
+                No, please keep my comments private.
+              </label>
+            </div>
+            <p class="footer-note">
+              We will never share apartment numbers or contact information publicly.
+            </p>
+          </div>
+
+          <button type="submit">
+            Submit Nomination
+          </button>
+        </form>
+      </section>
+
+      <footer class="card-footer">
+        <span><strong>Luau Manor</strong> &middot; Wheeling Housing Authority</span>
+        <span>Questions? Contact your Housing Manager, Sidney Mozingo.</span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
