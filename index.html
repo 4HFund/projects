@@ -227,11 +227,13 @@
           required
         />
 
-        <!-- Permission to Enter -->
-        <label for="permission">Is it OK to enter if you are not there? *</label>
-        <div class="radio-group">
-          <label><input type="radio" name="permission" value="Yes" required /> Yes</label>
-          <label><input type="radio" name="permission" value="No" /> No</label>
+        <!-- Permission to Enter (shown only for work orders) -->
+        <div id="permissionField">
+          <label for="permission">Is it OK to enter if you are not there? *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="permission" value="Yes" required /> Yes</label>
+            <label><input type="radio" name="permission" value="No" /> No</label>
+          </div>
         </div>
 
         <!-- Request Type Dropdown -->
@@ -267,6 +269,8 @@
         const complaintInfo = document.getElementById('complaintInfo');
         const descriptionLabel = document.getElementById('descriptionLabel');
         const descriptionTextarea = document.getElementById('description');
+        // Permission field wrapper for hiding/showing entry permission question
+        const permissionField = document.getElementById('permissionField');
 
         function updateForm() {
           const value = selectElement.value;
@@ -278,6 +282,7 @@
             // Update the description label and placeholder for work orders
             if (descriptionLabel) descriptionLabel.textContent = 'Description of Work Needed *';
             if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe the work needed in detail';
+            if (permissionField) permissionField.style.display = 'block';
           } else if (value === 'Complaint') {
             container.classList.add('complaint');
             formTitle.textContent = 'Luau Manor Complaint Form';
@@ -286,6 +291,7 @@
             // Update the description label and placeholder for complaints
             if (descriptionLabel) descriptionLabel.textContent = 'Description of Complaint *';
             if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe your complaint in detail';
+            if (permissionField) permissionField.style.display = 'none';
           } else {
             container.classList.remove('complaint');
             formTitle.textContent = 'Luau Manor Work Order & Complaint Form';
@@ -294,6 +300,7 @@
             // Provide a generic label and placeholder when no option is selected
             if (descriptionLabel) descriptionLabel.textContent = 'Description *';
             if (descriptionTextarea) descriptionTextarea.placeholder = 'Describe the work needed or your complaint in detail';
+            if (permissionField) permissionField.style.display = 'block';
           }
         }
 
