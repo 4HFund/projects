@@ -9,8 +9,6 @@
       --yellow: #f9d548;
       --navy: #001833;
       --accent: #fca311;
-      --bg: #f5f5f5;
-      --radius: 10px;
     }
 
     * {
@@ -97,7 +95,7 @@
 
     .highlight-box {
       background: #fff7d5;
-      border-radius: var(--radius);
+      border-radius: 10px;
       border: 1px solid rgba(0, 0, 0, 0.06);
       padding: 12px 14px;
       margin-bottom: 20px;
@@ -132,22 +130,22 @@
     }
 
     input[type="text"],
+    input[type="email"],
     input[type="tel"],
-    textarea,
-    select {
+    textarea {
       border-radius: 8px;
       border: 1px solid rgba(0, 0, 0, 0.15);
       padding: 9px 11px;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.05s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       background: #fff;
     }
 
     input[type="text"]:focus,
+    input[type="email"]:focus,
     input[type="tel"]:focus,
-    textarea:focus,
-    select:focus {
+    textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.25);
     }
@@ -193,7 +191,6 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-      transform: translateY(0);
       transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s;
     }
 
@@ -206,6 +203,7 @@
     button[type="submit"]:active {
       transform: translateY(1px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transform: translateY(1px);
     }
 
     .card-footer {
@@ -253,7 +251,7 @@
       <section class="card-body">
         <p class="intro-text">
           Use this form to submit your nomination for Luau Manor’s Resident of the Month.
-          Your nomination will be sent directly to the Housing Manager for review.
+          Your nomination will be sent to the Housing Manager for review.
         </p>
 
         <div class="highlight-box">
@@ -261,12 +259,13 @@
           Any Luau Manor resident who shows kindness, helps others, or makes this building feel more like home.
         </div>
 
-        <form action="https://formspree.io/f/xrbjegyk" method="POST">
-          
-          <!-- REQUIRED hidden field to pass Formspree validation -->
-          <input type="hidden" name="sidney@wheelingwv-pha.org" value="Luau Manor" />
+        <!-- FORM START -->
+        <form action="https://formspree.io/f/xrbjegyk" method="POST" accept-charset="UTF-8">
+          <!-- Subject line for the email -->
+          <input type="hidden" name="_subject" value="New Luau Manor Resident of the Month Nomination" />
 
-          <input type="hidden" name="form_name" value="Luau Manor Resident of the Month" />
+          <!-- Optional: where Formspree can use as reply-to if enabled -->
+          <!-- (this just sets the reply-to header; it does NOT control where notifications are sent) -->
 
           <div class="form-row">
             <label for="resident_name">
@@ -320,7 +319,7 @@
               Your Phone or Apartment # (optional)
             </label>
             <input
-              type="tel"
+              type="text"
               id="your_contact"
               name="your_contact"
               placeholder="Only if we need follow-up details"
@@ -357,6 +356,7 @@
             Submit Nomination
           </button>
         </form>
+        <!-- FORM END -->
       </section>
 
       <footer class="card-footer">
